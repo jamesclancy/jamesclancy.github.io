@@ -1,0 +1,18 @@
+---
+layout: post
+title: Deviate by Beau Lotto
+author: James Clancy
+tags: books science
+---
+
+# Some interesting points but not for me - 6/10
+
+Let me start by saying I generally don't read books along the lines of *Deviate* by Beau Lotto. The book was available at my local Habitat for Humanity and appeared to be on an interesting topic so I picked it up. 
+
+## Summary
+
+The book discusses some of the ways in which people are constrained and limited both the preconceptions and memories of the culture in which they live and there own desire for certainty. Individuals need to understand these constraints in order to be adapt and come up with new *deviating* ideas which improve and invigorate society. The book lays out five principles for driving innovations which boil down to. It goes on to discuss how play is one of developing these new ideas and science, as a more directed version of play, is fundamental to developing new ideas at scale.
+
+## My Impressions
+
+I found the subject mater interesting and found the discusses about play and science being the key to driving innovation interesting. Unfortunately, I didn't find teh book all that rewarding or interesting. Largely I was reading teh book just to finish it not to find out what was going to be said next for that I am rating it a six out of ten. It might be a good book if you like this sort of pop-science books but it was definitely not for me. 
