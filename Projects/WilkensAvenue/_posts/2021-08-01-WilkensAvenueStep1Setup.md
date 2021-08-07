@@ -14,3 +14,5 @@ Similar to the SafeCardGame, I am going to utilize the `SAFE Template` to scaffo
 * Create the docker files etc for the container
 * Have a script to build and push container to Heroku
 * Add some basic database access via Dapper to the project, locally it should pull connection information from the App Secrets, when deployed it should use the Environmental Variables
+
+[Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-1)
