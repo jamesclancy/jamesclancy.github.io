@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Wilkens Avenue - Step 3 - Outline basic pages and set up routing in the clien
+title: Wilkens Avenue - Step 3 - Outline Basic Pages & Client Routing
 author: James Clancy
 tags: fsharp dotnet safe-stack ci test github github-actions
 ---
@@ -29,7 +29,9 @@ Initially at least, the site is going to be a SPA and not play nicely with SEO. 
 * ViewLocation
 * About
 
-### Implementation details about creating routes for Elmish
+### Implementation Details & Notes
+
+
 
 
 
