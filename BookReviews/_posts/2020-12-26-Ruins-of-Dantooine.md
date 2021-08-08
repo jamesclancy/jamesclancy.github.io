@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Star Wars Galaxies: The Ruins of Dantooine by Voronica Whitney-Robinson
+title: Star Wars Galaxies The Ruins of Dantooine by Voronica Whitney-Robinson
 author: James Clancy
 tags: books star-wars
 ---
