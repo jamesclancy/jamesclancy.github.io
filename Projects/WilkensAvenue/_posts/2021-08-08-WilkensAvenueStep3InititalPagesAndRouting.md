@@ -15,7 +15,7 @@ Initially at least, the site is going to be a SPA and not play nicely with SEO. 
 
 ## Results
 
-### List of pages
+### List of normal pages
 * Home
 * Find
 * Browse
@@ -29,10 +29,17 @@ Initially at least, the site is going to be a SPA and not play nicely with SEO. 
 * ViewLocation
 * About
 
+### Pages without routes
+* Not Found
+* Unauthorized
+
 ### Implementation Details & Notes
 
+Looking through the [Elmish documentation](https://elmish.github.io/browser/routing.html) this was quite simple. The call-out about tuples on that page was helpful, when creating the "Find" route I had to pass a lambda i.e. `map (fun x y z -> (x, y, z) |> Find) (s "Find" </> str </> str </> i32)`.
 
+In addition to setting up the routing itself, I also extended the `Model` to become a discriminated union holding different typed models for each page. 
 
+One thing that did cause some confusion was that the Elmish parser is case sensitive.
 
 
 [Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-3)
