@@ -19,10 +19,10 @@
 # in the templates via {{ site.myvariable }}.
 
 title: James Clancy
-tagline: A site documenting my thought process?
+tagline: This needs to be reorganized in the future.
 email: clancysphone@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  A site documenting my thought process.
+  Largely a mess of content. The idea is to generate content then refine sometime in the future.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jamesclancy.github.io" # the base hostname & protocol for your site, e.g. 
 avatar: https://avatars.githubusercontent.com/u/2839134?s=400&v=4
