@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Cheesy Navy Bean Spread
+title: Cheesy Navy Bean & Chickpea Spread
 author: James Clancy
-tags: navy-beans nutritional-yeast chickpeas
+tags: navy-beans nutritional-yeast chickpeas chia flax
 ---
 
 Creamy spread given a cheesy flavor with nutritional yeast
