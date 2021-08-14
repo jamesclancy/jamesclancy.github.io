@@ -2,7 +2,7 @@
 layout: post
 title: Wilkens Avenue - Step 2 - Add CI Test Runner
 author: James Clancy
-tags: fsharp dotnet safe-stack ci test github github-actions
+tags: fsharp dotnet safe-stack ci test github github-actions potential-tutorial-idea
 ---
 
 Unlike what I did during the development of the SafeCardGame, I am going to prioritize tests when creating this project. In order to better facilitate this I am going to create a github action to automatically run tests on PRs to master.
