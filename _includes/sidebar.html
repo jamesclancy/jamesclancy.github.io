@@ -1,0 +1,95 @@
+<!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>{{ site.description }}</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item{% if page.title == 'Home' %} active{% endif %}" href="{{ '/' | absolute_url }}">Home</a>
+    <a class="sidebar-nav-item{% if page.title == 'About' %} active{% endif %}" href="{{ '/about' | absolute_url }}">About</a>
+
+    
+{% assign HEAD_PREFIX = "h_" %}
+{% assign LIST_PREFIX = "l_" %}
+
+{% assign group_index = 0 %}
+
+{% assign sort_categories = site.categories | sort %}
+
+{% for category in sort_categories %}
+  {% assign category_name = category | first %}
+  {% assign posts_of_category = category | last %}
+  {% assign first_post = posts_of_category | first %}
+
+  {% if category_name == first_post.categories[0] %}
+    {% assign sub_categories = "" | split: "" %}
+
+    {% for post in posts_of_category %}
+      {% assign second_category = post.categories[1] %}
+      {% if second_category %}
+        {% unless sub_categories contains second_category %}
+          {% assign sub_categories = sub_categories | push: second_category %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign sub_categories = sub_categories | sort %}
+    {% assign sub_categories_size = sub_categories | size %}
+
+        {% capture _category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
+
+        {% assign top_posts_size = site.categories[category_name] | size %}
+        <a class="sidebar-nav-item{% if page.title == category_name %} active{% endif %}" href="{{ _category_url | relative_url }}">
+          {{ category_name }}
+          (<span class="text-muted small font-weight-light">
+              {{ top_posts_size }}
+              {{ site.data.locales[lang].categories.post_measure }}
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    {% if sub_categories_size > 0 %}
+        {% for sub_category in sub_categories %}
+          {% capture _sub_ctg_url %}/categories/{{ sub_category | slugify | url_encode }}/{% endcapture %}
+          {% assign posts_size = site.categories[sub_category] | size %}
+          <a class="sidebar-nav-item{% if page.title == sub_category %} active{% endif %}" 
+              href="{{ _sub_ctg_url | relative_url }}" style="padding-left:60px;">{{ sub_category }} (<span class="text-muted small font-weight-light">
+                {{ posts_size }}
+                {{ site.data.locales[lang].categories.post_measure }}
+              </span>)</a>
+
+          
+        {% endfor %}
+    {% endif %}
+
+
+    {% assign group_index = group_index | plus: 1 %}
+
+  {% endif %}
+{% endfor %}
+
+  </nav>
+
+  {% for tab in site.tabs %}
+  <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+    <a href="{{ tab.url | relative_url }}" class="nav-link">
+      <i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3 unloaded"></i>
+      {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+
+      <span>{{ site.data.locales[lang].tabs.[tab_name] | default: tab_name | upcase }}</span>
+    </a>
+  </li> <!-- .nav-item -->
+  {% endfor %}
+
+  <div class="sidebar-item">
+    <p>
+      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+    </p>
+  </div>
+</div>

@@ -48,7 +48,6 @@ permalink: /feed.xml
     <summary>{{ post.summary | strip }}</summary>
   {% else %}
     <summary>
-      {% include no-linenos.html content=post.content %}
       {{ content  | strip_html | truncate: 400 }}
     </summary>
   {% endif %}

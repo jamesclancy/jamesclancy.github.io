@@ -1,8 +1,0 @@
----
-title: About
-icon: fas fa-info
-order: 4
----
-
-
-> I am a software developer based in the Mid-Atlantic. 
