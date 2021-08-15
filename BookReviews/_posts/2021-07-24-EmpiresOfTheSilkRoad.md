@@ -5,7 +5,7 @@ author: James Clancy
 tags: books history
 ---
 
-# An interesting but seemingly skewed view of history - 7/10
+## An interesting but seemingly skewed view of history - 7/10
 
 ## Summary
 

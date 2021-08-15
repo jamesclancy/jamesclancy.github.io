@@ -5,7 +5,7 @@ author: James Clancy
 tags: books history
 ---
 
-# Historical parts were very interesting but focused to much on modern history - 7/10
+## Historical parts were very interesting but focused to much on modern history - 7/10
 
 ## Summary
 

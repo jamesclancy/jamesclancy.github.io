@@ -13,7 +13,7 @@ To do this I will add a Msg of type SwapPlayer.
 
 i.e.
 
-```
+{% highlight FSharp %}
 type Msg =
     | StartGame of StartGameEvent
     | DrawCard of DrawCardEvent
@@ -26,22 +26,22 @@ type Msg =
     | DeleteNotification of Guid
     | GameWon of GameWonEvent
     | SwapPlayer
-```
+{% endhighlight %}
 
 I will then handle the message in the update like:
 
-```
+{% highlight FSharp %}
 let update (msg: Msg) (model: GameState): GameState * Cmd<Msg> =
     match msg with
     ...
     | SwapPlayer ->
         { model with PlayerOne = model.PlayerTwo; PlayerTwo = model.PlayerOne }, Cmd.none
 
-```
+{% endhighlight %}
 
 Now I can add a button to switch players on the top nav bar like:
 
-```
+{% highlight FSharp %}
 let topNavigation dispatch =
              ...
               div [ Class "navbar-end" ]
@@ -55,11 +55,11 @@ let topNavigation dispatch =
                               Href "#" ]
                             [ str "Log in" ]
              ...
-```
+{% endhighlight %}
 
 While doing this I found a bug in the, it should have been written like:
 
-```
+{% highlight FSharp %}
 let currentStepInformation (player: Player) (gameState : GameState)  =
     div [ Class "navbar-item" ]
                     [ div [ Class "field is-grouped has-addons is-grouped-right" ]
@@ -83,12 +83,12 @@ let currentStepInformation (player: Player) (gameState : GameState)  =
                                        Disabled true ]
                                 [ span [ ]
                                     [ str "Reconcile" ] ] ] ] ]
-```
+{% endhighlight %}
 Also, I just noticed that the Draw is moving to the Attack step instead of the play step.
 
 To fix this I changed the event that was being dispatched like
 
-```
+{% highlight FSharp %}
 let modifyGameStateFromDrawCardEvent (ev: DrawCardEvent) (gs: GameState) =
     getExistingPlayerBoardFromGameState ev.PlayerId gs
     |> Result.bind (moveCardsFromDeckToHand gs ev.PlayerId)
@@ -96,7 +96,7 @@ let modifyGameStateFromDrawCardEvent (ev: DrawCardEvent) (gs: GameState) =
     |> function
         | Ok g -> g
         | Error e -> { gs with NotificationMessages = appendNotificationMessageToListOrCreateList gs.NotificationMessages e }
-```
+{% endhighlight %}
 
 Also, in this branch, it was recommended to me that you can zoom cards. I am attempting to add a model that displays card details to the hand.
 
@@ -104,17 +104,17 @@ To try this I am trying to add a modal on click for the hand.
 
 
 Meanwhile, I am noticing I really need to refactor out operators for stuff like :
-```
+{% highlight FSharp %}
     |        |> Result.bind (applyUpdatedPlayerBoardResultToGamesState playerId gs x)
-```
+{% endhighlight %}
 and
-```
+{% highlight FSharp %}
         |> Result.bind (fun x -> (applyUpdatedPlayerBoardResultToGamesState playerId gs x) |> Ok)
 
-```
+{% endhighlight %}
 i did this by implementing infix operators like
 
-```
+{% highlight FSharp %}
 
 let (>>=) twoTrackInput switchFunction =
     Result.bind switchFunction twoTrackInput
@@ -124,7 +124,7 @@ let (>=>) switch1 switch2 x =
     | Ok s -> switch2 s
     | Error f -> Error f
 
-```
+{% endhighlight %}
 
 Additionally, I moved many of the constructors for domain objects to the Shared Domain and deleted unused test generator functions.
 

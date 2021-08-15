@@ -71,7 +71,7 @@ I am not thinking that the CurrentPlayerTurn should actually be on the Game Step
 
 I modified the domain models with:
 
-```
+{% highlight FSharp %}
     and GameOverStep =
         {
             WinnerId: Option<PlayerId>
@@ -96,10 +96,10 @@ I modified the domain models with:
             CurrentStep:GameStep
             TurnNumber: int
         }
-```
+{% endhighlight %}
 
 I then had to update the init function for the new fields like
-```
+{% highlight FSharp %}
 
 let init =
     let player1 = createPlayer "Player1" "Player1" 10 "https://picsum.photos/id/1000/2500/1667?blur=5"
@@ -133,11 +133,11 @@ let init =
           Ok (model, cmd)
         | _ -> "Failed to create player boards" |> Error
     | _ -> "Failed to create players" |> Error
-```
+{% endhighlight %}
 
 I similarly had to update the currentStepInformation to utilize the updated GameStep type. Using the fact that whose turn it is now embedded in the state I was able to simplify the yourCurrentStepClasses function like:
 
-```
+{% highlight FSharp %}
 let yourCurrentStepClasses (gameState : GameState) (gamesStep: GameStep) =
         if gameState.CurrentStep = gamesStep then "button is-danger"
         else "button is-primary"
@@ -165,7 +165,7 @@ let currentStepInformation (player: Player) (gameState : GameState) =
                                        Disabled true ]
                                 [ span [ ]
                                     [ str "Reconcile" ] ] ] ] ]
-```
+{% endhighlight %}
 
 At this point everything builds and I am checking it in with a commit message of `Step 7 Updates to GameState`.
 
@@ -173,7 +173,7 @@ In the Client/Index.fs I can now modify the Msg type to be a discriminated union
 
 Based on the above description I was able to define the events as follows:
 
-```
+{% highlight FSharp %}
 type StartGameEvent =
     {
         GameId: GameId
@@ -238,7 +238,7 @@ type Msg =
     | EndTurn of EndTurnEvent
     | GameWon of GameWonEvent
 
-```
+{% endhighlight %}
 
 I am not receiving compiler errors for incomplete match statements but it builds. At this point, I am committing these changes with the message `Update Msg type to include a variety of events`.
 

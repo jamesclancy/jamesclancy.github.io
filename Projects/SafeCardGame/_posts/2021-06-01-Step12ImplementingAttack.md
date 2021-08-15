@@ -11,7 +11,7 @@ The next step will be to implement the attack functionality.
 
 To do this I implemented several new functions:
 
-```
+{% highlight FSharp %}
 let getPlayBoardToTargetAttack (playerId : PlayerId) gs =
     playerId
     |> gs.Boards.TryGetValue
@@ -68,7 +68,8 @@ let modifyGameStateFromPerformAttackEvent (ev: PerformAttackEvent) (gs: GameStat
         >>= (playAttackFromBoard ev.Attack ev.PlayerId gs)
         >>= migrateGameStateToNewStep (ev.PlayerId |> Reconcile )
         |> applyErrorResultToGamesState gs
-```
+
+{% endhighlight %}
 
 I then reference this `modifyGameStateFromPerformAttackEvent` in the update function.
 
@@ -77,7 +78,7 @@ This builds. I will now have to make sure my sample data has attacks and that th
 
 To wire up the UI I am able to modify the `renderAttackRow` to also include a button to exec an attack if it is available like:
 
-```
+{% highlight FSharp %}
 let renderDamageInformationForAttack (attack: Attack) =
     match attack.SpecialEffect with
     | Some se ->
@@ -132,11 +133,11 @@ let renderAttackRow displayAttackButton canAttack availableResources gameId play
                     else
                         str ""
                 ] ]
-```
+{% endhighlight %}
 
 To populate the test database I am adding a "tackle" attack to all generated creatures in the `SampleCardDatabase`
 
-```
+{% highlight FSharp %}
 let creatureCreatureConstructor creatureId name description primaryResource resourceCost health weaknesses =
     let cardId = NonEmptyString.build creatureId |> Result.map CardId
     let cardImageUrl = ImageUrlString.build (sprintf "/images/full/%s.png" creatureId)
@@ -167,7 +168,8 @@ let creatureCreatureConstructor creatureId name description primaryResource reso
                 Description =description
             }
     | _,_ -> Error "No"
-```
+{% endhighlight %}
+
 I am now able to test the game. I can deal damage to creatures and players. It works in terms of basic functionality.
 
 I am leaving this as the last commit in the branch `step-12-implement-attack`.

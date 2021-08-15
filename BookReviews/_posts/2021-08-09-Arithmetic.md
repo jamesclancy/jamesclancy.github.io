@@ -5,7 +5,7 @@ author: James Clancy
 tags: books mathematics
 ---
 
-# Amazing book about the history and art of counting - 10/10
+## Amazing book about the history and art of counting - 10/10
 
 ## Summary
 

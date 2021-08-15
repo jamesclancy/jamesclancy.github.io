@@ -12,7 +12,7 @@ When implementing the repository for pulling cards from a deck I ordered by rand
 
 I was then able to update the API to include new methods for the premade decks like:
 
-```
+{% highlight FSharp %}
 type ICardGameApi =
     {
         getPlayers : unit -> Async<Player seq>
@@ -22,9 +22,10 @@ type ICardGameApi =
         getDecks: unit -> Async<PreCreatedDeckDto seq>
         getCardsForDeck: string ->  Async<Card seq>
     }
-```
+{% endhighlight %}
+
 which I then implemented like:
-```
+{% highlight FSharp %}
 let playerRepository = PlayerRepository()
 let cardRepository = CardRepository()
 let deckRepository = DeckRepository()
@@ -38,11 +39,11 @@ let gameApi : ICardGameApi =
         getDecks = fun () -> deckRepository.GetAll()
         getCardsForDeck = fun deckId -> deckRepository.GetCardsForDeck(deckId)
     }
-```
+{% endhighlight %}
 
 I was then able to update the Index on the client to use this API:
 
-```
+{% highlight FSharp %}
 let createCardInstanceForCard (card : Card) =
     let cardInstanceId = NonEmptyString.build (System.Guid.NewGuid().ToString()) |> Result.map CardInstanceId
 
@@ -65,11 +66,11 @@ let testDeckSeqGenerator (numberOfCards :int) =
         |> CollectionManipulation.selectAllOkayResults
     }
 
-```
+{% endhighlight %}
 
 This now appears to work but some of the cards are rending weird. To fix this I updated the PageLayElements with:
 
-```
+{% highlight FSharp %}
 let renderThumbnailResourceCard (card: ResourceCard) =
         figure [ Class "image is-64x64" ]
                             [ img [ Src (card.ImageUrl.ToString())
@@ -133,13 +134,13 @@ let renderCardThumbnailForHand (card: Card) : ReactElement =
     | CharacterCard c -> renderThumbnailCharacterCard c
     | ResourceCard rc -> renderThumbnailResourceCard rc
     | EffectCard ec -> renderThumbnailEffectCard ec
-```
+{% endhighlight %}
 
 I am now able to play the game entirely on the client it seems. I do notice an issue where my attacks are not decrementing my available resources and I don't think my resources are resetting every turn.
 
 I was able to update the resource resetting but altering the `EndTurnEvent` to reset the user's resources when the draw step is set like:
 
-```
+{% highlight FSharp %}
 let modifyGameStateFromPerformAttackEvent (ev: PerformAttackEvent) (gs: GameState) =
         tryToMoodifyGameStateFromPerformAttackEvent ev gs
         |> applyErrorResultToGamesState gs
@@ -158,11 +159,11 @@ let moodifyGameStateTurnToOtherPlayer playerId model =
     getTheOtherPlayer model playerId
     |> tryToMoodifyGameStateTurnToOtherPlayer model
     |> applyErrorResultToGamesState model
-```
+{% endhighlight %}
 
 I was able to update the attack to remove resources but updating the `modifyGameStateFromPerformAttackEvent` to also remove the resources by modifying it like:
 
-```
+{% highlight FSharp %}
 let tryToMoodifyGameStateFromPerformAttackEvent (ev: PerformAttackEvent) (gs: GameState) =
     CollectionManipulation.result {
            let! pb = getExistingPlayerBoardFromGameState ev.PlayerId gs
@@ -176,13 +177,13 @@ let tryToMoodifyGameStateFromPerformAttackEvent (ev: PerformAttackEvent) (gs: Ga
 let modifyGameStateFromPerformAttackEvent (ev: PerformAttackEvent) (gs: GameState) =
         tryToMoodifyGameStateFromPerformAttackEvent ev gs
         |> applyErrorResultToGamesState gs
-```
+{% endhighlight %}
 
 After testing this I have noticed that the attacks should use any available colored resources for colorless resources with no more colorless resources are available.
 
 I was able to add this functionality by updating `tryRemoveResourceFromPlayerBoard` to be a recursive function that will try to remove available resources from colored types if colorless is needed and not available.
 
-```
+{% highlight FSharp %}
     let rec tryRemoveResourceFromPlayerBoard (playerBoard:PlayerBoard) x y =
         match playerBoard.AvailableResourcePool.TryGetValue(x) with
         | true, z when z >= y -> Ok {playerBoard with AvailableResourcePool = (addResourcesToPool playerBoard.AvailableResourcePool  [ (x, 0-y) ])  }
@@ -202,12 +203,12 @@ I was able to add this functionality by updating `tryRemoveResourceFromPlayerBoa
                             x (y - v)
                 else
                     sprintf "Not enough %s" (getSymbolForResource x) |> Error
-```
+{% endhighlight %}
 
 
 Additionally, to make this give preference to decrementing the colored before the colorless energy I had to order the application but sorting the resource pools like:
 
-```
+{% highlight FSharp %}
 let rec decrementResourcesFromPlayerBoard playerBoard resourcePool =
 
         let sortedPool = resourcePool |> List.sortBy (fun (x : Resource * int) ->
@@ -216,7 +217,7 @@ let rec decrementResourcesFromPlayerBoard playerBoard resourcePool =
                                                                     | _, _ -> 1
                                                                 )
 ...
-```
+{% endhighlight %}
 
 This now appears to be a low quality but playable game besides not having a win condition. I need to add the logic to actually cause a player to lose when they have zero or less health. (obviously currently you can do that first turn depending on the cards you draw which makes the game more exciting?)
 

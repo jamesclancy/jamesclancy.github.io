@@ -5,7 +5,7 @@ author: James Clancy
 tags: books star-wars
 ---
 
-# Possibly the most boring Star Wars book I have read - 1/10
+## Possibly the most boring Star Wars book I have read - 1/10
 
-# Summary
+## Summary
 A remarkably forgettable and basic story of a several imperial agents who try to try to steal information for the rebellion. The book is clearly written as a way to milk money from the *Star Wars Galaxies* franchise. I would avoid reading unless you really *need* to read all the books.

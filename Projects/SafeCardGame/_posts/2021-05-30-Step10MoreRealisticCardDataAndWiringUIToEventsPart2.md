@@ -11,7 +11,7 @@ Now I will try to implement the turn step changes via conditional buttons in the
 
 Currently, a placeholder for these buttons is located in the `playerControlCenter` function. I will pull out a `stepNavigation` function and rewrite the `playerControlCenter` as
 
-```
+{% highlight FSharp %}
 let playerControlCenter  (player : Player) playerBoard gameState dispatch =
   nav [ Class "navbar is-fullwidth is-primary" ]
     [ div [ Class "container" ]
@@ -25,13 +25,13 @@ let playerControlCenter  (player : Player) playerBoard gameState dispatch =
                   currentStepInformation player gameState ]
               div [ Class "navbar-end" ]
                 [ stepNavigation player playerBoard gameState dispatch ] ] ] ]
-```
+{% endhighlight %}
 * note I also added the dispatch to the function
 
 This `stepNavigation` function is going to rely on switching the current step and player to tell what options & actions are available.
 
 I can implement the changes like:
-```
+{% highlight FSharp %}
 
 let renderStepOptionButton dispatch buttonText classType message =
                         p [ Class "control" ]
@@ -81,14 +81,14 @@ let stepNavigation  (player: Player) (playerBoard: PlayerBoard) (gameState : Gam
                             (renderStepOptionButton dispatch "Start New Game" "is-danger" (({ GameId = gameState.GameId; PlayerId = player.PlayerId; } : EndTurnEvent) |> EndTurn) )
                         ] ]
     | _ -> div [] []
-```
+{% endhighlight %}
 
 Now I can see I start on the draw stage and am able to draw but that is not transitioning me to the next step. I will have to investigate the `modifyGameStateFromDrawCardEvent` function.
 
 Investigating this function it appears I forgot to add the state shifting functionality.
 
 I implemented this by changing the `modifyGameStateFromDrawCardEvent` function like
-```
+{% highlight FSharp %}
 let migrateGameStateToNewStep newStep (gs: GameState) =
     // maybe some vaidation could go here?
     Ok {
@@ -107,7 +107,7 @@ let modifyGameStateFromDrawCardEvent (ev: DrawCardEvent) (gs: GameState) =
     |> function
         | Ok g -> g
         | Error e -> { gs with NotificationMessages = appendNotificationMessageToListOrCreateList gs.NotificationMessages e }
-```
+{% endhighlight %}
 
 Refreshing the site I am not able to click through all the steps of my turn!
 

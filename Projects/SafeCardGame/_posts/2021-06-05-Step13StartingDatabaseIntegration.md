@@ -21,7 +21,7 @@ I am going to be creating DTOs for each of the domain types and writing function
 
 I started doing this with the idea of documenting the process I was going through. This turned into quite a bit of code but generally, I was creating Dtos for each domain type and adding a module for that class with `fromDomain` and `toDomain` functions which map to the DTO and to a Result<the domain type, string> type. I implemented them like
 
-```
+{% highlight FSharp %}
 module Player =
 
     let fromDomain (person:Domain.Player) : PlayerDto =
@@ -46,13 +46,14 @@ module Player =
                RemainingLifePoints = lifePoints
             }
         }
-```
+
+{% endhighlight %}
 
 You can note that the `toDomain` function utilizes a computational expression I had to added.
 
 the computational expression is defined like:
 
-```
+{% highlight FSharp %}
 type ResultBuilder() =
     member __.Return(x) = Ok x
     member __.ReturnFrom(m: Result<_, _>) = m
@@ -60,14 +61,15 @@ type ResultBuilder() =
 
 
 let result = new ResultBuilder()
-```
+
+{% endhighlight %}
 
 This `ResultBuilder` allows multiple result checks to chained together using a series of `let!` bind operations.
 
 
 I was able to test serializing these DTOs using System.Text.Json by adding code to the Server project
 
-```
+{% highlight FSharp %}
 SampleCardDatabase.creatureCardDb |> Seq.map (fun c-> CharacterCard c)
 |> Seq.map Card.fromDomain
 |> Seq.map (fun c ->
@@ -77,11 +79,12 @@ SampleCardDatabase.creatureCardDb |> Seq.map (fun c-> CharacterCard c)
 |> JsonSerializer.Serialize
 |> (fun c-> System.IO.File.WriteAllText("test.json", c))
 |> ignore
-```
+
+{% endhighlight %}
 
 It did serialize but I noticed the CardId and other Domain Ids needed to have their `ToString()` methods overloaded like:
 
-```
+{% highlight FSharp %}
 module Domain =
 
     type PlayerId = PlayerId of NonEmptyString
@@ -95,7 +98,8 @@ module Domain =
     type GameId = GameId of NonEmptyString
         with override this.ToString() = match this with GameId s -> s.ToString()
         ...
-```
+
+{% endhighlight %}
 
 I am leaving this as the final commit in the branch `step-13-decks-to-database`. We were unable to actually write to a database but are able to serialize a list of cards to JSON now. This actually took an inordinate amount of time (like a week of share time) so I will continue on with this in step 14.
 
