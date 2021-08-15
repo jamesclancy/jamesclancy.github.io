@@ -13,7 +13,7 @@ Now I am going to continue to wire up the layout to the GameState. Previously, I
 
 In order to facilitate this mapping I created a function:
 
-```
+{% highlight FSharp %}
 let getSymbolForResource resource =
     match resource with
     | Grass -> "🍂"
@@ -23,20 +23,20 @@ let getSymbolForResource resource =
     | Psychic -> "🧠"
     | Fighting -> "👊"
     | Colorless -> "□"
-```
+{% endhighlight %}
 
 Using this I can create a function mapping a `ResourcePool' to a string like:
 
-```
+{% highlight FSharp %}
 let textDescriptionForResourcePool (resourcePool : ResourcePool) =
     resourcePool
     |> Seq.map (fun x -> sprintf "%s x%i" (getSymbolForResource x.Key) x.Value)
     |> String.concat ";"
-```
+{% endhighlight %}
 
 Using this function I can break out a renderAttackRow function. To do this I had to add a Name property to the `Attack` type. After adding the `Name` I can create a method like:
 
-```
+{% highlight FSharp %}
 
 let renderAttackRow (attack: Attack) =
     match attack.SpecialEffect with
@@ -61,11 +61,11 @@ let renderAttackRow (attack: Attack) =
                 [
                     p [] [ str (sprintf "%i" attack.Damage) ]
                 ] ]
-```
+{% endhighlight %}
 
 and reference it like
 
-```
+{% highlight FSharp %}
 let renderCharacterCard (card: CharacterCard) =
       div [ Class "column is-4" ]
                 [ div [ Class "card" ]
@@ -101,7 +101,7 @@ let renderCharacterCard (card: CharacterCard) =
                           a [ Href "#"
                               Class "card-footer-item" ]
                             [ str "Discard" ] ] ] ]
-```
+{% endhighlight %}
 
 Now I have to plug in the information into the player and enemy creature hopefully reusing much of the previously created functions.
 
@@ -110,7 +110,7 @@ First, I can plug in the playmat backgrounds.
 Then, I see I can use a mapping function for the `SpecialCondition`s to status symbols similar to what was done for the Resource symbols as well a function which takes an optional list of these conditions and appends them together. *These mappings do rely on emojis, this is not a great idea but I am sticking with it for now*.
 
 Like:
-```
+{% highlight FSharp %}
 let getSymbolForSpecialCondition status =
     match status with
     | Asleep -> "💤"
@@ -123,7 +123,7 @@ let textDescriptionForListOfSpecialConditions specialConditions =
     match specialConditions with
     | Some sc -> sc |> Seq.map getSymbolForSpecialCondition |> String.concat ";"
     | None -> ""
-```
+{% endhighlight %}
 
 I am starting to have a number of UI helper functions so I am going to move them into another file/module `GeneralUIHelpers`. I will have to register this file in Client.fsproj making sure it is compiled before the PageLayoutElement.fs.
 
@@ -132,7 +132,7 @@ I can now pull out a `renderEnemyActiveCreature` function which takes an optiona
 
 I wrote these and modified the enemyCreatures function to be like:
 
-```
+{% highlight FSharp %}
 
 let renderEnemyActiveCreature (inPlayCreature : Option<InPlayCreature>) =
   match (Option.map (fun x -> (x, x.Card)) inPlayCreature) with
@@ -218,7 +218,7 @@ let enemyCreatures  (player: Player) (playerBoard: PlayerBoard) =
                         [ str "Bench" ]
                       renderEnemyBench playerBoard.Bench
                     ] ] ] ] ]
-```
+{% endhighlight %}
 
 This now builds (and looks very weird with no content).
 
@@ -226,7 +226,7 @@ I now need to populate some test data for the enemy creatures.
 
 Similar to the cards I am able to generate the data like:
 
-```
+{% highlight FSharp %}
 
 let inPlayCreatureGenerator inPlayCreatureIdStr cardInstanceIdStr cardIdStr cardImageUrlStr =
         let inPlayCreatureId = NonEmptyString.build inPlayCreatureIdStr |> Result.map InPlayCreatureId
@@ -263,13 +263,13 @@ let inPlayCreatureSeqGenerator (numberOfCards : int) =
                     | Ok accum, Ok curr -> curr @ accum |> Ok
                     | _,_ -> "Eating Errors lol" |> Error
                 ) (Ok List.empty)
-```
+{% endhighlight %}
 
 Next, I need to modify the player creatures to also reference the state.
 
 To do this I created three functions:
 
-```
+{% highlight FSharp %}
 
 let playerActiveCreature (inPlayCreature : Option<InPlayCreature>) =
   match (Option.map (fun x -> (x, x.Card)) inPlayCreature) with
@@ -376,13 +376,13 @@ let playerCreatures  (player: Player) (playerBoard: PlayerBoard) =
               playerBench playerBoard.Bench 4
 
                ] ] ]
-```
+{% endhighlight %}
 
 This compiles and displays now. Here note that the playerBench takes an argument for the number of columns to display. I wasn't sure if it should be 3 or 4 cards per column so I made it a variable.
 
 The playerCreatures can then be changed to
 
-```
+{% highlight FSharp %}
 
 let playerCreatures  (player: Player) (playerBoard: PlayerBoard) =
   section [
@@ -398,7 +398,7 @@ let playerCreatures  (player: Player) (playerBoard: PlayerBoard) =
               playerBench playerBoard.Bench 4
 
                ] ] ]
-```
+{% endhighlight %}
 
 Additionally, at this stage, I noticed that the playmat background on the creatures was missing a `'` around the URL so I added that.
 

@@ -15,7 +15,7 @@ In order to alter the init() I will have to come up with what the initial state 
 
 First I set up my type like:
 
-```
+{% highlight FSharp %}
     let model =
         {
             Players =  Map.empty
@@ -24,22 +24,25 @@ First I set up my type like:
             CurrentStep=  GameStep
             TurnNumber = 1
         }
-```
+{% endhighlight %}
 
 I then also deleted the Model type and updated the `Msg` type to consist solely of a GameStarted type.
 
 I then had to update the cmd of the init() like
-``` let cmd = Cmd.ofMsg GameStarted ```
+{% highlight FSharp %} 
+let cmd = Cmd.ofMsg GameStarted 
+{% endhighlight %}
+
 so that it returned a valid cmd and update the `update` function
 to only match on the `GamesStarted` type.
 
 i.e.
-```
+{% highlight FSharp %}
 let update (msg: Msg) (model: GameState): GameState * Cmd<Msg> =
     match msg with
     | GameStarted ->
         model, Cmd.none
-```
+{% endhighlight %}
 
 
 I was not able to save and it compiled
@@ -49,19 +52,19 @@ Next I will need to wire in the model part by part into the layout potentially u
 
 The first thing I noticed is that I didn't have any sort of validation that my Id's were non empty so I added some by defining a `NonEmptyString` type, making the constructor private and adding a NonEmptyString namespace with a build function that creates a NonEmptyString after validating the provided string is not null or whitespace.
 
-```
+{% highlight FSharp %}
 type NonEmptyString = private NonEmptyString of string
 module NonEmptyString =
     let build str =
         if String.IsNullOrWhiteSpace str then "Value cannot be empty" |> Error
         else str |> NonEmptyString |> Ok
 
-```
+{% endhighlight %}
 
 I then moved the domain types into a `Domain` module and made the various Ids types of NonEmptyStrings.
 
 i.e.
-```
+{% highlight FSharp %}
 module Domain =
 
     type PlayerId = NonEmptyString
@@ -71,7 +74,7 @@ module Domain =
 
     type Player =
         { ...
-```
+{% endhighlight %}
 
 I then added the arguments `model` and `dispatch` to pass through from the `view` to the `mainLayout`.
 
@@ -81,13 +84,13 @@ and  `playerCreatures` and `playerHand` will depend on your `PlayerBoard` and th
 First, we will need to pull out the opponent and player board and player but I have noticed that the GamesState does not define the current player vs the opponent so I am adding a property to the GameState to store this information.
 
 i.e.
-```
+{% highlight FSharp %}
     and GameState =
         {
             CurrentPlayer: PlayerId
             OpponentPlayer: PlayerId
             ...
-```
+{% endhighlight %}
 
 I then wrote functions to extract the needed information, wrapped them in results and a single function to extract all the data.
 
@@ -95,7 +98,7 @@ I then wrapped the main layout to verify no errors were encountered in building 
 
 i.e.
 
-```
+{% highlight FSharp %}
 
 let opponentPlayer (model : GameState) =
     match model.Players.TryGetValue model.OpponentPlayer with
@@ -138,11 +141,11 @@ let mainLayout  model dispatch =
           footerBand
         ]
   | _ -> strong [] [ str "Error in GameState encountered." ]
-```
+{% endhighlight %}
 
 Looking further at the `Player` definition I see that it is missing a playmat URL for their background graphic. I added that as well as definitions for two new primates domain types which should only hold valid URLs:
 
-```
+{% highlight FSharp %}
 
 type UrlString = private UrlString of NonEmptyString
 module UrlString =
@@ -167,11 +170,11 @@ module ImageUrlString =
         if isUrlImage str then "Value must be a url pointing to iamge." |> Error
         else str |> UrlString.build |> Result.map ImageUrlString
 
-```
+{% endhighlight %}
 
 and
 
-```
+{% highlight FSharp %}
 
     type Player =
         {
@@ -181,11 +184,11 @@ and
             RemainingLifePoints: int
         }
 
-```
+{% endhighlight %}
 
 In the Init I now have to add PlayerIds for the opponent and and current player. To do this I created a createPlayer function which takes a playerIdStr playerName playerCurrentLife playerPlaymatUrl and returns a `Player`.
 
-```
+{% highlight FSharp %}
 let createPlayer playerIdStr playerName playerCurrentLife playerPlaymatUrl =
     let playerId = NonEmptyString.build playerIdStr |> Result.map PlayerId
     let playerPlaymatUrl = ImageUrlString.build playerPlaymatUrl
@@ -199,13 +202,13 @@ let createPlayer playerIdStr playerName playerCurrentLife playerPlaymatUrl =
            PlaymatUrl = pm
         }
     | _ -> Error "Unable to create player"
-```
+{% endhighlight %}
 
 I then modified the init to create two players and plug them into the GameState. In doing this modification I had to switch the init to return a Result type.
 
 i.e.
 
-```
+{% highlight FSharp %}
 let init =
     let player1 = createPlayer "Player1" "Player1" 10 "https://picsum.photos/id/1000/2500/1667?blur=5"
     let player2 = createPlayer "Player2" "Player2" 10 "https://picsum.photos/id/10/2500/1667?blur=5'"
@@ -224,12 +227,12 @@ let init =
         let cmd = Cmd.ofMsg GameStarted
         Ok (model, cmd)
     | _ -> "Failed to create players" |> Error
-```
+{% endhighlight %}
 
 
 I then had to modify the App.fs in the client to accept a result set back from the init like
 
-```
+{% highlight FSharp %}
 
 match Index.init with
 | Ok (gamesState, dispatch) ->
@@ -237,7 +240,7 @@ match Index.init with
         gamesState, dispatch
     Program.mkProgram placeHolderFunc Index.update Index.view
     ...
-```
+{% endhighlight %}
 
 At this point, I ran into an error where the methods I was using from Path and Uri to validate the URLs are not implemented in FABLE. While FABLE implements a large part of the .NET framework some parts are not implemented. for now, I basically made the functions just to validate that the strings not null.
 
@@ -247,17 +250,17 @@ It now builds and displays the `Error in GameState encountered.` message from th
 Now I will have to update the init to populate these values.
 
 I updated the Players value to
-```
+{% highlight FSharp %}
 
                 Players =  [
                             p1.PlayerId, p1;
                             p2.PlayerId, p2
                            ] |> Map.ofList
-```
+{% endhighlight %}
 
 Additionally, I will need to create a function to generate a player board.
 
-```
+{% highlight FSharp %}
 let playerBoard player =
     {
             PlayerId=  player.PlayerId
@@ -275,7 +278,7 @@ let playerBoard player =
             TotalResourcePool= ResourcePool Seq.empty
             AvailableResourcePool =  ResourcePool Seq.empty
     }
-```
+{% endhighlight %}
 
 This was not working for me. I spent a long time trying to figure out why. The end answer was that my ImageUrlString build method needed a `not` and was actually verifying that the image URL was invalid.
 
@@ -291,7 +294,7 @@ Here I can notice that the health, hand, deck and discard items are shared betwe
 
 I, therefore, pulled out a playerStats function:
 
-```
+{% highlight FSharp %}
 let playerStats  (player: Player) (playerBoard: PlayerBoard) =
     [             div [ Class "navbar-item" ]
                     [ a [ Class "button is-primary"
@@ -310,11 +313,11 @@ let playerStats  (player: Player) (playerBoard: PlayerBoard) =
                           Href "#" ]
                         [ str (sprintf "🗑️ %i" playerBoard.DiscardPile.Cards.Length)] ] ]
 
-```
+{% endhighlight %}
 
 I can also pull out the step information into a `currentStepInformation` function. I can then utilize it if it is the player's turn and the GameState.CurrentStep to select the classes for the steps like:
 
-```
+{% highlight FSharp %}
 let yourCurrentStepClasses (player: Player) (gameState : GameState) (gamesStep: GameStep) =
     if not (player.PlayerId = gameState.CurrentPlayer) then "button is-primary"
     else
@@ -344,12 +347,12 @@ let currentStepInformation (player: Player) (playerBoard: PlayerBoard) (gameStat
                                        Disabled true ]
                                 [ span [ ]
                                     [ str "Reconcile" ] ] ] ] ]
-```
+{% endhighlight %}
 
 All this builds so I am not able to try to populate the Player Hand from the PlayerBoard.Hand. This can be rendered by rendering each card from the list in a yield.
 
 I can do this like
-```
+{% highlight FSharp %}
 let renderCardForHand (card: Card) =
   div [ Class "column is-4" ]
                 [ div [ Class "card" ]
@@ -411,14 +414,14 @@ let playerHand (hand : Hand) =
           div [ Class "columns is-mobile mb-5" ]
             [ yield! Seq.map renderCardInstanceForHand hand.Cards ] ] ]
 
-```
+{% endhighlight %}
 
 Next to see some data I will have to populate some hand data into the init object.
 
 To do this I am going to create a `testCardSeqGenerator` function. This will take a number and return that number of randomly generated cards.
 
 While doing this I realized the all the `GameStateSpecialEffect` in the cards and attacks should be Optional and updated the domain like
-```
+{% highlight FSharp %}
     and CharacterCard
         = { CardId: CardId;
             Name: string;
@@ -456,11 +459,11 @@ While doing this I realized the all the `GameStateSpecialEffect` in the cards an
             SpecialEffect: Option<GameStateSpecialEffect>
         }
 
-```
+{% endhighlight %}
 
 After playing around for a while I was eventually able to create functions to generate test data:
 
-```
+{% highlight FSharp %}
 
 let testCardGenerator cardInstanceIdStr cardIdStr =
 
@@ -508,14 +511,13 @@ let testCardSeqGenerator (numberOfCards : int) =
                     | Ok accum, Ok curr -> curr @ accum |> Ok
                     | _,_ -> "Eating Errors lol" |> Error
                 ) (Ok List.empty)
-```
+{% endhighlight %}
 
 One of the major issues I encountered was transforming the Sequence of results into a Result of a sequence. I ended up having to map the Seq<Result<Card, string>> to a Seq<Result<Card list, string>> and fold across that.
 
 I was then able to update the `playerBoard` function to
 
-```
-
+{% highlight FSharp %}
 let playerBoard (player : Player) =
     let deckTemp =  testCardSeqGenerator 35
     let handTemp = testCardSeqGenerator 3
@@ -542,7 +544,7 @@ let playerBoard (player : Player) =
                 AvailableResourcePool =  ResourcePool Seq.empty
             }
     | _,_ -> "Error creating deck or hand" |> Error
-```
+{% endhighlight %}
 
 I feel like there has to be a much better way to deal with these Result types but I am going to keep driving on and revisit later.
 
@@ -558,7 +560,7 @@ Also, a `ToString` override is needed for the `ImageUrlString` type. I set this 
 
 i.e.
 
-```
+{% highlight FSharp %}
 type NonEmptyString = private NonEmptyString of string
     with override this.ToString() = match this with NonEmptyString s -> s
 ...
@@ -570,7 +572,7 @@ type UrlString = private UrlString of NonEmptyString
 type ImageUrlString = private ImageUrlString of UrlString
     with override this.ToString() = match this with ImageUrlString s -> s.ToString()
 
-```
+{% endhighlight %}
 
 This has proven to be extremely time-consuming and I am calling it quits for the day.
 

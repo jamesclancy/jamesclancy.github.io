@@ -15,7 +15,7 @@ These updates to the gamestate will occur in the update function of the client I
 
 First I scaffolded out the update function like:
 
-```
+{% highlight FSharp %}
 let update (msg: Msg) (model: GameState): GameState * Cmd<Msg> =
     match msg with
     | GameStarted ->
@@ -38,14 +38,14 @@ let update (msg: Msg) (model: GameState): GameState * Cmd<Msg> =
         model, Cmd.none
     | GameWon ev ->
         model, Cmd.none
-```
+{% endhighlight %}
 
 First I will implement to `StartGame` handler.
 
 
 In order to do this I first created a `takeDeckDealFirstHandAndReturnNewPlayerBoard` function:
 
-```
+{% highlight FSharp %}
 let takeDeckDealFirstHandAndReturnNewPlayerBoard (intitalHandSize: int) (playerId : PlayerId) (deck : Deck) =
     let emptyHand =
       {
@@ -66,10 +66,10 @@ let takeDeckDealFirstHandAndReturnNewPlayerBoard (intitalHandSize: int) (playerI
         TotalResourcePool= ResourcePool Seq.empty
         AvailableResourcePool =  ResourcePool Seq.empty
     }
-```
+{% endhighlight %}
 
 This references a new function to draw cards:
-```
+{% highlight FSharp %}
 let drawCardsFromDeck (cardsToDraw: int) (deck : Deck) (hand: Hand) =
     if deck.Cards.IsEmpty then
         deck, hand
@@ -77,10 +77,10 @@ let drawCardsFromDeck (cardsToDraw: int) (deck : Deck) (hand: Hand) =
         let cardsToTake = List.truncate cardsToDraw deck.Cards
         { deck with Cards = List.skip cardsToTake.Length deck.Cards}, {hand with Cards = hand.Cards @ cardsToTake}
 
-```
+{% endhighlight %}
 
-Then I was able to intialize the state as:
-```
+Then I was able to initialize the state as:
+{% highlight FSharp %}
 let intitalizeGameStateFromStartGameEvent (ev : StartGameEvent) =
             {
                 GameId= ev.GameId
@@ -95,12 +95,13 @@ let intitalizeGameStateFromStartGameEvent (ev : StartGameEvent) =
                 TurnNumber= 1
             }
 
-```
+{% endhighlight %}
+
 Then I just have to call intitalizeGameStateFromStartGameEvent from my update match statement.
 
 Using the same draw function I can implement the draw event.
 
-```
+{% highlight FSharp %}
 let appendNotificationMessageToListOrCreateList (existingNotifications : Option<Notification list) (newNotification : string) =
     match existingNotifications with
     | Some nl ->
@@ -119,24 +120,24 @@ let modifyGameStateFromDrawCardEvent (ev: DrawCardEvent) (gs: GameState) =
         { gs with Boards = (gs.Boards.Add (ev.PlayerId, { pb with Deck = newDeck; Hand = newHand })  ) }
     | false, _ ->
         { gs with NotificationMessages = appendNotificationMessageToListOrCreateList gs.NotificationMessages "Unable to lookup player board" }
-```
+{% endhighlight %}
 
 I realize there has to be a better way to pipe into a list than `|> (fun y -> y :: nl)` but I am just going to leave that for now.
 
 Discard card is next. I noticed a typo in the name `CardInstanceId` so I corrected that. Also, I notice I will similarly have to pull the player board from the state so I should extract that to be a function like:
 
-```
+{% highlight FSharp %}
 let getExistingPlayerBoardFromGameState playerId gs =
  match gs.Boards.TryGetValue playerId with
     | true, pb ->
         pb |> Ok
     | false, _ ->
         (sprintf "Unable to locate player board for player id %s" (playerId.ToString())) |> Error
-```
+{% endhighlight %}
 
 I am then able to implement a discardCardFromBoard function like:
 
-```
+{% highlight FSharp %}
 let discardCardFromBoard (cardInstanceId : CardInstanceId) (playerBoard : PlayerBoard) =
     let cardToDiscard : CardInstance list = List.filter (fun x -> x.CardInstanceId = cardInstanceId) playerBoard.Hand.Cards
 
@@ -168,33 +169,33 @@ let modifyGameStateFromDiscardCardEvent (ev: DiscardCardEvent) (gs: GameState) =
     | Error e ->
         { gs with NotificationMessages = appendNotificationMessageToListOrCreateList gs.NotificationMessages e }
 
-```
+{% endhighlight %}
 
 The end play step should just move the player to the Attack step like:
 
-```
+{% highlight FSharp %}
     | EndPlayStep ev ->
         { model with CurrentStep = (Attack ev.PlayerId)}, Cmd.none
-```
+{% endhighlight %}
 
 Similarly, SkipAttack should just move the player to the Reconcile step.
 
-```
+{% highlight FSharp %}
     | SkipAttack ev ->
         { model with CurrentStep = (Reconcile ev.PlayerId)}, Cmd.none
-```
+{% endhighlight %}
 
 EndTurn should just move the game to the draw step of the other player.
 
-```
+{% highlight FSharp %}
     | EndTurn ev ->
         let otherPlayer = getTheOtherPlayer model ev.PlayerId
         { model with CurrentStep = (Draw otherPlayer)}, Cmd.none
-```
+{% endhighlight %}
 
 Game Won should transition to the GameOverState, set a winner and a message but I will first have to define a function to format the GameOverMessage like:
 
-```
+{% highlight FSharp %}
 let formatGameOverMessage (notifications : Option<Notification list>) =
     match notifications with
     | None ->
@@ -205,15 +206,15 @@ let formatGameOverMessage (notifications : Option<Notification list>) =
         x
         |> Seq.map (fun x -> x.ToString())
         |> String.concat ";"
-```
+{% endhighlight %}
 
 then I can
 
-```
+{% highlight FSharp %}
     | GameWon ev ->
         let newStep =  { WinnerId =  ev.Winner; Message = formatGameOverMessage ev.Message } |> GameOver
         { model with CurrentStep = newStep}, Cmd.none
-```
+{% endhighlight %}
 
 This involved some copypasta which could be removed and refactored but I am just going to keep driving on for now.
 
@@ -221,7 +222,7 @@ This now just leaves me to complete the play card and attack events.
 
 For the play card action, I will need to implement a variety of functions. These will require refactoring but just to get something down I added
 
-```
+{% highlight FSharp %}
 let applyEffectIfDefinied effect gs =
     match effect with
     | Some e -> e.Function.Invoke gs |> Ok
@@ -337,7 +338,7 @@ let modifyGameStateFromPlayCardEvent (ev: PlayCardEvent) (gs: GameState) =
     | Error e ->
         { gs with NotificationMessages = appendNotificationMessageToListOrCreateList gs.NotificationMessages e }
 
-```
+{% endhighlight %}
 
 I am leaving the attack logic for later and am now focuses on testing to verify what I have done so far is working.
 

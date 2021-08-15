@@ -19,7 +19,7 @@ This appeared to be very straightforward, unfortunately I was unable to find a w
 
 Therefor, I had to implement my own `use_open_id_auth_with_config_from_service_collection`. To do this I essentially copy and pasted the original [`use_open_id_auth_with_config`](https://github.com/SaturnFramework/Saturn/blob/9593e90e1397309c4653abe703478893b60daa5e/src/Saturn.Extensions.Authorization/OAuth.fs#L189) and modified it to accept a function with maps from a IServiceCollection to the required confuration like so:
 
-```
+{% highlight FSharp %}
 type Saturn.Application.ApplicationBuilder with
     [<CustomOperation("use_open_id_auth_with_config_from_service_collection")>]
     member __.UseOpenIdAuthWithConfigFromServiceCollection(state: ApplicationState, (config: IServiceCollection -> Action<OpenIdConnect.OpenIdConnectOptions>)) =
@@ -39,6 +39,6 @@ type Saturn.Application.ApplicationBuilder with
             ServicesConfig = service::state.ServicesConfig
             AppConfigs = middleware::state.AppConfigs
             CookiesAlreadyAdded = true }
-```
+{% endhighlight %}
 
 [Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-4)

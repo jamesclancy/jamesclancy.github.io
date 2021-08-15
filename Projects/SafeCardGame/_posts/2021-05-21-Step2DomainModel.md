@@ -20,7 +20,7 @@ The game starts with two players.
 
 Each `Player` will start with a name and an amount of health.
 
-```
+{% highlight FSharp %}
 type PlayerId = string
 
 type Player =
@@ -29,11 +29,12 @@ type Player =
         Name: string
         RemainingLifePoints: int
     }
-```
+{% endhighlight %}
+
 
 Each player will have a `board` which consists of a Deck of cards, a hand, a pile of discarded, an optional active creature, a list of in play but not active creatures (i.e. a bench), a total resource pool and an available resource pool.
 
-```
+{% highlight FSharp %}
 type PlayerBoard =
     {
         PlayerId: PlayerId
@@ -45,26 +46,28 @@ type PlayerBoard =
         TotalResourcePool: ResourcePool
         AvailableResourcePool: ResourcePool
     }
+{% endhighlight %}
 
-```
 
 `Resource`s are typed from a finite list, i.e.:
-```
+{% highlight FSharp %}
 type Resource =
     Grass | Fire |
     Water | Lightning |
     Psychic | Fighting |
     Colorless
-```
+{% endhighlight %}
+
 
 A `ResourcePool` is simply a list of the different types of resources along with a quantity value.
 
-```
+{% highlight FSharp %}
 type ResourcePool = Map<Resource, int>
-```
+{% endhighlight %}
+
 
 A `Deck` and a `Hand` are both lists of `CardInstance`s, the main difference being that potentially a deck could have a number of cards exposed or visible.
-```
+{% highlight FSharp %}
 type Hand =
     {
         Cards: CardInstance list
@@ -74,7 +77,8 @@ type Deck =
         Cards: CardInstance list
         TopCardsExposed: int
     }
-```
+{% endhighlight %}
+
 
 Each `CardInstance` will contain a unique CardInstanceId and refers to a generic card referenced via a CardId. I am also placing the Card Type on the CardInstance, this seems pretty memory inefficient but probably doesn't matter due to the limited size of decks. For the moment it makes it much easier to manipulate the decks and pull information.
 The `Card` referenced by the `CardId` will have:
@@ -88,7 +92,7 @@ The `Card` referenced by the `CardId` will have:
 * a `GameStateSpecialEffect` for when the card enters and leaves the game
     * the `GameStateSpecialEffect` will consist of a function which takes an arguement of the `GameState` and returns a new manipulated `GameState`
 
-```
+{% highlight FSharp %}
 type CardInstanceId = string
 type CardId = string
 type GameStateSpecialEffect = delegate of GameState -> GameState
@@ -102,11 +106,12 @@ type Card =
    CharacterCard of { CardId: CardId; Name: string; Creature: Creature; ResourceCost: ResourcePool; PrimaryResource: Resource; EnterSpecialEffects: GameStateSpecialEffect; ExitSpecialEffects: GameStateSpecialEffect}
    | EffectCard of { CardId: CardId; Name: string; ResourceCost: ResourcePool; PrimaryResource: Resource; EnterSpecialEffects: GameStateSpecialEffect; ExitSpecialEffects: GameStateSpecialEffect; }
    | ResourceCard of { CardId: CardId; Name: string; ResourceCost: ResourcePool; PrimaryResource: Resource; EnterSpecialEffects: GameStateSpecialEffect; ExitSpecialEffects: GameStateSpecialEffect; ResourceAvailableOnFirstTurn: bool; ResourcesAdded: ResourcePool}
-```
+{% endhighlight %}
+
 
 A `Creature` will have integer health for total health associated with the card, a list of `Resource`s the creature is weak to, and a list of `Attacks.
 An `Attack` will have an integer for the damage it inflicts, a `ResourcePool` representing the cost to use, and a `GameStateSpecialEffect` defining any additional effects which may be triggered by the attack.
-```
+{% highlight FSharp %}
 type Creature =
     {
         Health: int
@@ -119,11 +124,12 @@ type Attack =
         Cost: ResourcePool
         SpecialEffect: GameStateSpecialEffect
     }
-```
+{% endhighlight %}
+
 An `InPlayCreature` has an id, is associated with a `CardInstance`, a current amount of damage, an optional list of `SpecialCondition`s currently applied as well as attached and spent resource pools.
 The `InPlayCreatureId` is a string and available `SpecialCondition`s are `Asleep | Burned | Confused | Paralyzed | Poisoned`
 
-```
+{% highlight FSharp %}
 type SpecialCondition = Asleep | Burned | Confused | Paralyzed | Poisoned
 type InPlayCreatureId = string
 type InPlayCreature =
@@ -135,7 +141,8 @@ type InPlayCreature =
         AttachedEnergy: ResourcePool
         SpentEnergy: ResourcePool
     }
-```
+{% endhighlight %}
+
 
 Lastly, the `GameState` contains a:
 * Map of `PlayerId`s to `Player`s
@@ -146,7 +153,7 @@ Lastly, the `GameState` contains a:
 
 The GameStep is just an enum represented by `NotCurrentlyPlaying | Draw | Play | Attack | Reconcile`
 
-```
+{% highlight FSharp %}
 
 type GameStep =
     NotCurrentlyPlaying | Draw | Play | Attack | Reconcile
@@ -159,7 +166,8 @@ type GameState =
         CurrentStep:GameStep
         TurnNumber: int
     }
-```
+{% endhighlight %}
+
 
 
 If you look at the current Shared.fs file you can see that many of the `type` declarations have been transformed into `and`s this is because F# cares about the order in which things are declared. The `type` declares a thing in a subsequent order and the `and` keyword forces the items to be declared at the same time.
@@ -181,7 +189,7 @@ C:\tests\SafeCardGame\src\Shared\Shared.fs(53,22): error FS0035: This construct 
 ```
 
 It appears that newer versions of F# no longer allow anonymous types in discriminated unions so I had to break out those types like:
-```
+{% highlight FSharp %}
 type Card =
    CharacterCard of CharacterCard
    | EffectCard of EffectCard
@@ -193,7 +201,8 @@ and EffectCard
 and ResourceCard
     = { CardId: CardId; Name: string; ResourceCost: ResourcePool; PrimaryResource: Resource; EnterSpecialEffects: GameStateSpecialEffect; ExitSpecialEffects: GameStateSpecialEffect; ResourceAvailableOnFirstTurn: bool; ResourcesAdded: ResourcePool}
 
-```
+{% endhighlight %}
+
 
 Now running `dotnet fake build --target run` builds.
 

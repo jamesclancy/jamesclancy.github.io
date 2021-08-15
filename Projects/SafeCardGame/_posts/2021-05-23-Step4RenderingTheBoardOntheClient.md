@@ -31,7 +31,7 @@ This will require future refinement but I initially broke out the page into part
     playerHand
     footerBand
 ```
-With a general arangement of
+With a general arrangement of
 ```
 <div class="container is-fluid">
     topNavigation
@@ -47,7 +47,6 @@ With a general arangement of
     playerHand
     footerBand
 </div>
-
 ```
 
 Going in order I dropped each of these parts into the converter. When I reached `playerControlCenter` the converter stopped working. After playing around with the html for a while (no error message was returned) I was able to discover that the converter did not like the `disabled` on the buttons.
@@ -72,17 +71,17 @@ I don't think this is needed from an html standpoint? It is probably just a feat
 I was eventually able to convert all the html subsections defining each as a variable (will eventually be converted to a function).
 
 i.e. like:
-```
+{% highlight FSharp %}
 let footerBand =
   footer [ Class "footer" ]
     [ div [ Class "container" ]
         [ div [ Class "level" ]
         ...
-```
+{% endhighlight %}
 
 I then manually created the mainLayout as
 
-```
+{% highlight FSharp %}
 let mainLayout =
   div [ Class "container is-fluid" ]
     [ topNavigation
@@ -96,7 +95,7 @@ let mainLayout =
             playerCreatures ] ]
       playerHand
       footerBand
-```
+{% endhighlight %}
 The results of this process ae located in ([the documentation > html > ElmishElements.fs](documentation/html/ElmishElements.fs))
 
 
@@ -106,14 +105,14 @@ I copied and pasted the contents from the ElmishElements into this file.
 
 This broke the build as the file needed a module to be defined and the references imported so I added
 
-```
+{% highlight FSharp %}
 module PageLayoutParts
 
 open Elmish
 open Fable.React
 open Fable.React.Props
 open Fulma
-```
+{% endhighlight %}
 
 to the top of the file.
 
@@ -122,27 +121,27 @@ This still did not build. There was an issue with a `broken-css` being added by 
 
 The indentation was
 
-```
+{% highlight FSharp %}
 
                                 [ strong [ ]
                                     [ str "On Enter Playing Field" ]
                                       str ": Effect description." ]
-```
+{% endhighlight %}
 
 I needed to change it to
 
-```
+{% highlight FSharp %}
 
                                 [ strong [ ]
                                     [ str "On Enter Playing Field" ]
                                   str ": Effect description." ]
-```
+{% endhighlight %}
 
 i.e. the function definition is strong str not strong and two lists like many other elements.
 
 Finally, I found that the `mainLayout` thing I wrote was invalid. I had to change it to:
 
-```
+{% highlight FSharp %}
 let mainLayout =
   div [ Class "container is-fluid" ]
     [ topNavigation
@@ -160,16 +159,16 @@ let mainLayout =
       playerHand
       footerBand
     ]
-```
+{% endhighlight %}
 
 It compiled and I was then able to upload the view function in Index.fs to reference the mainLayout function.
 
 i.e.
 
-```
+{% highlight FSharp %}
 let view (model : Model) (dispatch : Msg -> unit) =
     PageLayoutParts.mainLayout
-```
+{% endhighlight %}
 
 After viewing the page a few elements had to be rearranged and some changes had to be made. For example, changing the html unicode codes to just the unicode characters.
 

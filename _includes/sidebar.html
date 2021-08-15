@@ -10,8 +10,6 @@
 
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item{% if page.title == 'Home' %} active{% endif %}" href="{{ '/' | absolute_url }}">Home</a>
-    <a class="sidebar-nav-item{% if page.title == 'About' %} active{% endif %}" href="{{ '/about' | absolute_url }}">About</a>
-
     
 {% assign HEAD_PREFIX = "h_" %}
 {% assign LIST_PREFIX = "l_" %}
@@ -74,20 +72,18 @@
   {% endif %}
 {% endfor %}
 
+
+
   </nav>
 
-  {% for tab in site.tabs %}
-  <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
-    <a href="{{ tab.url | relative_url }}" class="nav-link">
-      <i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3 unloaded"></i>
-      {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
 
-      <span>{{ site.data.locales[lang].tabs.[tab_name] | default: tab_name | upcase }}</span>
-    </a>
-  </li> <!-- .nav-item -->
-  {% endfor %}
-
-  <div class="sidebar-item">
+<div class="sidebar-item">
+  <p>
+<a href="{{ '/about' | absolute_url }}">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="{{ '/feed.xml' | absolute_url }}" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
     <p>
       &copy; {{ site.time | date: '%Y' }}. All rights reserved.
     </p>
