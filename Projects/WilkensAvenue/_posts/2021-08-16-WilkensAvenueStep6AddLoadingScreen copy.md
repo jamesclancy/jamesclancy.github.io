@@ -38,9 +38,6 @@ npm install bulma-pageloader@2.1.0 --save
 
 Additionally, (and not documented anywhere I saw) I had to add a reference to the CSS package for the bulma loader. to do this I added `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-pageloader@0.3.0/dist/css/bulma-pageloader.min.css" />` to my index.html.
 
-
-
-
 ## Results
 
 Currently, the page can be viewed [here](https://wilkens-avenue.herokuapp.com/#/viewlocation/sdf).
