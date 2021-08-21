@@ -36,8 +36,8 @@ type LocationSearchRequest =
 {% endhighlight %}
 
 And displaying a list of:
-{% highlight FSharp %}
 
+{% highlight FSharp %}
 type LocationSummaryViewModel =
     { Id: string
       NeighborhoodId: string
@@ -56,6 +56,7 @@ type LocationSummaryViewModel =
 
 This will be returned from the API in a container:
 
+{% highlight FSharp %}
 type LocationSummaryViewModel =
     { Id: string
       NeighborhoodId: string
