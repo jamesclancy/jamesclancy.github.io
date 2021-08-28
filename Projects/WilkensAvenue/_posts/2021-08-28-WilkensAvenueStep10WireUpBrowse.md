@@ -15,15 +15,15 @@ For now I am going to move on from the tags input issue and come back to it late
 
 This required the implementation of a new API endpoint, several mappings between `DataTransferFormats`, modifications to the page views to pass through the values, updates to the url router to fire off the API call as well as a new Msg type to handle completed search requests.
 
-#### New Api Endpoint
+### New Api Endpoint
 
-#### DataTransferFormat Mappings
+### DataTransferFormat Mappings
 
-#### Page View Modifications
+### Page View Modifications
 
-#### Updates to URL Router
+### Updates to URL Router
 
-#### New Msg Type & Handler
+### New Msg Type & Handler
 
 
 ## Results
