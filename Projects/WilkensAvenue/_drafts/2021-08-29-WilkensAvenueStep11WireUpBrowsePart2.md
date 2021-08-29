@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Wilkens Avenue - Step 10 - Wire up Browse Page (Read values)
+title: Wilkens Avenue - Step 10 - Wire up Browse Page - Part 2 Write
 author: James Clancy
 tags: fsharp dotnet safe-stack bulma-tagsinput mocha fails
 ---
