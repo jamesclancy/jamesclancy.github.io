@@ -11,6 +11,8 @@ tags: fsharp dotnet safe-stack browse-page
 
 ## Process
 
+Dependabot is a free Github action which scans projects for old dependencies and created pull requests for upgrades to the dependencies. 
+
 I created a basic dependabot.yml file based on the template in the .github folder of the repository. I am not certain how well this will work with Packet/F# but I figured I would see what happens. 
 
 ## Results
