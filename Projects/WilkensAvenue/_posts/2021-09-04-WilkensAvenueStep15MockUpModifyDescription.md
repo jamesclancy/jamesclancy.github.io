@@ -145,7 +145,7 @@ type Msg =
     | LocationDetailUpdated of LocationDetailUpdate
 {% endhighlight %}
 
-I also added a type for teh editor state and added it to the ViewLocationPageModel like:
+I also added a type for the editor state and added it to the ViewLocationPageModel like:
 
 {% highlight FSharp %}
 type UpdateLocationDetailState =

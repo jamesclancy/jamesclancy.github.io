@@ -12,60 +12,60 @@ tags: fsharp dotnet safe-stack browse-page
 
 To wire this up I first created data transfer formats:
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 type LocationDetailUpdateRequest =
     { Id: string
       Summary: string
       Description: string }
 
 type LocationDetailUpdateResult = { ErrorMessage: string option }
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 I then added an `updateLocationDetails` to the `ILocationInformationApi` like 
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 type ILocationInformationApi =
     { getLocation: string -> Async<LocationDetailModel>
       searchLocations: LocationSearchRequest -> Async<LocationSearchResult>
       updateLocationDetails: LocationDetailUpdateRequest -> Async<LocationDetailUpdateResult> }
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 I update the server to return accept the request and return a response (but not actually do anything)
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 let locationInformationApi =
     { getLocation = fun id -> async { return exampleLocation }
       searchLocations =
           ...
       updateLocationDetails = fun req -> async { return { ErrorMessage = None } }
     }
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 I added an `ErrorMessage` to the `UpdateLocationDetailState`:
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 type UpdateLocationDetailState =
     { EditingSummary: bool
       NewSummaryContent: string
       EditingDescription: bool
       NewDescriptionContent: string
       ErrorMessage: string option }
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 And I added a `LocationDetailUpdateServerResponseReceived` the client `Msg` type:
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 type Msg =
     | ReceivedLocationDetail of LocationDetailModel
     | BrowsePageFilterChanged of BrowsePageFilterChange
     | ReceivedBrowsePageResult of BrowsePageModel
     | LocationDetailUpdated of LocationDetailUpdate
     | LocationDetailUpdateServerResponseReceived of LocationDetailModel * UpdateLocationDetailState
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 I set up the mapping to create the request from the states and generate the new `LocationDetailUpdateServerResponseReceived` from the result:
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 let mapLocationDetailToEditRequest (id: string) currentEditState =
     { Id = id
       Summary = currentEditState.NewSummaryContent
@@ -82,12 +82,12 @@ let mapUpdateResultsToUpdateDetailResponseReceived
      { editState with
            ErrorMessage = response.ErrorMessage })
     |> LocationDetailUpdateServerResponseReceived
-{% endhighlight %s}
+{% endraw %}{% endhighlight %}
 
 
 In the LocationDetails, I then updated the `defaultEditState` to include the `ErrorMessage` and the `updateLocationDetailsModel` to also return a command which can trigger the result. 
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 let defaultEditState (model: LocationDetailModel) : UpdateLocationDetailState =
     { EditingSummary = false
       NewSummaryContent = stringEmptyOrValue model.Summary
@@ -111,7 +111,6 @@ let updateLocationDetailsModel
     match d with
     | SummaryStartEdit -> currPage, { editState with EditingSummary = true }, Cmd.none
     | SummaryTextChanged s ->
-        Console.WriteLine(s)
         currPage, { editState with NewSummaryContent = s }, Cmd.none
     | SummaryTextSaved ->
         { currPage with
@@ -141,11 +140,11 @@ let updateLocationDetailsModel
         { editState with
               EditingDescription = false
               NewDescriptionContent = stringEmptyOrValue currPage.Description }, Cmd.none
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 I update the view to display the error message if present like:
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
     let errorMessage (msg : string option) =
         match msg with
         | None -> Seq.empty
@@ -171,12 +170,12 @@ I update the view to display the error message if present like:
           yield!
               editablePageSection
               ...
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 Lastly, I hooked this into the general index update function:
 
 
-{% highlight FSharp %}
+{% highlight FSharp %}{% raw %}
 let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
     match msg, model.PageModel with
     | ReceivedLocationDetail d, _ ->
@@ -200,9 +199,8 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
                   |> ViewLocationPageModel }, cmd
 
     | _, _ -> model, Cmd.none
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 ## Results
 
-
-[Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-15)
+[Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-16)
