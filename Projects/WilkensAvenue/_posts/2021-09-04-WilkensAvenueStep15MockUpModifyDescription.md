@@ -147,7 +147,7 @@ type Msg =
 
 I also added a type for teh editor state and added it to the ViewLocationPageModel like:
 
-{% highlight FSharp}
+{% highlight FSharp %}
 type UpdateLocationDetailState =
     {
         EditingSummary: bool
