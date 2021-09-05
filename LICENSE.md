@@ -1,4 +1,9 @@
-# Released under MIT License
+Content is Copyright (c) 2021 James Clancy
+## Notable Dependencies
+
+Theme/Repo based on https://github.com/poole/poole which is released under MIT License
+
+### Poole License agreement
 
 Copyright (c) 2014 Mark Otto.
 
