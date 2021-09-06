@@ -10,7 +10,7 @@ tags: books science
 
 ## Summary
 
-The book is written in a question and answer format where the author _Plasencia_ interviews scientists and academics about philosophical issues relating to their work. May of the discusions centered around how the internet was providing a way for people to become more and more connected. 
+The book is written in a question and answer format where the author _Plasencia_ interviews scientists and academics about philosophical issues relating to their work. May of the discussions centered around how the internet was providing a way for people to become more and more connected. 
 
 ## My Impressions
 
