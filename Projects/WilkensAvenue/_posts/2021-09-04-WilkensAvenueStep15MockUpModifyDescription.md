@@ -306,6 +306,8 @@ Finally, I update the view to publish these message and reflect the bool is edit
                                               prop.text "Upload Images" ] ] ] ]
 {% endhighlight %}
 
+One thing that wasn't 100% clear here from the documentation was to set hte `innerHtml` prop on the p. This might be clear to someone with more ReactJS experience but I had to spend some time googling to determine what to do. 
+
 This needs to be refactored and actually hooked up to the backend but I am ending the step here. 
 
 ## Results
