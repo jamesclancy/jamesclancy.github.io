@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Wilkens Avenue - Step 15 - Wire Update Description to Api
+title: Wilkens Avenue - Step 16 - Wire Update Description to Api
 author: James Clancy
 tags: fsharp dotnet safe-stack browse-page
 ---
