@@ -381,8 +381,32 @@ type Saturn.Application.ApplicationBuilder with
 
 I am still getting an error ` cookie not found.`. I am thinking this is because the url/ ip generated for the redirect is at port 8085 while the client is being served by webpack at 8080. i.e. Webpack is proxying the request to the server @ 8085 which uses the cookie info from 8080 and the port from the server instance to create the request to Okta. Okta is then redirecting back to 8085 which is unable to find the cookie from the client port. 
 
-I am unable to solve this today and will come back to the problem. Ending the step here. 
+I tried enabling forwarded headers in asp.net:
+
+{% highlight FSharp %}
+        let service (s: IServiceCollection) =
+            s.Configure<ForwardedHeadersOptions>(fun (options:ForwardedHeadersOptions) ->
+                options.ForwardedHeaders <- ForwardedHeaders.All
+                options.KnownNetworks.Clear() |> ignore
+                options.KnownProxies.Clear() |> ignore
+            ) |> ignore
+            
+            let authBuilder =
+            ...
+{% endhighlight %}
+
+This did not do what was needed. I am assuming I also need to configure WebPack to set forward headers.
+
+
+After updating Webpack to forward headers it still was not working. After reading a lot of blog posts I found that that issue was 
+
+{% highlight FSharp %}
+let addAuth (app: IApplicationBuilder) =
+    app.UseCookiePolicy(new CookiePolicyOptions(MinimumSameSitePolicy=SameSiteMode.Lax,Secure=CookieSecurePolicy.None)).UseAuthentication()
+{% endhighlight %}
+
+which was being called last in the ApplicationBuilder, this was wiping out the cookies. I removed the line and it started to work in firefox but not in Chrome.
 
 ## Results
 
-[Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-18)
+[Git branch for this step](https://github.com/jamesclancy/WilkensAvenue/tree/step-19)
