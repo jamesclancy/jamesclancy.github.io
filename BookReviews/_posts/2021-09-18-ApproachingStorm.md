@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Approaching Storm by Alan Dean Foster
+title: Star Wars - The Approaching Storm by Alan Dean Foster
 author: James Clancy
 tags: books sci-fi star-wars
 ---
