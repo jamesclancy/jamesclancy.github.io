@@ -27,7 +27,7 @@ Peanut Butter and Plantain Stew
 
 1. Turn slow cooker on "steam" heat setting and add sliced plantains
 2. Stir the plantains and allow them to cook, this should only take a few min
-3. After hte plantains seem cooked add all other ingredients and fill the remainder of the slow cooker with water
+3. After the plantains seem cooked add all other ingredients and fill the remainder of the slow cooker with water
 4. Leave on slow cook for 4 hours
 
 ## Results 
