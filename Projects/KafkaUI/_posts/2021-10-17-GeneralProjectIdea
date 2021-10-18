@@ -26,6 +26,17 @@ Out of general interest I wanted to see if I could come up with hacky solutions 
 
 ### Getting the Topic Offsets & Event Counts
 
+Even looking through the [Rest Proxy Api Specs](https://docs.confluent.io/2.0.0/kafka-rest/docs/api.html#consumers) I am not seeing this info available in the rest api. 
+
+Basically, for each topic I believe I want to compare the 
+`kafka-run-class kafka.tools.GetOffsetShell --broker-list=localhost:29092 --topic=testtopic --time -1` results to the `kafka-run-class kafka.tools.GetOffsetShell --broker-list=localhost:29092 --topic=testtopic --time -2` for topics.
+
+![Get Offset Example](\assets\img\post-media\2021-10-17-GeneralProjectIdea\get-offset-shell-example.png)
+
+For consumer groups I believe we want to simulate `kafka-consumer-groups --bootstrap-server=localhost:29092 --group=testgroup --describe`.
+
+![Consumer Groups Example](\assets\img\post-media\2021-10-17-GeneralProjectIdea\kafka-consumer-groups-example.png)
+
 
 ## Links
 
