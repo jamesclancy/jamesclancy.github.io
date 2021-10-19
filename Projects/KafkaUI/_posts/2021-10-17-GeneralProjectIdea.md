@@ -83,6 +83,11 @@ For consumer groups I believe we want to simulate `kafka-consumer-groups --boots
 
 ![Consumer Groups Example](\assets\img\post-media\2021-10-17-GeneralProjectIdea\kafka-consumer-groups-example.png)
 
+#### Replicating the Topic Information
+
+I think I can replicate the `GetOffsetShell` results by creating a starting at the beginning of time and then comparing the high and low watermark offsets. I am not entirely certain how accurate this would be and what would be the effect of compacted topics on these results. I feel like the best way to figure out is to test it. 
+
+#### Replicating the Consumer Group Information
 
 
 
