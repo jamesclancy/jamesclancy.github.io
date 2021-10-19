@@ -5,6 +5,8 @@ author: James Clancy
 tags: fsharp dotnet
 ---
 
+_I have been writing this blog post over several days and will probably break it into multiple logical parts when finished._
+
 ## Overview
 I recently attended the Kafka Summit Americas and have been experimenting with Kafka. One thing I have found lacking with Kafka vs other Pub-Sub systems is a management UI. I have previously used RabbitMQ and Azure Service Bus and both of those had quite useful tooling. Unfortunately, Kakfa largely utilizes helpful but not user friendly command line interfaces or commercial products. There appear to be a few user friendly clients like [KaDrop](https://github.com/obsidiandynamics/kafdrop) and [Conduktor](https://www.conduktor.io/) but these are still quite limited vs what you get built into something like Rabbit. 
 
