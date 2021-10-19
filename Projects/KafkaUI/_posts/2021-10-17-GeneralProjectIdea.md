@@ -24,6 +24,52 @@ Reading online, it appears that the guidance is not to try to manage the cluster
 
 Out of general interest I wanted to see if I could come up with hacky solutions to try to perform similar functionality to Conduktor using only `Confluent.Kafka` and interfacing with `Zookeeper`.
 
+### Initial Set Up
+
+First I set up a general scaffold of the UI and hooked up some ideal DTOs and set up a basic UI in MaterialUI. 
+
+The general project structure is set up like:
+
+```
+Client
+    |--> Pages -> 
+    |           |--> CommonLayoutItems - Shared Layout Components
+    |           |
+    |           |--> Brokers
+    |           |
+    |           |--> Topics
+    |           |
+    |           |--> Consumers
+    |
+    |--> Models - Global event models
+    |
+    |--> Index - Routing for requests into the various pages
+    |
+    |--> App - Boilerplate set up for client App
+Server
+    |--> Kafka Interface - Helper and functions built around the Kafka clients, 
+                           used in the Api Implementations
+    |
+    |--> ApiImplementations - Implementations of the API Contracts against kafka
+Shared
+    |--> Dtos - Data models for information exchange between the client and server
+    |
+    |--> Contracts - Api Definitions
+    |
+    |--> Shared - Shared logic and helper functions
+
+```
+
+The pages will all share two general templates, there are informative pages and action pages.
+
+Informative pages are divided into sections like:
+
+![Informative Page Example](\assets\img\post-media\2021-10-17-GeneralProjectIdea\general-page-layout.png)
+
+Action pages are displayed as modals:
+
+![Informative Page Example](\assets\img\post-media\2021-10-17-GeneralProjectIdea\modal-page-layout.png)
+
 ### Getting the Topic Offsets & Event Counts
 
 Even looking through the [Rest Proxy Api Specs](https://docs.confluent.io/2.0.0/kafka-rest/docs/api.html#consumers) I am not seeing this info available in the rest api. 
@@ -36,6 +82,9 @@ Basically, for each topic I believe I want to compare the
 For consumer groups I believe we want to simulate `kafka-consumer-groups --bootstrap-server=localhost:29092 --group=testgroup --describe`.
 
 ![Consumer Groups Example](\assets\img\post-media\2021-10-17-GeneralProjectIdea\kafka-consumer-groups-example.png)
+
+
+
 
 
 ## Links
