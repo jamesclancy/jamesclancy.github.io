@@ -36,6 +36,8 @@ The general project structure is set up like:
 Client
     |--> Pages -> 
     |           |--> CommonLayoutItems - Shared Layout Components
+                |
+                |--> Layout - General layout definition & view
     |           |
     |           |--> Brokers
     |           |
@@ -88,6 +90,36 @@ For consumer groups I believe we want to simulate `kafka-consumer-groups --boots
 #### Replicating the Topic Information
 
 I think I can replicate the `GetOffsetShell` results by creating a starting at the beginning of time and then comparing the high and low watermark offsets. I am not entirely certain how accurate this would be and what would be the effect of compacted topics on these results. I feel like the best way to figure out is to test it. 
+
+Basically, I believe that if I use
+
+```
+        let topicPartitions =
+            topicMetadata.Partitions
+            |> Seq.map (fun x -> new TopicPartition(topicMetadata.Topic, new Partition(x.PartitionId)))
+
+        topicPartitions |> consumer.Assign
+
+        let res =
+            consumer.Consume(System.TimeSpan.FromMilliseconds(10.0))
+
+        let offsets =
+            topicPartitions
+            |> Seq.map consumer.GetWatermarkOffsets
+            |> Seq.toList
+```  [Github link](https://github.com/jamesclancy/KafkaUI/blob/2b43f8f3562ac8dd65a785a5a8156b91daa33bcf/src/Server/KafkaInterface/ClientBuilder.fs#L252)
+
+to pull watermarks and then sum them like:
+
+```
+        this.TopicPartitionOffsets
+        |> Seq.filter (fun x -> x.High.IsSpecial = false)
+        |> Seq.map (fun x -> x.High.Value - x.Low.Value)
+        |> Seq.sum
+``` [Github link](https://github.com/jamesclancy/KafkaUI/blob/2b43f8f3562ac8dd65a785a5a8156b91daa33bcf/src/Server/KafkaInterface/ClientBuilder.fs#L34)
+
+I should be get the total events still in the topic.
+
 
 #### Replicating the Consumer Group Information
 
