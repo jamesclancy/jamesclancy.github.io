@@ -2,7 +2,7 @@
 layout: post
 title: Golang and the Power of Opinionative Development
 author: James Clancy
-tags: books sci-fi
+tags: software-development golang 
 ---
 
 ## Golang First Impressions

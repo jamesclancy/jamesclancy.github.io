@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Secret Atlas by Micheal A Stackpole
+title: A Secret Atlas by Michael A Stackpole
 author: James Clancy
 tags: books fantasy star-wars
 ---
