@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Young Jedi Knights - Jedi Under Seige by Kevin J. Anderson and Rebecca Moesta
+title: Young Jedi Knights - Jedi Under Siege by Kevin J. Anderson and Rebecca Moesta
 author: James Clancy
 tags: books star-wars
 ---
