@@ -1,12 +1,12 @@
 ---
 layout: post
-title: The Fortunes of Africa - A 5000-Year History of Wealth, Greed, and Endeavor 
+title: The Fate of Africa -  A History of the Continent Since Independence
 author: James Clancy
 tags: books history africa
 ---
 
-## Excellent fast past history giving a brief overviews of a broad range of topics 8.5/10
+## A great and interesting read which rivals but doesn't quite match The Fortunes of Africa 8/10
 
-_The Fortunes of Africa - A 5000-Year History of Wealth, Greed, and Endeavor _ really didn't go into to many details but I think it worked in this format. The book gave an overview of five thousand years of history across an entire continent so it necessarily  didn't go into great detail. Rather then thinking of this book as a "history" book I think of this book as a "Cliff Notes" on topics and an invitation for further research. I felt the book was inviting, expected little previous knowledge and well paced. 
+_The Fate of Africa -  A History of the Continent Since Independence_ comes from the same author as _The Fortunes of Africa - A 5000-Year History of Wealth, Greed, and Endeavor _ and similarly tries to outline the general flow of history across the diverse and independent regions of Africa while respecting that it is a definitive guide on no particular items. _The Fate of Africa_ focuses in on the history of Africa since the beginning of decolonization after WWII. The book does a great job of attempting to briefly summarize significant events and how they fit together an within the entire geopolitical trends of the time. 
 
-I would recommend this to someone who has a broad interest in world history but is looking for new topics to really dive into. I would not recommend this book to those who already possesses great knowledge of the African history or are looking to learning about any particular time period or region as this is not a detailed history.
+Coming from the same author as _Fortunes_, Martin Meredith, I had high expectations for the novel and I was not disappointed. The book imbraced the limitation of being a single 700 page volume and treated the subject matter with respect attempting not to focus to much on particularities but rather provide the user with ideas for independent research. I do think book was less of a page turner then _Fortunes_ but would still highly recommend this book to anyone with an interest but not a strong background in the recent history of Africa or the Cold War in general.
