@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Gideon's Trumpet by Anthony Lewis
+title: The Right Stuff by Tom Wolfe
 author: James Clancy
-tags: books history law
+tags: books history us nasa
 ---
 
-## Remarkably information while horrifically boring - 4/10
+## Enjoyable but not a classic - 7.5/10
 
-_Gideon's Trumpet_ details how one man's court case reshaped the American legal system. Gideon, a small time gambler from Florida was convicted of burglary in a case where he could not afford legal representation. Because the case was in a state court and Florida at the time did not guarantee legal representation he was forced to represent himself and lost. He was eventually able to appeal the case to the Supreme Court in the case _Gideon v. Wainwright_. The Supreme Court ruled for Gideon and in turn guaranteed the right to representation in all criminal cases.
+_The Right Stuff_ is an epic novel about the first American astronauts in the Mercury program. The book describes the personalities and general history surrounding the Mercury Seven and there wives. 
 
-The book was quite informative and made me realize how little I knew about the workings of the American legal system. It also served to remind how astonishing boring and bureaucratic the legal system is and why I generally have not spent much time reading about it in the past. Maybe it is worthwhile to read this book if you are very interested in the legal system but I am assuming if you are already interested in the legal system you would get very little from the book.
+While the novel does ver in the direction of gonzo journalism I felt this book was a nice half step from traditional journalism into the form of writing made famous by Hunter Thompson. I did enjoy the book and found it very engaging but I don't think it delivered the excitement of books like _Hells Angels_. I think part of this because of teh subject matter but part is also the style. I would recommend this book to anyone but wouldn't classify this as a must read. 
