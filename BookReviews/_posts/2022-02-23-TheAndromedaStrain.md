@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Andromeda Strain bs Micheal Crichton
+title: The Andromeda Strain by Micheal Crichton
 author: James Clancy
 tags: books sci-fi thriller
 ---
