@@ -1,12 +1,12 @@
 ---
 layout: post
-title: The Remaining A Song of Ice and Fire (Game of Thrones) Books by George R.R. Martin
+title: The Earth Is Weeping - The Epic Story of the Indian Wars for the American West by Peter Cozzens 
 author: James Clancy
-tags: books fantasy
+tags: books history west
 ---
 
-## Very disappointing, too long, too many character and too little happening /10
+## A little slow but still worth a read 7/10
 
-_A Game of Thrones_ started the _A Song of Ice and Fire_ books on a decent foot. It set up a universe full of dramatic events which presented a lot of potential as a potential canvas for exciting stories to told on. The remaining 4 published books in the series (_A Clash of Kings_, _A Storm of Swords_, _A Feast for Crows_, _A Dance with Dragons_) were all long and boring. The shear number of characters introduced continued to increase as the books progressed with all the characters being largely forgettable and mostly interchangeable. The conflicts became more and more prevalent and petty as the book progressed. Not only did the the events have a lower bar of significance but their effects were more localize and effecting smaller and smaller sliver of the ever growing poor unrelatable characters. 
+_The Earth Is Weeping_ details the various military conflicts between the American Army and various Native American Groups on the plains after the Civil War. The book is significantly more focused on military battles then other books I have read on the subject matter like _Dreams od El Dorado_ or _Empire of the Summer Moon_. The military focus of the book does lead it to be a bit drier and less exciting then other books but the book does present a good amount of the information and was clearly well researched and well written. 
 
-The low point of the novels was the end of the fourth book _A Feast for Crows_ where the author breaks the third wall to explain that stories for half the characters were absent because they were in _A Dance with Dragons_. To me the authors need to break the third wall helps to further highlight the fact these could have been a single 400 page book instead of four thousand page novels. 
+Overall, I would have liked more personality and a more human perspective to be included in the book to make it a little more interesting but the book was certainly informative and perfectly readable for anyone with any sort of interest in the old west. 

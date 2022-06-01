@@ -5,7 +5,7 @@ author: James Clancy
 tags: books fantasy
 ---
 
-## Very disappointing, too long, too many character and too little happening 3/10
+## Very disappointing, too long, too many character and too little happening /10
 
 _A Game of Thrones_ started the _A Song of Ice and Fire_ books on a decent foot. It set up a universe full of dramatic events which presented a lot of potential as a potential canvas for exciting stories to told on. The remaining 4 published books in the series (_A Clash of Kings_, _A Storm of Swords_, _A Feast for Crows_, _A Dance with Dragons_) were all long and boring. The shear number of characters introduced continued to increase as the books progressed with all the characters being largely forgettable and mostly interchangeable. The conflicts became more and more prevalent and petty as the book progressed. Not only did the the events have a lower bar of significance but their effects were more localize and effecting smaller and smaller sliver of the ever growing poor unrelatable characters. 
 
