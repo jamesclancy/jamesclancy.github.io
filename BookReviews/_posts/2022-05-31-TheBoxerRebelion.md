@@ -1,12 +1,12 @@
 ---
 layout: post
-title: The Remaining A Song of Ice and Fire (Game of Thrones) Books by George R.R. Martin
+title: The Boxer Rebellion - The Dramatic Story of China's War on Foreigners that Shook the World in the Summer of 1900 by Diana Preston
 author: James Clancy
-tags: books fantasy
+tags: books colonialism
 ---
 
-## Very disappointing, too long, too many character and too little happening /10
+## Moderately interesting but not all that informative 5/10
 
-_A Game of Thrones_ started the _A Song of Ice and Fire_ books on a decent foot. It set up a universe full of dramatic events which presented a lot of potential as a potential canvas for exciting stories to told on. The remaining 4 published books in the series (_A Clash of Kings_, _A Storm of Swords_, _A Feast for Crows_, _A Dance with Dragons_) were all long and boring. The shear number of characters introduced continued to increase as the books progressed with all the characters being largely forgettable and mostly interchangeable. The conflicts became more and more prevalent and petty as the book progressed. Not only did the the events have a lower bar of significance but their effects were more localize and effecting smaller and smaller sliver of the ever growing poor unrelatable characters. 
+_The Boxer Rebellion_ tells the story of foreigners and christian converts trapped in the Beijing (Peking) Legations and cathedrals as they waited to be saved from the populist "boxers".
 
-The low point of the novels was the end of the fourth book _A Feast for Crows_ where the author breaks the third wall to explain that stories for half the characters were absent because they were in _A Dance with Dragons_. To me the authors need to break the third wall helps to further highlight the fact these could have been a single 400 page book instead of four thousand page novels. 
+Over all the book attempted to give a more human look and perspective to those trapped under the blockade and make the story more human and relatable. Overall though I found the book to provide little information or history that I did not learn in high school history class. The Boxer Rebellion was a very significant historical event as it marked beginning of the end of imperial china and colonialism in china but this books did little to explore the implications, meanings, motivations or effects of the rebellion. Instead of focusing on significant impacts or novel facts the book largely seemed to focus on how the people eat horses and rationed rice which while interesting to hear is not all that significant. 
