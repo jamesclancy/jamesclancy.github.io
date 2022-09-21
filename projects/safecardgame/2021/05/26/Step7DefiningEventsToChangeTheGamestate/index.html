@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 7 - Defining Events To Change the GameState &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/26/Step7DefiningEventsToChangeTheGamestate/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 7 - Defining Events To Change the GameState</h1>
+  <span class="post-date">26 May 2021</span>
+  <h3 id="defining-events-to-change-the-gamestate">Defining Events To Change the GameState</h3>
+<hr />
+
+<p>As players play the game they can perform a number of actions that trigger events that modify the GameState.</p>
+
+<p><em>Note from a technical standpoint:</em> The GameState is actually immutable and never changes but rather a new GameState is generated from an acton and the previous state. This new state replaces the past state.</p>
+
+<p>Initially, I am going to start just writing out some potential events which could happen during the game and the associated event data they would carry.</p>
+
+<ul>
+  <li>StartGame - Initializes a new game (Creates a new GameState)
+    <ul>
+      <li>A unique GameID</li>
+      <li>Pair of Players with associated decks</li>
+      <li>PlayerID of Player to start game</li>
+    </ul>
+  </li>
+  <li>DrawCard - Moves the top card from the deck to the hand on the playboard referenced by the PlayerId
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+    </ul>
+  </li>
+  <li>DiscardCard - Move card with CardInstanceId from the playerboard’s hand to discard pile
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+      <li>CardInstanceID</li>
+    </ul>
+  </li>
+  <li>PlayCard -
+  If resources are available on the player’s board:
+      remove the card from the player’s hand
+      - if a resource card add to the total resource pool
+      - if an effect card trigger the effect
+      - if a character card creates an inplay creature and trigger the enter event. If no active create exists place the in-play creature in the active position otherwise place it on the bench.
+  If the resources are not available add an error message to the gamestate
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+      <li>CardInstanceID</li>
+    </ul>
+  </li>
+  <li>EndPlayStep - Move the gamestate to the attack state
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+    </ul>
+  </li>
+  <li>PerformAttack -
+  If the resources are available on the player’s board:
+      if the opponent has an inplay creature deal the damage from the attack to that creature. If the creature has &lt;= 0 heath the creature dies
+      if the opponent has no inplay creature deal the damage to the player
+  if the resources are not available on the player’s board display a message
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+      <li>InPlayCreatureId</li>
+      <li>Attack</li>
+    </ul>
+  </li>
+  <li>SkipAttack - Move the gamestate to reconcile
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+    </ul>
+  </li>
+  <li>EndTurn - Mode the gamestate to the other player’s draw state
+    <ul>
+      <li>GameId</li>
+      <li>PlayerId</li>
+    </ul>
+  </li>
+  <li>GameWon - Move the gamestate to the game over state
+    <ul>
+      <li>PlayerId of Winner</li>
+      <li>Winning Reason (string)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>There will have to be additional events for things like tapping out/retreating active creatures but I think those would best be added after everything else is set up/works.</p>
+
+<p>Going through this process I have identified a few initial things that need to be added.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* need a list of notifications on the GameState
+* need a GameStep for GameOver
+* need an optional winner on the GameOver Step
+* need a game id on the GameState
+</code></pre></div></div>
+
+<p>I am not thinking that the CurrentPlayerTurn should actually be on the Game Step so I am refactoring that type.</p>
+
+<p>I modified the domain models with:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">    <span class="k">and</span> <span class="nc">GameOverStep</span> <span class="p">=</span>
+        <span class="p">{</span>
+            <span class="nc">WinnerId</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">&gt;</span>
+            <span class="nc">Message</span><span class="p">:</span> <span class="kt">string</span>
+        <span class="p">}</span>
+    <span class="k">and</span> <span class="nc">GameStep</span> <span class="p">=</span>
+        <span class="nc">NotCurrentlyPlaying</span>
+        <span class="p">|</span> <span class="nc">Draw</span> <span class="k">of</span> <span class="nc">PlayerId</span>
+        <span class="p">|</span> <span class="nc">Play</span> <span class="k">of</span> <span class="nc">PlayerId</span>
+        <span class="p">|</span> <span class="nc">Attack</span> <span class="k">of</span> <span class="nc">PlayerId</span>
+        <span class="p">|</span> <span class="nc">Reconcile</span> <span class="k">of</span> <span class="nc">PlayerId</span>
+        <span class="p">|</span> <span class="nc">GameOver</span> <span class="k">of</span> <span class="nc">GameOverStep</span>
+    <span class="k">and</span> <span class="nc">Notification</span> <span class="p">=</span> <span class="kt">string</span>
+    <span class="k">and</span> <span class="nc">GameState</span> <span class="p">=</span>
+        <span class="p">{</span>
+            <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+            <span class="nc">NotificationMessages</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">Notification</span> <span class="kt">list</span><span class="p">&gt;</span>
+            <span class="nc">CurrentPlayer</span><span class="p">:</span> <span class="nc">PlayerId</span>
+            <span class="nc">OpponentPlayer</span><span class="p">:</span> <span class="nc">PlayerId</span>
+            <span class="nc">Players</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="nc">Player</span><span class="p">&gt;</span>
+            <span class="nc">Boards</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="nc">PlayerBoard</span><span class="p">&gt;</span>
+            <span class="nc">CurrentStep</span><span class="p">:</span><span class="nc">GameStep</span>
+            <span class="nc">TurnNumber</span><span class="p">:</span> <span class="kt">int</span>
+        <span class="p">}</span></code></pre></figure>
+
+<p>I then had to update the init function for the new fields like</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">init</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">player1</span> <span class="p">=</span> <span class="n">createPlayer</span> <span class="s2">"Player1"</span> <span class="s2">"Player1"</span> <span class="mi">10</span> <span class="s2">"https://picsum.photos/id/1000/2500/1667?blur=5"</span>
+    <span class="k">let</span> <span class="n">player2</span> <span class="p">=</span> <span class="n">createPlayer</span> <span class="s2">"Player2"</span> <span class="s2">"Player2"</span> <span class="mi">10</span> <span class="s2">"https://picsum.photos/id/10/2500/1667?blur=5"</span>
+    <span class="k">let</span> <span class="n">gameId</span> <span class="p">=</span>  <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="s2">"GameIDHere"</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">GameId</span>
+
+    <span class="k">match</span> <span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">,</span> <span class="n">gameId</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">p1</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">p2</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">g</span> <span class="p">-&gt;</span>
+        <span class="k">let</span> <span class="n">playerBoard1</span> <span class="p">=</span> <span class="n">playerBoard</span> <span class="n">p1</span>
+        <span class="k">let</span> <span class="n">playerBoard2</span> <span class="p">=</span> <span class="n">playerBoard</span> <span class="n">p2</span>
+        <span class="k">match</span> <span class="n">playerBoard1</span><span class="p">,</span> <span class="n">playerBoard2</span> <span class="k">with</span>
+        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">pb1</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">pb2</span> <span class="p">-&gt;</span>
+          <span class="k">let</span> <span class="n">model</span> <span class="p">=</span>
+            <span class="p">{</span>
+                <span class="nc">GameId</span> <span class="p">=</span> <span class="n">g</span>
+                <span class="nc">Players</span> <span class="p">=</span>  <span class="p">[</span>
+                            <span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="n">p1</span><span class="p">;</span>
+                            <span class="n">p2</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="n">p2</span>
+                           <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">ofList</span>
+                <span class="nc">Boards</span> <span class="p">=</span>   <span class="p">[</span>
+                            <span class="n">pb1</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="n">pb1</span><span class="p">;</span>
+                            <span class="n">pb2</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="n">pb2</span>
+                           <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">ofList</span>
+                <span class="nc">NotificationMessages</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">CurrentStep</span><span class="p">=</span>  <span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nc">Attack</span>
+                <span class="nc">TurnNumber</span> <span class="p">=</span> <span class="mi">1</span>
+                <span class="nc">CurrentPlayer</span> <span class="p">=</span> <span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span>
+                <span class="nc">OpponentPlayer</span> <span class="p">=</span> <span class="n">p2</span><span class="p">.</span><span class="nc">PlayerId</span>
+            <span class="p">}</span>
+          <span class="k">let</span> <span class="n">cmd</span> <span class="p">=</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">ofMsg</span> <span class="nc">GameStarted</span>
+          <span class="nc">Ok</span> <span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+        <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="s2">"Failed to create player boards"</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="s2">"Failed to create players"</span> <span class="p">|&gt;</span> <span class="nc">Error</span></code></pre></figure>
+
+<p>I similarly had to update the currentStepInformation to utilize the updated GameStep type. Using the fact that whose turn it is now embedded in the state I was able to simplify the yourCurrentStepClasses function like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">yourCurrentStepClasses</span> <span class="p">(</span><span class="n">gameState</span> <span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">(</span><span class="n">gamesStep</span><span class="p">:</span> <span class="nc">GameStep</span><span class="p">)</span> <span class="p">=</span>
+        <span class="k">if</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">CurrentStep</span> <span class="p">=</span> <span class="n">gamesStep</span> <span class="k">then</span> <span class="s2">"button is-danger"</span>
+        <span class="k">else</span> <span class="s2">"button is-primary"</span>
+
+<span class="k">let</span> <span class="n">currentStepInformation</span> <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">gameState</span> <span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Draw</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Draw"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Draw</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Play"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Draw</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attack"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Draw</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Reconcile"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>At this point everything builds and I am checking it in with a commit message of <code class="language-plaintext highlighter-rouge">Step 7 Updates to GameState</code>.</p>
+
+<p>In the Client/Index.fs I can now modify the Msg type to be a discriminated union of all the above-listed types. First, I am moving the Msg type into its own module/file Events/Events.fs.</p>
+
+<p>Based on the above description I was able to define the events as follows:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">StartGameEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">Players</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">Player</span><span class="p">,</span> <span class="nc">Deck</span><span class="p">&gt;</span>
+        <span class="nc">StartingPlayer</span><span class="p">:</span><span class="nc">PlayerId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">DrawCardEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">DiscardCardEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+        <span class="nc">CardInstanceId</span><span class="p">:</span> <span class="nc">CardInstanceId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">PlayCardEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+        <span class="nc">CardInstanceId</span><span class="p">:</span> <span class="nc">CardInstanceId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">EndPlayStepEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">PerformAttackEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+        <span class="nc">InPlayCreatureId</span><span class="p">:</span> <span class="nc">InPlayCreatureId</span>
+        <span class="nc">Attack</span><span class="p">:</span> <span class="nc">Attack</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">SkipAttackEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">EndTurnEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">GameWonEvent</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">GameId</span><span class="p">:</span> <span class="nc">GameId</span>
+        <span class="nc">Winner</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">&gt;</span>
+        <span class="nc">Message</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">Notification</span> <span class="kt">list</span><span class="p">&gt;</span>
+    <span class="p">}</span>
+
+<span class="k">type</span> <span class="nc">Msg</span> <span class="p">=</span>
+    <span class="p">|</span> <span class="nc">GameStarted</span>
+    <span class="p">|</span> <span class="nc">StartGame</span> <span class="k">of</span> <span class="nc">StartGameEvent</span>
+    <span class="p">|</span> <span class="nc">DrawCard</span> <span class="k">of</span> <span class="nc">DrawCardEvent</span>
+    <span class="p">|</span> <span class="nc">DiscardCard</span> <span class="k">of</span> <span class="nc">DiscardCardEvent</span>
+    <span class="p">|</span> <span class="nc">PlayCard</span> <span class="k">of</span> <span class="nc">PlayCardEvent</span>
+    <span class="p">|</span> <span class="nc">EndPlayStep</span> <span class="k">of</span> <span class="nc">EndPlayStepEvent</span>
+    <span class="p">|</span> <span class="nc">PerformAttack</span> <span class="k">of</span> <span class="nc">PerformAttackEvent</span>
+    <span class="p">|</span> <span class="nc">SkipAttack</span> <span class="k">of</span> <span class="nc">SkipAttackEvent</span>
+    <span class="p">|</span> <span class="nc">EndTurn</span> <span class="k">of</span> <span class="nc">EndTurnEvent</span>
+    <span class="p">|</span> <span class="nc">GameWon</span> <span class="k">of</span> <span class="nc">GameWonEvent</span></code></pre></figure>
+
+<p>I am not receiving compiler errors for incomplete match statements but it builds. At this point, I am committing these changes with the message <code class="language-plaintext highlighter-rouge">Update Msg type to include a variety of events</code>.</p>
+
+<p>I am keeping this as the final commit in the branch <code class="language-plaintext highlighter-rouge">step-7-creating-events-to-update-state</code></p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-7-creating-events-to-update-state">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

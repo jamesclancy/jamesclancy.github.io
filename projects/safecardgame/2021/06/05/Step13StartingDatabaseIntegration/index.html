@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 13 - Pushing Decks, Players, and Cards into a Database Part 1 &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/06/05/Step13StartingDatabaseIntegration/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 13 - Pushing Decks, Players, and Cards into a Database Part 1</h1>
+  <span class="post-date">05 Jun 2021</span>
+  <p>Next, I would like a better way to come up with more complicated and complete sets of decks, players, and cards.</p>
+
+<h2 id="pushing-decks-players-and-cards-into-a-database">Pushing Decks, Players, and Cards into a Database</h2>
+
+<p>I am not going to try to start pulling the decks, player info, and cards from a database.</p>
+
+<p>The first thing I am going to do for this is moving the <code class="language-plaintext highlighter-rouge">SampleCardDatabase</code> to the Shared project from the Client project.</p>
+
+<p>Now I am researching ways to store the information on the server-side.</p>
+
+<p>The first step appears to be mapping to and from a DTO. To start this I added a Dto module to the Shared project.</p>
+
+<p>I am going to be creating DTOs for each of the domain types and writing functions to map from the DTOs to the Domain models.</p>
+
+<p>I started doing this with the idea of documenting the process I was going through. This turned into quite a bit of code but generally, I was creating Dtos for each domain type and adding a module for that class with <code class="language-plaintext highlighter-rouge">fromDomain</code> and <code class="language-plaintext highlighter-rouge">toDomain</code> functions which map to the DTO and to a Result&lt;the domain type, string&gt; type. I implemented them like</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">module</span> <span class="nc">Player</span> <span class="p">=</span>
+
+    <span class="k">let</span> <span class="n">fromDomain</span> <span class="p">(</span><span class="n">person</span><span class="p">:</span><span class="nn">Domain</span><span class="p">.</span><span class="nc">Player</span><span class="p">)</span> <span class="p">:</span> <span class="nc">PlayerDto</span> <span class="p">=</span>
+       <span class="p">{</span>
+           <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">person</span><span class="p">.</span><span class="nn">PlayerId</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+           <span class="nc">Name</span> <span class="p">=</span> <span class="n">person</span><span class="p">.</span><span class="nc">Name</span>
+           <span class="nc">PlaymatUrl</span> <span class="p">=</span> <span class="n">person</span><span class="p">.</span><span class="nn">PlaymatUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+           <span class="nc">LifePoints</span> <span class="p">=</span> <span class="n">person</span><span class="p">.</span><span class="nc">RemainingLifePoints</span>
+       <span class="o">}:</span> <span class="nc">PlayerDto</span>
+
+    <span class="k">let</span> <span class="n">toDomain</span> <span class="p">(</span><span class="n">dto</span><span class="p">:</span> <span class="nc">PlayerDto</span><span class="p">)</span> <span class="p">:</span><span class="nc">Result</span><span class="p">&lt;</span><span class="nn">Domain</span><span class="p">.</span><span class="nc">Player</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span> <span class="p">=</span>
+        <span class="nn">CollectionManipulation</span><span class="p">.</span><span class="n">result</span> <span class="p">{</span>
+            <span class="k">let</span><span class="o">!</span> <span class="n">playerId</span> <span class="p">=</span> <span class="n">dto</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span>
+            <span class="k">let</span><span class="o">!</span> <span class="n">name</span> <span class="p">=</span> <span class="n">dto</span><span class="p">.</span><span class="nc">Name</span> <span class="p">|&gt;</span> <span class="nc">Ok</span>
+            <span class="k">let</span><span class="o">!</span> <span class="n">playmatUrl</span> <span class="p">=</span> <span class="n">dto</span><span class="p">.</span><span class="nc">PlaymatUrl</span> <span class="p">|&gt;</span> <span class="nn">ImageUrlString</span><span class="p">.</span><span class="n">build</span>
+            <span class="k">let</span><span class="o">!</span> <span class="n">lifePoints</span> <span class="p">=</span> <span class="n">dto</span><span class="p">.</span><span class="nc">LifePoints</span> <span class="p">|&gt;</span> <span class="nc">Ok</span>
+
+            <span class="k">return</span> <span class="p">{</span>
+               <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">playerId</span> <span class="p">|&gt;</span> <span class="nc">PlayerId</span>
+               <span class="nc">Name</span> <span class="p">=</span> <span class="n">name</span>
+               <span class="nc">PlaymatUrl</span> <span class="p">=</span> <span class="n">playmatUrl</span>
+               <span class="nc">RemainingLifePoints</span> <span class="p">=</span> <span class="n">lifePoints</span>
+            <span class="p">}</span>
+        <span class="p">}</span></code></pre></figure>
+
+<p>You can note that the <code class="language-plaintext highlighter-rouge">toDomain</code> function utilizes a computational expression I had to added.</p>
+
+<p>the computational expression is defined like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">ResultBuilder</span><span class="bp">()</span> <span class="p">=</span>
+    <span class="k">member</span> <span class="o">__.</span><span class="nc">Return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">=</span> <span class="nc">Ok</span> <span class="n">x</span>
+    <span class="k">member</span> <span class="o">__.</span><span class="nc">ReturnFrom</span><span class="p">(</span><span class="n">m</span><span class="p">:</span> <span class="nc">Result</span><span class="o">&lt;_,</span> <span class="o">_&gt;)</span> <span class="p">=</span> <span class="n">m</span>
+    <span class="k">member</span> <span class="o">__.</span><span class="nc">Bind</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="p">=</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="n">f</span> <span class="n">m</span>
+
+
+<span class="k">let</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="nc">ResultBuilder</span><span class="bp">()</span></code></pre></figure>
+
+<p>This <code class="language-plaintext highlighter-rouge">ResultBuilder</code> allows multiple result checks to chained together using a series of <code class="language-plaintext highlighter-rouge">let!</code> bind operations.</p>
+
+<p>I was able to test serializing these DTOs using System.Text.Json by adding code to the Server project</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="nn">SampleCardDatabase</span><span class="p">.</span><span class="n">creatureCardDb</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">c</span><span class="p">-&gt;</span> <span class="nc">CharacterCard</span> <span class="n">c</span><span class="p">)</span>
+<span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="nn">Card</span><span class="p">.</span><span class="n">fromDomain</span>
+<span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">c</span> <span class="p">-&gt;</span>
+                    <span class="nn">System</span><span class="p">.</span><span class="nn">Console</span><span class="p">.</span><span class="nc">Write</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                    <span class="n">c</span>
+<span class="p">)</span>
+<span class="p">|&gt;</span> <span class="nn">JsonSerializer</span><span class="p">.</span><span class="nc">Serialize</span>
+<span class="p">|&gt;</span> <span class="p">(</span><span class="k">fun</span> <span class="n">c</span><span class="p">-&gt;</span> <span class="nn">System</span><span class="p">.</span><span class="nn">IO</span><span class="p">.</span><span class="nn">File</span><span class="p">.</span><span class="nc">WriteAllText</span><span class="p">(</span><span class="s2">"test.json"</span><span class="p">,</span> <span class="n">c</span><span class="o">))</span>
+<span class="p">|&gt;</span> <span class="n">ignore</span></code></pre></figure>
+
+<p>It did serialize but I noticed the CardId and other Domain Ids needed to have their <code class="language-plaintext highlighter-rouge">ToString()</code> methods overloaded like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">module</span> <span class="nc">Domain</span> <span class="p">=</span>
+
+    <span class="k">type</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="nc">PlayerId</span> <span class="k">of</span> <span class="nc">NonEmptyString</span>
+        <span class="k">with</span> <span class="k">override</span> <span class="n">this</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span> <span class="p">=</span> <span class="k">match</span> <span class="n">this</span> <span class="k">with</span> <span class="nc">PlayerId</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+    <span class="k">type</span> <span class="nc">CardInstanceId</span> <span class="p">=</span> <span class="nc">CardInstanceId</span> <span class="k">of</span> <span class="nc">NonEmptyString</span>
+        <span class="k">with</span> <span class="k">override</span> <span class="n">this</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span> <span class="p">=</span> <span class="k">match</span> <span class="n">this</span> <span class="k">with</span> <span class="nc">CardInstanceId</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+    <span class="k">type</span> <span class="nc">CardId</span> <span class="p">=</span> <span class="nc">CardId</span> <span class="k">of</span> <span class="nc">NonEmptyString</span>
+        <span class="k">with</span> <span class="k">override</span> <span class="n">this</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span> <span class="p">=</span> <span class="k">match</span> <span class="n">this</span> <span class="k">with</span> <span class="nc">CardId</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+    <span class="k">type</span> <span class="nc">InPlayCreatureId</span> <span class="p">=</span> <span class="nc">InPlayCreatureId</span> <span class="k">of</span> <span class="nc">NonEmptyString</span>
+        <span class="k">with</span> <span class="k">override</span> <span class="n">this</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span> <span class="p">=</span> <span class="k">match</span> <span class="n">this</span> <span class="k">with</span> <span class="nc">InPlayCreatureId</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+    <span class="k">type</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="nc">GameId</span> <span class="k">of</span> <span class="nc">NonEmptyString</span>
+        <span class="k">with</span> <span class="k">override</span> <span class="n">this</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span> <span class="p">=</span> <span class="k">match</span> <span class="n">this</span> <span class="k">with</span> <span class="nc">GameId</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+        <span class="o">...</span></code></pre></figure>
+
+<p>I am leaving this as the final commit in the branch <code class="language-plaintext highlighter-rouge">step-13-decks-to-database</code>. We were unable to actually write to a database but are able to serialize a list of cards to JSON now. This actually took an inordinate amount of time (like a week of share time) so I will continue on with this in step 14.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-13-decks-to-database">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Wilkens Avenue - Step 14 - Fixing a number of the Dependabot Upgrades &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/wilkensavenue/2021/09/01/WilkensAvenueStep14FixingWebpackDevServer/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Wilkens Avenue - Step 14 - Fixing a number of the Dependabot Upgrades</h1>
+  <span class="post-date">01 Sep 2021</span>
+  <h2 id="goals-of-this-step">Goals of this Step</h2>
+<ul>
+  <li>Update webpack-cli</li>
+  <li>Update webpack-dev-server</li>
+</ul>
+
+<h2 id="process">Process</h2>
+
+<p>The Dependabot flagged upgrades for <code class="language-plaintext highlighter-rouge">webpack-cli</code> and <code class="language-plaintext highlighter-rouge">webpack-dev-server</code>. These are important and large upgrades which introduced breaking changes (even though Dependabot said dev server was 100% compatible.)</p>
+
+<p>First I updated the packages.json file to later version of these two libraries like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        "webpack-cli": "^4.8.0",
+        "webpack-dev-server": "^4.0.0"
+</code></pre></div></div>
+
+<p>This caused <code class="language-plaintext highlighter-rouge">dotnet run</code> to fail catastrophically when trying to start the client.</p>
+
+<p>To more quickly troubleshoot the problems I switched to running <code class="language-plaintext highlighter-rouge">npx webpack-dev-server --config webpack.config.js</code></p>
+
+<p>This gave me a number of issues to step through with the configuration:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\tests\WilkensAvenue&gt; npx webpack-dev-server --config webpack.config.js
+[webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'inline'. These properties are valid:
+   object { allowedHosts?, bonjour?, client?, compress?, devMiddleware?, headers?, historyApiFallback?, host?, hot?, http2?, https?, ipc?, liveReload?, magicHtml?, onAfterSetupMiddleware?, onBeforeSetupMiddleware?, onListening?, open?, port?, proxy?, setupExitSignals?, static?, watchFiles?, webSocketServer? }
+PS C:\tests\WilkensAvenue&gt; npx webpack-dev-server --config webpack.config.js
+Bundling for development...
+[webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'contentBase'. These properties are valid:
+   object { allowedHosts?, bonjour?, client?, compress?, devMiddleware?, headers?, historyApiFallback?, host?, hot?, http2?, https?, ipc?, liveReload?, magicHtml?, onAfterSetupMiddleware?, onBeforeSetupMiddleware?, onListening?, open?, port?, proxy?, setupExitSignals?, static?, watchFiles?, webSocketServer? }
+PS C:\tests\WilkensAvenue&gt; npx webpack-dev-server --config webpack.config.js
+Bundling for development...
+[webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'publicPath'. These properties are valid:
+   object { allowedHosts?, bonjour?, client?, compress?, devMiddleware?, headers?, historyApiFallback?, host?, hot?, http2?, https?, ipc?, liveReload?, magicHtml?, onAfterSetupMiddleware?, onBeforeSetupMiddleware?, onListening?, open?, port?, proxy?, setupExitSignals?, static?, watchFiles?, webSocketServer? }
+</code></pre></div></div>
+
+<ul>
+  <li>I removed the <code class="language-plaintext highlighter-rouge">inline</code> property from <code class="language-plaintext highlighter-rouge">module.exports.devServer</code> in <code class="language-plaintext highlighter-rouge">webpack.config.js</code></li>
+  <li>I switched <code class="language-plaintext highlighter-rouge">contentBase</code> to <code class="language-plaintext highlighter-rouge">static</code> in  <code class="language-plaintext highlighter-rouge">module.exports.devServer</code> in <code class="language-plaintext highlighter-rouge">webpack.config.js</code></li>
+  <li>I removed <code class="language-plaintext highlighter-rouge">publicPath</code>  from <code class="language-plaintext highlighter-rouge">module.exports.devServer</code> in <code class="language-plaintext highlighter-rouge">webpack.config.js</code></li>
+</ul>
+
+<p>Now <code class="language-plaintext highlighter-rouge">npx webpack-dev-server --config webpack.config.js</code> is working but <code class="language-plaintext highlighter-rouge">dotnet run</code> still fails with a:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client: WARNING in configuration
+client: The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+client: You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
+client: ERROR in Entry module not found: Error: Can't resolve './src' in 'C:\tests\WilkensAvenue\src\Client'
+client: ERROR in multi (webpack)-dev-server/client?protocol=ws%3A&amp;hostname=0.0.0.0&amp;port=8080&amp;pathname=%2Fws&amp;logging=info (webpack)/hot/dev-server.js ./src
+client: Module not found: Error: Can't resolve './src' in 'C:\tests\WilkensAvenue\src\Client'
+client:  @ multi (webpack)-dev-server/client?protocol=ws%3A&amp;hostname=0.0.0.0&amp;port=8080&amp;pathname=%2Fws&amp;logging=info (webpack)/hot/dev-server.js ./src main[2]
+</code></pre></div></div>
+
+<p>This appears to be because the dev server is no longer pulling in the correct configuration by default. To remedy this I update the <code class="language-plaintext highlighter-rouge">Build.fs</code> file changing the run definition from:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Target.create "Run" (fun _ -&gt;
+    run dotnet "build" sharedPath
+    [ "server", dotnet "watch run" serverPath
+      "client", dotnet "fable watch --run webpack-dev-server" clientPath ]
+    |&gt; runParallel
+)
+</code></pre></div></div>
+
+<p>to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Target.create "Run" (fun _ -&gt;
+    run dotnet "build" sharedPath
+    [ "server", dotnet "watch run" serverPath
+      "client", dotnet "fable watch --run webpack-dev-server --config ../../webpack.config.js" clientPath ]
+    |&gt; runParallel
+)
+</code></pre></div></div>
+
+<p>and <code class="language-plaintext highlighter-rouge">dotnet run</code> now works again.</p>
+
+<p>Now it looks like dotnet run Bundle fails with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client: .&gt; cmd /C ..\..\node_modules\.bin\webpack -p
+client: [webpack-cli] Error: Unknown option '-p'
+client: [webpack-cli] Run 'webpack --help' to see available commands and options
+client: Run process failed
+Finished (Failed) 'Bundle' in 00:00:21.3183767
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Bundle</code> was defined as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Target.create "Bundle" (fun _ -&gt;
+    [ "server", dotnet $"publish -c Release -o \"{deployPath}\"" serverPath
+      "client", dotnet "fable --run webpack -p" clientPath ]
+    |&gt; runParallel
+)
+</code></pre></div></div>
+
+<p>To fix the command I had to switch out the <code class="language-plaintext highlighter-rouge">-p</code> with ` –mode production –env production<code class="language-plaintext highlighter-rouge"> and also explicitly specify the configuration with a </code>–config ../../webpack.config.js<code class="language-plaintext highlighter-rouge">. The led to the </code>Bundle` being replaced with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Target.create "Bundle" (fun _ -&gt;
+    [ "server", dotnet $"publish -c Release -o \"{deployPath}\"" serverPath
+      "client", dotnet "fable --run webpack --mode production --env production --config ../../webpack.config.js" clientPath ]
+    |&gt; runParallel
+)
+</code></pre></div></div>
+
+<p>Now <code class="language-plaintext highlighter-rouge">dotnet run Bundle</code> works.</p>
+
+<h2 id="results">Results</h2>
+
+<p><a href="https://github.com/jamesclancy/WilkensAvenue/tree/step-14">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

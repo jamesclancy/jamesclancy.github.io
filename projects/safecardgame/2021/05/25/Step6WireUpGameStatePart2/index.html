@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 6 - Wiring up the Layout to the GameState Part 2 &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/25/Step6WireUpGameStatePart2/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 6 - Wiring up the Layout to the GameState Part 2</h1>
+  <span class="post-date">25 May 2021</span>
+  <h3 id="wiring-up-the-layout-to-the-gamestate-part-2">Wiring up the Layout to the GameState Part 2</h3>
+<hr />
+
+<p>Now I am going to continue to wire up the layout to the GameState. Previously, I was able to generate some cards and decks. Doing that I realize I can pull out a function to map Resources to a symbol.</p>
+
+<p>In order to facilitate this mapping I created a function:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">getSymbolForResource</span> <span class="n">resource</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">resource</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Grass</span> <span class="p">-&gt;</span> <span class="s2">"🍂"</span>
+    <span class="p">|</span> <span class="nc">Fire</span> <span class="p">-&gt;</span> <span class="s2">"🔥"</span>
+    <span class="p">|</span> <span class="nc">Water</span> <span class="p">-&gt;</span> <span class="s2">"💧"</span>
+    <span class="p">|</span> <span class="nc">Lightning</span> <span class="p">-&gt;</span> <span class="s2">"⚡"</span>
+    <span class="p">|</span> <span class="nc">Psychic</span> <span class="p">-&gt;</span> <span class="s2">"🧠"</span>
+    <span class="p">|</span> <span class="nc">Fighting</span> <span class="p">-&gt;</span> <span class="s2">"👊"</span>
+    <span class="p">|</span> <span class="nc">Colorless</span> <span class="p">-&gt;</span> <span class="s2">"□"</span></code></pre></figure>
+
+<p>Using this I can create a function mapping a `ResourcePool’ to a string like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">textDescriptionForResourcePool</span> <span class="p">(</span><span class="n">resourcePool</span> <span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">resourcePool</span>
+    <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">sprintf</span> <span class="s2">"%s x%i"</span> <span class="p">(</span><span class="n">getSymbolForResource</span> <span class="n">x</span><span class="p">.</span><span class="nc">Key</span><span class="p">)</span> <span class="n">x</span><span class="p">.</span><span class="nc">Value</span><span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="nn">String</span><span class="p">.</span><span class="n">concat</span> <span class="s2">";"</span></code></pre></figure>
+
+<p>Using this function I can break out a renderAttackRow function. To do this I had to add a Name property to the <code class="language-plaintext highlighter-rouge">Attack</code> type. After adding the <code class="language-plaintext highlighter-rouge">Name</code> I can create a method like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderAttackRow</span> <span class="p">(</span><span class="n">attack</span><span class="p">:</span> <span class="nc">Attack</span><span class="p">)</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">attack</span><span class="p">.</span><span class="nc">SpecialEffect</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="n">se</span> <span class="p">-&gt;</span>
+        <span class="n">tr</span> <span class="p">[</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Cost</span><span class="p">)</span> <span class="p">]</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span>
+                    <span class="n">p</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"%i"</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">)</span> <span class="p">]</span>
+                    <span class="n">p</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="n">se</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span>
+        <span class="n">tr</span> <span class="p">[</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Cost</span><span class="p">)</span> <span class="p">]</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span>
+                    <span class="n">p</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"%i"</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">)</span> <span class="p">]</span>
+                <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>and reference it like</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderCharacterCard</span> <span class="p">(</span><span class="n">card</span><span class="p">:</span> <span class="nc">CharacterCard</span><span class="p">)</span> <span class="p">=</span>
+      <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-4"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">header</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-title"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-icon"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">card</span><span class="p">.</span><span class="nc">ResourceCost</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                      <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-image"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">figure</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"image is-4by3"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">img</span> <span class="p">[</span> <span class="nc">Src</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">ImageUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span>
+                                    <span class="nc">Alt</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span>
+                                    <span class="nc">Class</span> <span class="s2">"is-fullwidth"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                      <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-content"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"content"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"is-italic"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                              <span class="n">displayCardSpecialEffectDetailIfPresent</span> <span class="s2">"On Enter Playing Field"</span> <span class="n">card</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span>
+                              <span class="n">displayCardSpecialEffectDetailIfPresent</span> <span class="s2">"On Exit Playing Field"</span> <span class="n">card</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span>
+                              <span class="n">h5</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"IsTitle is5"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attacks"</span> <span class="p">]</span>
+                              <span class="n">table</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span>
+                                  <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                                    <span class="k">for</span> <span class="n">a</span> <span class="k">in</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Attach</span> <span class="k">do</span>
+                                      <span class="p">(</span><span class="n">renderAttackRow</span> <span class="n">a</span><span class="p">)</span>
+                                  <span class="p">}</span>
+                                <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                      <span class="n">footer</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-footer"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span>
+                              <span class="nc">Class</span> <span class="s2">"card-footer-item"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="s2">"Play"</span> <span class="p">]</span>
+                          <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span>
+                              <span class="nc">Class</span> <span class="s2">"card-footer-item"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="s2">"Discard"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>Now I have to plug in the information into the player and enemy creature hopefully reusing much of the previously created functions.</p>
+
+<p>First, I can plug in the playmat backgrounds.</p>
+
+<p>Then, I see I can use a mapping function for the <code class="language-plaintext highlighter-rouge">SpecialCondition</code>s to status symbols similar to what was done for the Resource symbols as well a function which takes an optional list of these conditions and appends them together. <em>These mappings do rely on emojis, this is not a great idea but I am sticking with it for now</em>.</p>
+
+<p>Like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">getSymbolForSpecialCondition</span> <span class="n">status</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">status</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Asleep</span> <span class="p">-&gt;</span> <span class="s2">"💤"</span>
+    <span class="p">|</span> <span class="nc">Burned</span> <span class="p">-&gt;</span> <span class="s2">"♨"</span>
+    <span class="p">|</span> <span class="nc">Confused</span> <span class="p">-&gt;</span> <span class="s2">"❓"</span>
+    <span class="p">|</span> <span class="nc">Paralyzed</span> <span class="p">-&gt;</span> <span class="s2">"🧊"</span>
+    <span class="p">|</span> <span class="nc">Poisoned</span> <span class="p">-&gt;</span> <span class="s2">"☠️"</span>
+
+<span class="k">let</span> <span class="n">textDescriptionForListOfSpecialConditions</span> <span class="n">specialConditions</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">specialConditions</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="n">sc</span> <span class="p">-&gt;</span> <span class="n">sc</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="n">getSymbolForSpecialCondition</span> <span class="p">|&gt;</span> <span class="nn">String</span><span class="p">.</span><span class="n">concat</span> <span class="s2">";"</span>
+    <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span> <span class="s2">""</span></code></pre></figure>
+
+<p>I am starting to have a number of UI helper functions so I am going to move them into another file/module <code class="language-plaintext highlighter-rouge">GeneralUIHelpers</code>. I will have to register this file in Client.fsproj making sure it is compiled before the PageLayoutElement.fs.</p>
+
+<p>I can now pull out a <code class="language-plaintext highlighter-rouge">renderEnemyActiveCreature</code> function which takes an optional <code class="language-plaintext highlighter-rouge">InPlayCreature</code> as well as a <code class="language-plaintext highlighter-rouge">renderEnemyBench</code> which takes an optional list of <code class="language-plaintext highlighter-rouge">InPlayCreature</code>s.</p>
+
+<p>I wrote these and modified the enemyCreatures function to be like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderEnemyActiveCreature</span> <span class="p">(</span><span class="n">inPlayCreature</span> <span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">InPlayCreature</span><span class="o">&gt;)</span> <span class="p">=</span>
+  <span class="k">match</span> <span class="p">(</span><span class="nn">Option</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span><span class="o">))</span> <span class="n">inPlayCreature</span><span class="p">)</span> <span class="k">with</span>
+  <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"No creature in active play"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">EffectCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span>  <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Active creature is not a character?"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">ResourceCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Active creature is not a character?"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">CharacterCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span>
+        <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">header</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-title"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"✫ %s"</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span><span class="p">)</span> <span class="p">]</span>
+                              <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-icon"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"💓 %i/%i"</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span> <span class="p">-</span> <span class="n">creature</span><span class="p">.</span><span class="nc">CurrentDamage</span><span class="p">)</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span><span class="p">)</span>
+                                  <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForListOfSpecialConditions</span> <span class="n">creature</span><span class="p">.</span><span class="nc">SpecialEffect</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-image"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">figure</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"image is-4by3"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">img</span> <span class="p">[</span> <span class="nc">Src</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">ImageUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span>
+                                        <span class="nc">Alt</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span>
+                                        <span class="nc">Class</span> <span class="s2">"is-fullwidth"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-content"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"content"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"is-italic"</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                                  <span class="n">h5</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"IsTitle is5"</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attacks"</span> <span class="p">]</span>
+                                  <span class="n">table</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span>
+                                        <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                                            <span class="k">for</span> <span class="n">a</span> <span class="k">in</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Attach</span> <span class="k">do</span>
+                                                <span class="p">(</span><span class="n">renderAttackRow</span> <span class="n">a</span><span class="p">)</span>
+                                        <span class="p">}</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">renderEnemyBenchRow</span> <span class="n">inPlayCreature</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">inPlayCreature</span><span class="p">.</span><span class="nc">Card</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">EffectCard</span> <span class="n">ec</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Bench creature is not a character code"</span> <span class="p">]</span>
+    <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="n">rc</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Bench creature is not a character code"</span> <span class="p">]</span>
+    <span class="p">|</span> <span class="nc">CharacterCard</span> <span class="n">card</span> <span class="p">-&gt;</span>
+        <span class="n">tr</span> <span class="p">[</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+                              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForListOfSpecialConditions</span> <span class="n">inPlayCreature</span><span class="p">.</span><span class="nc">SpecialEffect</span><span class="p">)</span> <span class="p">]</span>
+                              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"💓 %i/%i"</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span> <span class="p">-</span> <span class="n">inPlayCreature</span><span class="p">.</span><span class="nc">CurrentDamage</span><span class="p">)</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span><span class="p">)</span>  <span class="p">]</span> <span class="p">]</span>
+
+
+
+<span class="k">let</span> <span class="n">renderEnemyBench</span> <span class="n">bench</span>  <span class="p">=</span>
+    <span class="k">match</span> <span class="n">bench</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"No creatures on bench"</span> <span class="p">]</span>
+    <span class="p">|</span> <span class="nc">Some</span>  <span class="n">l</span><span class="p">-&gt;</span>
+                      <span class="n">table</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"table is-fullwidth"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">tr</span> <span class="p">[</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">th</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="s2">"Creature Name"</span> <span class="p">]</span>
+                              <span class="n">th</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="s2">"Status"</span> <span class="p">]</span>
+                              <span class="n">th</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="s2">"Health"</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                                <span class="k">for</span> <span class="n">b</span> <span class="k">in</span> <span class="n">l</span> <span class="k">do</span>
+                                <span class="n">renderEnemyBenchRow</span> <span class="n">b</span>
+                          <span class="p">}</span>
+                        <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">enemyCreatures</span>  <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span><span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+  <span class="n">section</span> <span class="p">[</span>
+          <span class="nc">Class</span> <span class="s2">"section"</span>
+          <span class="nc">Style</span> <span class="p">[</span> <span class="nc">Background</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"url(%s')"</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nn">PlaymatUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span>
+                  <span class="nc">BackgroundSize</span> <span class="s2">"cover"</span>
+                  <span class="nc">BackgroundRepeat</span> <span class="s2">"no-repeat"</span>
+                  <span class="nc">BackgroundPosition</span> <span class="s2">"center center"</span> <span class="p">]</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container py-r"</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"columns"</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-1"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="p">]</span>
+              <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-3"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">renderEnemyActiveCreature</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">ActiveCreature</span> <span class="p">]</span>
+              <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-7"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"columns is-mobile is-multiline"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">h2</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"title is-4"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="s2">"Bench"</span> <span class="p">]</span>
+                      <span class="n">renderEnemyBench</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Bench</span>
+                    <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>This now builds (and looks very weird with no content).</p>
+
+<p>I now need to populate some test data for the enemy creatures.</p>
+
+<p>Similar to the cards I am able to generate the data like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">inPlayCreatureGenerator</span> <span class="n">inPlayCreatureIdStr</span> <span class="n">cardInstanceIdStr</span> <span class="n">cardIdStr</span> <span class="n">cardImageUrlStr</span> <span class="p">=</span>
+        <span class="k">let</span> <span class="n">inPlayCreatureId</span> <span class="p">=</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="n">inPlayCreatureIdStr</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">InPlayCreatureId</span>
+        <span class="k">let</span> <span class="n">card</span> <span class="p">=</span> <span class="n">testCardGenerator</span> <span class="n">cardInstanceIdStr</span> <span class="n">cardIdStr</span> <span class="n">cardImageUrlStr</span>
+
+        <span class="k">match</span> <span class="n">inPlayCreatureId</span><span class="p">,</span> <span class="n">card</span> <span class="k">with</span>
+        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">id</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">c</span> <span class="p">-&gt;</span>
+            <span class="nc">Ok</span> <span class="p">{</span>
+                <span class="nc">InPlayCharacterId</span><span class="p">=</span>  <span class="n">id</span>
+                <span class="nc">Card</span> <span class="p">=</span> <span class="n">c</span><span class="p">.</span><span class="nc">Card</span>
+                <span class="nc">CurrentDamage</span><span class="p">=</span>  <span class="mi">0</span>
+                <span class="nc">SpecialEffect</span><span class="p">=</span>  <span class="nc">None</span>
+                <span class="nc">AttachedEnergy</span> <span class="p">=</span> <span class="p">[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Grass</span><span class="p">,</span> <span class="mi">4</span><span class="p">;</span>
+                                     <span class="nn">Resource</span><span class="p">.</span><span class="nc">Colorless</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">ofList</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span>
+                <span class="nc">SpentEnergy</span> <span class="p">=</span> <span class="p">[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Grass</span><span class="p">,</span> <span class="mi">4</span><span class="p">;</span>
+                                     <span class="nn">Resource</span><span class="p">.</span><span class="nc">Colorless</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">ofList</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span>
+            <span class="p">}</span>
+        <span class="p">|</span> <span class="o">_,</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="s2">"Unable to create in play creature."</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+
+
+<span class="k">let</span> <span class="n">inPlayCreatureSeqGenerator</span> <span class="p">(</span><span class="n">numberOfCards</span> <span class="p">:</span> <span class="kt">int</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">seq</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">..</span> <span class="p">(</span><span class="n">numberOfCards</span> <span class="p">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">inPlayCreatureGenerator</span>
+                            <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"ExcitingCharacter%i"</span> <span class="n">x</span><span class="p">)</span>
+                            <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"ExcitingCharacter%i"</span> <span class="n">x</span><span class="p">)</span>
+                            <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Exciting Character #%i"</span> <span class="n">x</span><span class="p">)</span>
+                            <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"https://picsum.photos/320/200?%i"</span> <span class="n">x</span><span class="o">))</span>
+    <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span>
+                        <span class="k">match</span> <span class="n">x</span> <span class="k">with</span>
+                        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="p">[</span> <span class="n">s</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nc">Ok</span>
+                        <span class="p">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="p">-&gt;</span> <span class="n">e</span> <span class="p">|&gt;</span> <span class="nc">Error</span><span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">fold</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="p">-&gt;</span>
+                    <span class="k">match</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="k">with</span>
+                    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">accum</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">curr</span> <span class="p">-&gt;</span> <span class="n">curr</span> <span class="o">@</span> <span class="n">accum</span> <span class="p">|&gt;</span> <span class="nc">Ok</span>
+                    <span class="p">|</span> <span class="o">_,_</span> <span class="p">-&gt;</span> <span class="s2">"Eating Errors lol"</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+                <span class="p">)</span> <span class="p">(</span><span class="nc">Ok</span> <span class="nn">List</span><span class="p">.</span><span class="n">empty</span><span class="p">)</span></code></pre></figure>
+
+<p>Next, I need to modify the player creatures to also reference the state.</p>
+
+<p>To do this I created three functions:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">playerActiveCreature</span> <span class="p">(</span><span class="n">inPlayCreature</span> <span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">InPlayCreature</span><span class="o">&gt;)</span> <span class="p">=</span>
+  <span class="k">match</span> <span class="p">(</span><span class="nn">Option</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span><span class="o">))</span> <span class="n">inPlayCreature</span><span class="p">)</span> <span class="k">with</span>
+  <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"No creature in active play"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">EffectCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span>  <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Active creature is not a character?"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">ResourceCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Active creature is not a character?"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">CharacterCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span>
+        <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">header</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-title"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"✫ %s"</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span><span class="p">)</span> <span class="p">]</span>
+                              <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-icon"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"💓 %i/%i"</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span> <span class="p">-</span> <span class="n">creature</span><span class="p">.</span><span class="nc">CurrentDamage</span><span class="p">)</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span><span class="p">)</span>
+                                  <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForListOfSpecialConditions</span> <span class="n">creature</span><span class="p">.</span><span class="nc">SpecialEffect</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-image"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">figure</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"image is-4by3"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">img</span> <span class="p">[</span> <span class="nc">Src</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">ImageUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span>
+                                        <span class="nc">Alt</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span>
+                                        <span class="nc">Class</span> <span class="s2">"is-fullwidth"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-content"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"content"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"is-italic"</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                                  <span class="n">h5</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"IsTitle is5"</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attacks"</span> <span class="p">]</span>
+                                  <span class="n">table</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span>
+                                        <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                                            <span class="k">for</span> <span class="n">a</span> <span class="k">in</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Attach</span> <span class="k">do</span>
+                                                <span class="p">(</span><span class="n">renderAttackRow</span> <span class="n">a</span><span class="p">)</span>
+                                        <span class="p">}</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">footer</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-footer"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span>
+                                  <span class="nc">Class</span> <span class="s2">"card-footer-item"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="s2">"Tap Out"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">playerBenchCreature</span> <span class="p">(</span><span class="n">inPlayCreature</span> <span class="p">:</span> <span class="nc">InPlayCreature</span><span class="o">)=</span>
+  <span class="k">match</span> <span class="p">(</span><span class="n">inPlayCreature</span><span class="p">,</span> <span class="n">inPlayCreature</span><span class="p">.</span><span class="nc">Card</span><span class="p">)</span> <span class="k">with</span>
+  <span class="p">|</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">EffectCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span>  <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Active creature is not a character?"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">ResourceCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Active creature is not a character?"</span> <span class="p">]</span>
+  <span class="p">|</span> <span class="p">(</span><span class="n">creature</span><span class="p">,</span> <span class="nc">CharacterCard</span> <span class="n">card</span><span class="p">)</span> <span class="p">-&gt;</span>
+         <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-4-mobile is-12-tablet"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">header</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-title"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+                              <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-icon"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"💓 %i/%i"</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span> <span class="p">-</span> <span class="n">creature</span><span class="p">.</span><span class="nc">CurrentDamage</span><span class="p">)</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Health</span><span class="p">)</span>
+                                  <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForListOfSpecialConditions</span> <span class="n">creature</span><span class="p">.</span><span class="nc">SpecialEffect</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-image"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">figure</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"image is-4by3"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">img</span> <span class="p">[</span> <span class="nc">Src</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">ImageUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span>
+                                        <span class="nc">Alt</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span>
+                                        <span class="nc">Class</span> <span class="s2">"is-fullwidth"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-content"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"content"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"is-italic"</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                                  <span class="n">h5</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"IsTitle is5"</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attacks"</span> <span class="p">]</span>
+                                  <span class="n">table</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span>
+                                        <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                                            <span class="k">for</span> <span class="n">a</span> <span class="k">in</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Attach</span> <span class="k">do</span>
+                                                <span class="p">(</span><span class="n">renderAttackRow</span> <span class="n">a</span><span class="p">)</span>
+                                        <span class="p">}</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">playerBench</span> <span class="p">(</span><span class="n">bench</span> <span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">InPlayCreature</span> <span class="kt">list</span><span class="o">&gt;)</span> <span class="n">columnsInBench</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">bench</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"No creatures on bench."</span><span class="p">]</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="n">l</span> <span class="p">-&gt;</span>
+      <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-9"</span><span class="p">]</span> <span class="p">[</span>
+        <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container"</span><span class="p">]</span> <span class="p">[</span>
+          <span class="n">h3</span> <span class="p">[</span><span class="nc">Class</span> <span class="s2">"title is-3"</span><span class="p">]</span> <span class="p">[</span><span class="n">str</span> <span class="s2">"Bench"</span><span class="p">]</span>
+          <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">numberOfRows</span> <span class="p">=</span> <span class="p">(</span><span class="n">l</span><span class="p">.</span><span class="nc">Length</span> <span class="o">/</span> <span class="n">columnsInBench</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="k">in</span> <span class="p">{</span><span class="mi">0</span> <span class="p">..</span> <span class="n">numberOfRows</span> <span class="p">}</span>  <span class="k">do</span>
+                <span class="k">let</span> <span class="n">innerl</span> <span class="p">=</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">truncate</span> <span class="n">columnsInBench</span> <span class="p">(</span><span class="nn">Seq</span><span class="p">.</span><span class="n">skip</span> <span class="p">(</span><span class="n">row</span> <span class="p">*</span> <span class="n">columnsInBench</span><span class="p">)</span> <span class="n">l</span><span class="p">)</span>
+
+                <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"columns is-mobile is-multiline"</span> <span class="p">]</span>
+                    <span class="p">[</span>
+                       <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                           <span class="k">for</span> <span class="n">creature</span> <span class="k">in</span> <span class="n">innerl</span> <span class="k">do</span>
+                            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"column is-%i"</span> <span class="p">(</span><span class="mi">12</span><span class="o">/</span><span class="n">columnsInBench</span><span class="o">))</span> <span class="p">]</span> <span class="p">[</span>
+                                <span class="n">playerBenchCreature</span> <span class="n">creature</span>
+                            <span class="p">]</span>
+                       <span class="p">}</span>
+                    <span class="p">]</span>
+        <span class="p">}</span> <span class="p">]</span> <span class="p">]</span>
+
+
+<span class="k">let</span> <span class="n">playerCreatures</span>  <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span><span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+  <span class="n">section</span> <span class="p">[</span>
+          <span class="nc">Class</span> <span class="s2">"section"</span>
+          <span class="nc">Style</span> <span class="p">[</span> <span class="nc">Background</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"url('%s')"</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nn">PlaymatUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span>
+                  <span class="nc">BackgroundSize</span> <span class="s2">"cover"</span>
+                  <span class="nc">BackgroundRepeat</span> <span class="s2">"no-repeat"</span>
+                  <span class="nc">BackgroundPosition</span> <span class="s2">"center center"</span> <span class="p">]</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container py-r"</span> <span class="p">]</span> <span class="p">[</span>
+          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"columns"</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-3"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">playerActiveCreature</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">ActiveCreature</span> <span class="p">]</span>
+              <span class="n">playerBench</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Bench</span> <span class="mi">4</span>
+
+               <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>This compiles and displays now. Here note that the playerBench takes an argument for the number of columns to display. I wasn’t sure if it should be 3 or 4 cards per column so I made it a variable.</p>
+
+<p>The playerCreatures can then be changed to</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">playerCreatures</span>  <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span><span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+  <span class="n">section</span> <span class="p">[</span>
+          <span class="nc">Class</span> <span class="s2">"section"</span>
+          <span class="nc">Style</span> <span class="p">[</span> <span class="nc">Background</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"url('%s')"</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nn">PlaymatUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span>
+                  <span class="nc">BackgroundSize</span> <span class="s2">"cover"</span>
+                  <span class="nc">BackgroundRepeat</span> <span class="s2">"no-repeat"</span>
+                  <span class="nc">BackgroundPosition</span> <span class="s2">"center center"</span> <span class="p">]</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container py-r"</span> <span class="p">]</span> <span class="p">[</span>
+          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"columns"</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-3"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">playerActiveCreature</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">ActiveCreature</span> <span class="p">]</span>
+              <span class="n">playerBench</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Bench</span> <span class="mi">4</span>
+
+               <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>Additionally, at this stage, I noticed that the playmat background on the creatures was missing a <code class="language-plaintext highlighter-rouge">'</code> around the URL so I added that.</p>
+
+<p>Now our layout is largely wired up to the GameState. Next, we will need to define some events which modify the GameState and attach those events to the UI.</p>
+
+<p>This is the final commit in the branch <code class="language-plaintext highlighter-rouge">step-6-wire-up-layout-to-gamestate-part-2</code></p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-6-wire-up-layout-to-gamestate-part-2">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

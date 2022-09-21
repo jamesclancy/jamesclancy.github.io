@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 10 - Adding more realistic cards data and wiring up the Ui to send some events -Continued - the Player Control Center &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/30/Step10MoreRealisticCardDataAndWiringUIToEventsPart2/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 10 - Adding more realistic cards data and wiring up the Ui to send some events -Continued - the Player Control Center</h1>
+  <span class="post-date">30 May 2021</span>
+  <h2 id="adding-more-realistic-cards-data-and-wiring-up-the-ui-to-send-some-events--continued---the-player-control-center">Adding more realistic cards data and wiring up the Ui to send some events -Continued - the Player Control Center</h2>
+
+<p>Now I will try to implement the turn step changes via conditional buttons in the player control center.</p>
+
+<p>Currently, a placeholder for these buttons is located in the <code class="language-plaintext highlighter-rouge">playerControlCenter</code> function. I will pull out a <code class="language-plaintext highlighter-rouge">stepNavigation</code> function and rewrite the <code class="language-plaintext highlighter-rouge">playerControlCenter</code> as</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">playerControlCenter</span>  <span class="p">(</span><span class="n">player</span> <span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="n">playerBoard</span> <span class="n">gameState</span> <span class="n">dispatch</span> <span class="p">=</span>
+  <span class="n">nav</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar is-fullwidth is-primary"</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container"</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-brand"</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item title is-5"</span>
+                  <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="n">player</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span> <span class="p">]</span>
+          <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-menu"</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-start"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="k">yield</span><span class="o">!</span> <span class="n">playerStats</span> <span class="n">player</span> <span class="n">playerBoard</span>
+                  <span class="n">currentStepInformation</span> <span class="n">player</span> <span class="n">gameState</span> <span class="p">]</span>
+              <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-end"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">stepNavigation</span> <span class="n">player</span> <span class="n">playerBoard</span> <span class="n">gameState</span> <span class="n">dispatch</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<ul>
+  <li>note I also added the dispatch to the function</li>
+</ul>
+
+<p>This <code class="language-plaintext highlighter-rouge">stepNavigation</code> function is going to rely on switching the current step and player to tell what options &amp; actions are available.</p>
+
+<p>I can implement the changes like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="n">buttonText</span> <span class="n">classType</span> <span class="n">message</span> <span class="p">=</span>
+                        <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span>
+                                <span class="nc">Class</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"button %s is-large"</span> <span class="n">classType</span><span class="p">)</span>
+                                <span class="nc">OnClick</span>  <span class="p">(</span><span class="k">fun</span> <span class="o">_-&gt;</span> <span class="p">(</span><span class="n">message</span> <span class="p">|&gt;</span>  <span class="n">dispatch</span><span class="o">))</span>
+                                <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="n">buttonText</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">stepNavigation</span>  <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span><span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">(</span><span class="n">gameState</span> <span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="n">dispatch</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">CurrentStep</span> <span class="k">with</span>
+    <span class="p">|</span>  <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Draw</span> <span class="n">d</span> <span class="k">when</span> <span class="n">d</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">-&gt;</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span>
+                            <span class="p">(</span><span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="s2">"Draw"</span> <span class="s2">"is-warning"</span> <span class="o">(({</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">GameId</span><span class="p">;</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">;</span> <span class="p">}</span> <span class="p">:</span> <span class="nc">DrawCardEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">DrawCard</span><span class="p">)</span> <span class="p">)</span>
+                            <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span>  <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Play</span> <span class="n">d</span> <span class="k">when</span> <span class="n">d</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">-&gt;</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span>
+                            <span class="p">(</span><span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="s2">"End Play"</span> <span class="s2">"is-danger"</span> <span class="o">(({</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">GameId</span><span class="p">;</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">;</span> <span class="p">}</span> <span class="p">:</span> <span class="nc">EndPlayStepEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">EndPlayStep</span><span class="p">)</span> <span class="p">)</span>
+                            <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span>  <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Attack</span> <span class="n">d</span> <span class="k">when</span> <span class="n">d</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">-&gt;</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span>
+                            <span class="p">(</span><span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="s2">"Skip Attack"</span> <span class="s2">"is-danger"</span> <span class="o">(({</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">GameId</span><span class="p">;</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">;</span> <span class="p">}</span> <span class="p">:</span> <span class="nc">SkipAttackEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">SkipAttack</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span>  <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Reconcile</span> <span class="n">d</span> <span class="k">when</span> <span class="n">d</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">-&gt;</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span>
+                            <span class="p">(</span><span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="s2">"End Turn"</span> <span class="s2">"is-danger"</span> <span class="o">(({</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">GameId</span><span class="p">;</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">;</span> <span class="p">}</span> <span class="p">:</span> <span class="nc">EndTurnEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">EndTurn</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span>  <span class="nn">GameStep</span><span class="p">.</span><span class="nc">NotCurrentlyPlaying</span> <span class="p">-&gt;</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span>
+                            <span class="p">(</span><span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="s2">"Start New Game"</span> <span class="s2">"is-danger"</span> <span class="o">(({</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">GameId</span><span class="p">;</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">;</span> <span class="p">}</span> <span class="p">:</span> <span class="nc">EndTurnEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">EndTurn</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span>  <span class="nn">GameStep</span><span class="p">.</span><span class="nc">GameOver</span> <span class="n">g</span> <span class="p">-&gt;</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span>
+                            <span class="p">(</span><span class="n">renderStepOptionButton</span> <span class="n">dispatch</span> <span class="s2">"Start New Game"</span> <span class="s2">"is-danger"</span> <span class="o">(({</span> <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameState</span><span class="p">.</span><span class="nc">GameId</span><span class="p">;</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">;</span> <span class="p">}</span> <span class="p">:</span> <span class="nc">EndTurnEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">EndTurn</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="p">]</span> <span class="p">]</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="n">div</span> <span class="bp">[]</span> <span class="bp">[]</span></code></pre></figure>
+
+<p>Now I can see I start on the draw stage and am able to draw but that is not transitioning me to the next step. I will have to investigate the <code class="language-plaintext highlighter-rouge">modifyGameStateFromDrawCardEvent</code> function.</p>
+
+<p>Investigating this function it appears I forgot to add the state shifting functionality.</p>
+
+<p>I implemented this by changing the <code class="language-plaintext highlighter-rouge">modifyGameStateFromDrawCardEvent</code> function like</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">migrateGameStateToNewStep</span> <span class="n">newStep</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">=</span>
+    <span class="c1">// maybe some vaidation could go here?</span>
+    <span class="nc">Ok</span> <span class="p">{</span>
+        <span class="n">gs</span> <span class="k">with</span> <span class="nc">CurrentStep</span> <span class="p">=</span> <span class="n">newStep</span>
+    <span class="p">}</span>
+
+<span class="k">let</span> <span class="n">moveCardsFromDeckToHand</span> <span class="n">gs</span> <span class="n">playerId</span> <span class="n">pb</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">newDeck</span><span class="p">,</span> <span class="n">newHand</span> <span class="p">=</span>  <span class="n">drawCardsFromDeck</span> <span class="mi">1</span> <span class="n">pb</span><span class="p">.</span><span class="nc">Deck</span> <span class="n">pb</span><span class="p">.</span><span class="nc">Hand</span>
+    <span class="nc">Ok</span> <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span> <span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="p">{</span> <span class="n">pb</span> <span class="k">with</span> <span class="nc">Deck</span> <span class="p">=</span> <span class="n">newDeck</span><span class="p">;</span> <span class="nc">Hand</span> <span class="p">=</span> <span class="n">newHand</span> <span class="o">})</span>  <span class="p">)</span> <span class="p">}</span>
+
+
+<span class="k">let</span> <span class="n">modifyGameStateFromDrawCardEvent</span> <span class="p">(</span><span class="n">ev</span><span class="p">:</span> <span class="nc">DrawCardEvent</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">getExistingPlayerBoardFromGameState</span> <span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="n">gs</span>
+    <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">moveCardsFromDeckToHand</span> <span class="n">gs</span> <span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">migrateGameStateToNewStep</span> <span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nc">Attack</span><span class="o">))</span>
+    <span class="p">|&gt;</span> <span class="k">function</span>
+        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">g</span> <span class="p">-&gt;</span> <span class="n">g</span>
+        <span class="p">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="p">-&gt;</span> <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">NotificationMessages</span> <span class="p">=</span> <span class="n">appendNotificationMessageToListOrCreateList</span> <span class="n">gs</span><span class="p">.</span><span class="nc">NotificationMessages</span> <span class="n">e</span> <span class="p">}</span></code></pre></figure>
+
+<p>Refreshing the site I am not able to click through all the steps of my turn!</p>
+
+<p>I am leaving this as the final commit of branch <code class="language-plaintext highlighter-rouge">step-10-better-sample-data-and-wiring-up-ui-cont</code>.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-10-better-sample-data-and-wiring-up-ui-cont">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

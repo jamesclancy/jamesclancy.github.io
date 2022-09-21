@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 11 - Switching the player for the GameState &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/31/Step11SwitchingThePlayerForTheGameState/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 11 - Switching the player for the GameState</h1>
+  <span class="post-date">31 May 2021</span>
+  <h2 id="switching-the-player-for-the-gamestate">Switching the player for the GameState</h2>
+
+<p>To facilitate testing, I am not going to add logic to swap Player 1 and Player 2. This should allow us to step through an entire game.</p>
+
+<p>To do this I will add a Msg of type SwapPlayer.</p>
+
+<p>i.e.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">Msg</span> <span class="p">=</span>
+    <span class="p">|</span> <span class="nc">StartGame</span> <span class="k">of</span> <span class="nc">StartGameEvent</span>
+    <span class="p">|</span> <span class="nc">DrawCard</span> <span class="k">of</span> <span class="nc">DrawCardEvent</span>
+    <span class="p">|</span> <span class="nc">DiscardCard</span> <span class="k">of</span> <span class="nc">DiscardCardEvent</span>
+    <span class="p">|</span> <span class="nc">PlayCard</span> <span class="k">of</span> <span class="nc">PlayCardEvent</span>
+    <span class="p">|</span> <span class="nc">EndPlayStep</span> <span class="k">of</span> <span class="nc">EndPlayStepEvent</span>
+    <span class="p">|</span> <span class="nc">PerformAttack</span> <span class="k">of</span> <span class="nc">PerformAttackEvent</span>
+    <span class="p">|</span> <span class="nc">SkipAttack</span> <span class="k">of</span> <span class="nc">SkipAttackEvent</span>
+    <span class="p">|</span> <span class="nc">EndTurn</span> <span class="k">of</span> <span class="nc">EndTurnEvent</span>
+    <span class="p">|</span> <span class="nc">DeleteNotification</span> <span class="k">of</span> <span class="nc">Guid</span>
+    <span class="p">|</span> <span class="nc">GameWon</span> <span class="k">of</span> <span class="nc">GameWonEvent</span>
+    <span class="p">|</span> <span class="nc">SwapPlayer</span></code></pre></figure>
+
+<p>I will then handle the message in the update like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">update</span> <span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nc">Msg</span><span class="p">)</span> <span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nc">GameState</span><span class="o">):</span> <span class="nc">GameState</span> <span class="p">*</span> <span class="nc">Cmd</span><span class="p">&lt;</span><span class="nc">Msg</span><span class="p">&gt;</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">msg</span> <span class="k">with</span>
+    <span class="o">...</span>
+    <span class="p">|</span> <span class="nc">SwapPlayer</span> <span class="p">-&gt;</span>
+        <span class="p">{</span> <span class="n">model</span> <span class="k">with</span> <span class="nc">PlayerOne</span> <span class="p">=</span> <span class="n">model</span><span class="p">.</span><span class="nc">PlayerTwo</span><span class="p">;</span> <span class="nc">PlayerTwo</span> <span class="p">=</span> <span class="n">model</span><span class="p">.</span><span class="nc">PlayerOne</span> <span class="o">},</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span></code></pre></figure>
+
+<p>Now I can add a button to switch players on the top nav bar like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">topNavigation</span> <span class="n">dispatch</span> <span class="p">=</span>
+             <span class="o">...</span>
+              <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-end"</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"buttons"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-light"</span>
+                              <span class="nc">OnClick</span> <span class="p">(</span><span class="k">fun</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="nc">SwapPlayer</span> <span class="p">|&gt;</span> <span class="n">dispatch</span><span class="p">)</span>
+                              <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="s2">"Switch Player"</span> <span class="p">]</span>
+                          <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-light"</span>
+                              <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="s2">"Log in"</span> <span class="p">]</span>
+             <span class="o">...</span></code></pre></figure>
+
+<p>While doing this I found a bug in the, it should have been written like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">currentStepInformation</span> <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">gameState</span> <span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span>  <span class="p">=</span>
+    <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"field is-grouped has-addons is-grouped-right"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Draw</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Draw"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Play</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Play"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Attack</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attack"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"control"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="p">(</span><span class="n">yourCurrentStepClasses</span> <span class="n">gameState</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nn">GameStep</span><span class="p">.</span><span class="nc">Reconcile</span><span class="o">))</span>
+                                       <span class="nc">Disabled</span> <span class="bp">true</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">span</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"Reconcile"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>Also, I just noticed that the Draw is moving to the Attack step instead of the play step.</p>
+
+<p>To fix this I changed the event that was being dispatched like</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">modifyGameStateFromDrawCardEvent</span> <span class="p">(</span><span class="n">ev</span><span class="p">:</span> <span class="nc">DrawCardEvent</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">getExistingPlayerBoardFromGameState</span> <span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="n">gs</span>
+    <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">moveCardsFromDeckToHand</span> <span class="n">gs</span> <span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">migrateGameStateToNewStep</span> <span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nc">Play</span><span class="o">))</span>
+    <span class="p">|&gt;</span> <span class="k">function</span>
+        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">g</span> <span class="p">-&gt;</span> <span class="n">g</span>
+        <span class="p">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="p">-&gt;</span> <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">NotificationMessages</span> <span class="p">=</span> <span class="n">appendNotificationMessageToListOrCreateList</span> <span class="n">gs</span><span class="p">.</span><span class="nc">NotificationMessages</span> <span class="n">e</span> <span class="p">}</span></code></pre></figure>
+
+<p>Also, in this branch, it was recommended to me that you can zoom cards. I am attempting to add a model that displays card details to the hand.</p>
+
+<p>To try this I am trying to add a modal on click for the hand.</p>
+
+<p>Meanwhile, I am noticing I really need to refactor out operators for stuff like :</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">    <span class="p">|</span>        <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">applyUpdatedPlayerBoardResultToGamesState</span> <span class="n">playerId</span> <span class="n">gs</span> <span class="n">x</span><span class="p">)</span></code></pre></figure>
+
+<p>and</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">        <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="p">(</span><span class="n">applyUpdatedPlayerBoardResultToGamesState</span> <span class="n">playerId</span> <span class="n">gs</span> <span class="n">x</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">Ok</span><span class="p">)</span></code></pre></figure>
+
+<p>i did this by implementing infix operators like</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="o">(&gt;&gt;=)</span> <span class="n">twoTrackInput</span> <span class="n">switchFunction</span> <span class="p">=</span>
+    <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="n">switchFunction</span> <span class="n">twoTrackInput</span>
+
+<span class="k">let</span> <span class="o">(&gt;=&gt;)</span> <span class="n">switch1</span> <span class="n">switch2</span> <span class="n">x</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">switch1</span> <span class="n">x</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">s</span> <span class="p">-&gt;</span> <span class="n">switch2</span> <span class="n">s</span>
+    <span class="p">|</span> <span class="nc">Error</span> <span class="n">f</span> <span class="p">-&gt;</span> <span class="nc">Error</span> <span class="n">f</span></code></pre></figure>
+
+<p>Additionally, I moved many of the constructors for domain objects to the Shared Domain and deleted unused test generator functions.</p>
+
+<p>Eventually, I was able to get the modal to work by adding a property to the game board: <code class="language-plaintext highlighter-rouge">ZoomedInCard</code> this is an optional CardInstanceId. I then added functions to check if the zoomed-in card was set to the current card. If it is the view displays the modal, if not it is hidden. I also added a Msg ZoomedInCardToggled and wired that up to the update function and the click of the thumbnail image in the hand.</p>
+
+<p>This all builds and is the final commit in the <code class="language-plaintext highlighter-rouge">step-11-allow-the-user-to-switch-to-being-the-other-player</code> branch.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-11-allow-the-user-to-switch-to-being-the-other-player">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

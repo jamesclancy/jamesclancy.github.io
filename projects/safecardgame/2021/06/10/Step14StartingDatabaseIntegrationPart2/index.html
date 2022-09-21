@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 14 - More Persistance and an API &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/06/10/Step14StartingDatabaseIntegrationPart2/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 14 - More Persistance and an API</h1>
+  <span class="post-date">10 Jun 2021</span>
+  <h2 id="more-persistance-and-an-api">More Persistance and an API</h2>
+
+<p>I am going to try to save my data in Postgresq which I will hopefully be running a docker container.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>First I installed [DBeaver</td>
+      <td>https://dbeaver.io/download/] to administer/ access the new Postgres instance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>I then ran</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull postgres
+mkdir c:/data/safecardgamepostgresqldata
+docker run -d --name dev-postgres -e POSTGRES_PASSWORD=WHATEVERPASSWORDYOUWANT -v c:/data/safecardgamepostgresqldata/:/var/lib/postgresql/data -p 5432:5432 postgres
+</code></pre></div></div>
+
+<p>I was then able to connect to this Postgres instance via DBever and create two tables with the definitions:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">public</span><span class="p">.</span><span class="n">card</span> <span class="p">(</span>
+	<span class="n">card_id</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">card_name</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">card_description</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">card_image_url</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">card_thumbnail_image_url</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">card_primary_resource</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_type</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_enter_special_effects</span> <span class="nb">varchar</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_exit_special_effects</span> <span class="nb">varchar</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_creature_health</span> <span class="nb">int</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_creature_weaknesses</span> <span class="nb">varchar</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_creature_attacks</span> <span class="nb">varchar</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_resources_available_on_first_turn</span> <span class="nb">bit</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">card_resources_added</span>  <span class="nb">varchar</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="k">CONSTRAINT</span> <span class="n">card_pk</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">card_id</span><span class="p">),</span>
+	<span class="k">CONSTRAINT</span> <span class="n">card_unique_name</span> <span class="k">UNIQUE</span> <span class="p">(</span><span class="n">card_name</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">public</span><span class="p">.</span><span class="n">player</span> <span class="p">(</span>
+	<span class="n">player_id</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">player_name</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">player_playmat_url</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="k">CONSTRAINT</span> <span class="n">player_pk</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">player_id</span><span class="p">),</span>
+	<span class="k">CONSTRAINT</span> <span class="n">player_unique_name</span> <span class="k">UNIQUE</span> <span class="p">(</span><span class="n">player_name</span><span class="p">)</span>
+<span class="p">);</span></code></pre></figure>
+
+<p>After this, I added <code class="language-plaintext highlighter-rouge">Npgsql.FSharp</code> to the Server project by running <code class="language-plaintext highlighter-rouge">dotnet add package Npgsql.FSharp</code>.</p>
+
+<p>using this library I was able to add a module to my Server project named: <code class="language-plaintext highlighter-rouge">DatabaseRepositories</code>.</p>
+
+<p>In this module, I defined two repositories, a <code class="language-plaintext highlighter-rouge">CardRepository</code> and a <code class="language-plaintext highlighter-rouge">PlayerRepository</code> each includes methods to map DTOs to the database table row, a select all, and a select by id.</p>
+
+<p>I then pulled some other TCG card data in JSON and transformed that into a CSV file that matched the database and imported it (not included in the repo but you can find similar on google/github).</p>
+
+<p>I also added a deck_card_association and deck SQL tables.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">public</span><span class="p">.</span><span class="n">deck_card_association</span> <span class="p">(</span>
+    <span class="n">deck_card_association</span> <span class="nb">int</span> <span class="k">GENERATED</span> <span class="k">BY</span> <span class="k">DEFAULT</span> <span class="k">AS</span> <span class="k">IDENTITY</span><span class="p">,</span>
+	<span class="n">deck_id</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">card_id</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="k">CONSTRAINT</span> <span class="n">deck_card_association_fk_deck</span> <span class="k">FOREIGN</span> <span class="k">KEY</span><span class="p">(</span><span class="n">deck_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">deck</span><span class="p">(</span><span class="n">deck_id</span><span class="p">),</span>
+    <span class="k">CONSTRAINT</span> <span class="n">deck_card_association_fk_card</span> <span class="k">FOREIGN</span> <span class="k">KEY</span><span class="p">(</span><span class="n">card_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">card</span><span class="p">(</span><span class="n">card_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">public</span><span class="p">.</span><span class="n">deck</span> <span class="p">(</span>
+	<span class="n">deck_id</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">deck_name</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">deck_description</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">deck_image_url</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">deck_thumbnail_image_url</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="n">deck_primary_resource</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">deck_owner</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">deck_private</span> <span class="nb">boolean</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+	<span class="k">CONSTRAINT</span> <span class="n">deck_pk</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deck_id</span><span class="p">),</span>
+	<span class="k">CONSTRAINT</span> <span class="n">deck_unique_name</span> <span class="k">UNIQUE</span> <span class="p">(</span><span class="n">deck_name</span><span class="p">),</span>
+    <span class="k">CONSTRAINT</span> <span class="n">deck_fk_owner</span> <span class="k">FOREIGN</span> <span class="k">KEY</span><span class="p">(</span><span class="n">deck_owner</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">player</span><span class="p">(</span><span class="n">player_id</span><span class="p">)</span>
+<span class="p">);</span></code></pre></figure>
+
+<p>I then similarly bulk pulled some JSON info for an existing TCG game and added it to the database.</p>
+
+<p>I now will have to implement a deck repository and APIs.</p>
+
+<p>These I will implement in the next part.</p>
+
+<p>I am leaving this as the final commit in branch <code class="language-plaintext highlighter-rouge">step-14-continue-working-on-saving-to-db</code>.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-14-continue-working-on-saving-to-db">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

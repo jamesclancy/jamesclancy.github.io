@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 2 - Domain Model &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/21/Step2DomainModel/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 2 - Domain Model</h1>
+  <span class="post-date">21 May 2021</span>
+  <h2 id="game-rules">Game Rules</h2>
+<hr />
+
+<p>My idea would be that scoping out the rules for the game might be the best first step.</p>
+
+<h3 id="defining-the-basic-domain-model-and-terms">Defining the basic Domain Model and Terms</h3>
+<hr />
+
+<p>I think defining the domain models might be the best way to start documenting the rules.  The domain model should correlate to the object defined in the shared path of the project (i.e. src/shared). For now, I am just defining the types in the existing <code class="language-plaintext highlighter-rouge">Shared</code> module found in the Shared.fs.</p>
+
+<p>The game starts with two players.</p>
+
+<p>Each <code class="language-plaintext highlighter-rouge">Player</code> will start with a name and an amount of health.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">PlayerId</span> <span class="p">=</span> <span class="kt">string</span>
+
+<span class="k">type</span> <span class="nc">Player</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+        <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span>
+        <span class="nc">RemainingLifePoints</span><span class="p">:</span> <span class="kt">int</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Each player will have a <code class="language-plaintext highlighter-rouge">board</code> which consists of a Deck of cards, a hand, a pile of discarded, an optional active creature, a list of in play but not active creatures (i.e. a bench), a total resource pool and an available resource pool.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">PlayerBoard</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">PlayerId</span><span class="p">:</span> <span class="nc">PlayerId</span>
+        <span class="nc">Deck</span><span class="p">:</span> <span class="nc">Deck</span>
+        <span class="nc">Hand</span><span class="p">:</span> <span class="nc">Hand</span>
+        <span class="nc">ActiveCreature</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">InPlayCreature</span><span class="p">&gt;</span>
+        <span class="nc">Bench</span><span class="p">:</span>  <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">InPlayCreature</span> <span class="kt">list</span><span class="p">&gt;</span>
+        <span class="nc">DiscardPile</span><span class="p">:</span> <span class="nc">Deck</span>
+        <span class="nc">TotalResourcePool</span><span class="p">:</span> <span class="nc">ResourcePool</span>
+        <span class="nc">AvailableResourcePool</span><span class="p">:</span> <span class="nc">ResourcePool</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">Resource</code>s are typed from a finite list, i.e.:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">Resource</span> <span class="p">=</span>
+    <span class="nc">Grass</span> <span class="p">|</span> <span class="nc">Fire</span> <span class="p">|</span>
+    <span class="nc">Water</span> <span class="p">|</span> <span class="nc">Lightning</span> <span class="p">|</span>
+    <span class="nc">Psychic</span> <span class="p">|</span> <span class="nc">Fighting</span> <span class="p">|</span>
+    <span class="nc">Colorless</span></code></pre></figure>
+
+<p>A <code class="language-plaintext highlighter-rouge">ResourcePool</code> is simply a list of the different types of resources along with a quantity value.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">ResourcePool</span> <span class="p">=</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">Resource</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span></code></pre></figure>
+
+<p>A <code class="language-plaintext highlighter-rouge">Deck</code> and a <code class="language-plaintext highlighter-rouge">Hand</code> are both lists of <code class="language-plaintext highlighter-rouge">CardInstance</code>s, the main difference being that potentially a deck could have a number of cards exposed or visible.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">Hand</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">Cards</span><span class="p">:</span> <span class="nc">CardInstance</span> <span class="kt">list</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">Deck</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">Cards</span><span class="p">:</span> <span class="nc">CardInstance</span> <span class="kt">list</span>
+        <span class="nc">TopCardsExposed</span><span class="p">:</span> <span class="kt">int</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Each <code class="language-plaintext highlighter-rouge">CardInstance</code> will contain a unique CardInstanceId and refers to a generic card referenced via a CardId. I am also placing the Card Type on the CardInstance, this seems pretty memory inefficient but probably doesn’t matter due to the limited size of decks. For the moment it makes it much easier to manipulate the decks and pull information.
+The <code class="language-plaintext highlighter-rouge">Card</code> referenced by the <code class="language-plaintext highlighter-rouge">CardId</code> will have:</p>
+<ul>
+  <li>a name</li>
+  <li>a resource cost (a <code class="language-plaintext highlighter-rouge">ResourcePool</code>)</li>
+  <li>a Primary resource type for determining weaknesses</li>
+  <li>a classification under one of three different types
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ResourceCard</code> - Also contains a <code class="language-plaintext highlighter-rouge">ResourcePool</code> for <code class="language-plaintext highlighter-rouge">AddedResource</code> and a bool for <code class="language-plaintext highlighter-rouge">ResourceAvailableOnFirstTurn</code></li>
+      <li><code class="language-plaintext highlighter-rouge">CreatureCard</code> - Also contains a <code class="language-plaintext highlighter-rouge">Creature</code></li>
+      <li><code class="language-plaintext highlighter-rouge">EffectCard</code></li>
+    </ul>
+  </li>
+  <li>a <code class="language-plaintext highlighter-rouge">GameStateSpecialEffect</code> for when the card enters and leaves the game
+    <ul>
+      <li>the <code class="language-plaintext highlighter-rouge">GameStateSpecialEffect</code> will consist of a function which takes an arguement of the <code class="language-plaintext highlighter-rouge">GameState</code> and returns a new manipulated <code class="language-plaintext highlighter-rouge">GameState</code></li>
+    </ul>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">CardInstanceId</span> <span class="p">=</span> <span class="kt">string</span>
+<span class="k">type</span> <span class="nc">CardId</span> <span class="p">=</span> <span class="kt">string</span>
+<span class="k">type</span> <span class="nc">GameStateSpecialEffect</span> <span class="p">=</span> <span class="k">delegate</span> <span class="k">of</span> <span class="nc">GameState</span> <span class="p">-&gt;</span> <span class="nc">GameState</span>
+<span class="k">type</span> <span class="nc">CardInstance</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">CardIntanceId</span> <span class="p">:</span> <span class="nc">CardInstanceId</span>
+        <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span>
+        <span class="nc">Card</span><span class="p">:</span> <span class="nc">Card</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">Card</span> <span class="p">=</span>
+   <span class="nc">CharacterCard</span> <span class="k">of</span> <span class="p">{</span> <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span><span class="p">;</span> <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span><span class="p">;</span> <span class="nc">Creature</span><span class="p">:</span> <span class="nc">Creature</span><span class="p">;</span> <span class="nc">ResourceCost</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">;</span> <span class="nc">PrimaryResource</span><span class="p">:</span> <span class="nc">Resource</span><span class="p">;</span> <span class="nc">EnterSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ExitSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">}</span>
+   <span class="p">|</span> <span class="nc">EffectCard</span> <span class="k">of</span> <span class="p">{</span> <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span><span class="p">;</span> <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span><span class="p">;</span> <span class="nc">ResourceCost</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">;</span> <span class="nc">PrimaryResource</span><span class="p">:</span> <span class="nc">Resource</span><span class="p">;</span> <span class="nc">EnterSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ExitSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="p">}</span>
+   <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="k">of</span> <span class="p">{</span> <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span><span class="p">;</span> <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span><span class="p">;</span> <span class="nc">ResourceCost</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">;</span> <span class="nc">PrimaryResource</span><span class="p">:</span> <span class="nc">Resource</span><span class="p">;</span> <span class="nc">EnterSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ExitSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ResourceAvailableOnFirstTurn</span><span class="p">:</span> <span class="kt">bool</span><span class="p">;</span> <span class="nc">ResourcesAdded</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">}</span></code></pre></figure>
+
+<p>A <code class="language-plaintext highlighter-rouge">Creature</code> will have integer health for total health associated with the card, a list of <code class="language-plaintext highlighter-rouge">Resource</code>s the creature is weak to, and a list of <code class="language-plaintext highlighter-rouge">Attacks.
+An </code>Attack<code class="language-plaintext highlighter-rouge"> will have an integer for the damage it inflicts, a </code>ResourcePool<code class="language-plaintext highlighter-rouge"> representing the cost to use, and a </code>GameStateSpecialEffect` defining any additional effects which may be triggered by the attack.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">Creature</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">Health</span><span class="p">:</span> <span class="kt">int</span>
+        <span class="nc">Weaknesses</span><span class="p">:</span> <span class="nc">Resource</span> <span class="kt">list</span>
+        <span class="nc">Attacks</span><span class="p">:</span> <span class="nc">Attack</span> <span class="kt">list</span>
+    <span class="p">}</span>
+<span class="k">type</span> <span class="nc">Attack</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">Damage</span><span class="p">:</span> <span class="kt">int</span>
+        <span class="nc">Cost</span><span class="p">:</span> <span class="nc">ResourcePool</span>
+        <span class="nc">SpecialEffect</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>An <code class="language-plaintext highlighter-rouge">InPlayCreature</code> has an id, is associated with a <code class="language-plaintext highlighter-rouge">CardInstance</code>, a current amount of damage, an optional list of <code class="language-plaintext highlighter-rouge">SpecialCondition</code>s currently applied as well as attached and spent resource pools.
+The <code class="language-plaintext highlighter-rouge">InPlayCreatureId</code> is a string and available <code class="language-plaintext highlighter-rouge">SpecialCondition</code>s are <code class="language-plaintext highlighter-rouge">Asleep | Burned | Confused | Paralyzed | Poisoned</code></p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">SpecialCondition</span> <span class="p">=</span> <span class="nc">Asleep</span> <span class="p">|</span> <span class="nc">Burned</span> <span class="p">|</span> <span class="nc">Confused</span> <span class="p">|</span> <span class="nc">Paralyzed</span> <span class="p">|</span> <span class="nc">Poisoned</span>
+<span class="k">type</span> <span class="nc">InPlayCreatureId</span> <span class="p">=</span> <span class="kt">string</span>
+<span class="k">type</span> <span class="nc">InPlayCreature</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">InPlayCharacterId</span><span class="p">:</span> <span class="nc">InPlayCharacterId</span>
+        <span class="nc">Card</span><span class="p">:</span> <span class="nc">Card</span>
+        <span class="nc">CurrentDamage</span><span class="p">:</span> <span class="kt">int</span>
+        <span class="nc">SpecialEffect</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">SpecialCondition</span> <span class="kt">list</span><span class="p">&gt;</span>
+        <span class="nc">AttachedEnergy</span><span class="p">:</span> <span class="nc">ResourcePool</span>
+        <span class="nc">SpentEnergy</span><span class="p">:</span> <span class="nc">ResourcePool</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Lastly, the <code class="language-plaintext highlighter-rouge">GameState</code> contains a:</p>
+<ul>
+  <li>Map of <code class="language-plaintext highlighter-rouge">PlayerId</code>s to <code class="language-plaintext highlighter-rouge">Player</code>s</li>
+  <li>Map of boards for each player, a map from <code class="language-plaintext highlighter-rouge">PlayerId</code> to <code class="language-plaintext highlighter-rouge">PlayerBoard</code></li>
+  <li>A current turn which is an optional `PlayerId representing the player whose turn it currently is.</li>
+  <li>A current step which is a <code class="language-plaintext highlighter-rouge">GameStep</code> representing the current step the player is on in their turn.</li>
+  <li>Finally, it contains a turn number representing the number of turns that have passed since the beginning of the game.</li>
+</ul>
+
+<p>The GameStep is just an enum represented by <code class="language-plaintext highlighter-rouge">NotCurrentlyPlaying | Draw | Play | Attack | Reconcile</code></p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">GameStep</span> <span class="p">=</span>
+    <span class="nc">NotCurrentlyPlaying</span> <span class="p">|</span> <span class="nc">Draw</span> <span class="p">|</span> <span class="nc">Play</span> <span class="p">|</span> <span class="nc">Attack</span> <span class="p">|</span> <span class="nc">Reconcile</span>
+
+<span class="k">type</span> <span class="nc">GameState</span> <span class="p">=</span>
+    <span class="p">{</span>
+        <span class="nc">Players</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="nc">Player</span><span class="p">&gt;</span>
+        <span class="nc">Boards</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="nc">PlayerBoard</span><span class="p">&gt;</span>
+        <span class="nc">CurrentTurn</span><span class="p">:</span> <span class="nc">Option</span><span class="p">&lt;</span><span class="nc">PlayerId</span><span class="p">&gt;</span>
+        <span class="nc">CurrentStep</span><span class="p">:</span><span class="nc">GameStep</span>
+        <span class="nc">TurnNumber</span><span class="p">:</span> <span class="kt">int</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>If you look at the current Shared.fs file you can see that many of the <code class="language-plaintext highlighter-rouge">type</code> declarations have been transformed into <code class="language-plaintext highlighter-rouge">and</code>s this is because F# cares about the order in which things are declared. The <code class="language-plaintext highlighter-rouge">type</code> declares a thing in a subsequent order and the <code class="language-plaintext highlighter-rouge">and</code> keyword forces the items to be declared at the same time.</p>
+
+<p>Running <code class="language-plaintext highlighter-rouge">dotnet fake build --target run</code> the application <strong>FAILED to Build</strong> with an error message of</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Restored C:\tests\SafeCardGame\src\Shared\Shared.fsproj (in 197 ms).
+C:\tests\SafeCardGame\src\Shared\Shared.fs(51,21): error FS0035: This construct is deprecated: Consider using a separate record type instead [C:\tests\SafeCardGame\src\Shared\Shared.fsproj]
+C:\tests\SafeCardGame\src\Shared\Shared.fs(52,20): error FS0035: This construct is deprecated: Consider using a separate record type instead [C:\tests\SafeCardGame\src\Shared\Shared.fsproj]
+C:\tests\SafeCardGame\src\Shared\Shared.fs(53,22): error FS0035: This construct is deprecated: Consider using a separate record type instead [C:\tests\SafeCardGame\src\Shared\Shared.fsproj]
+
+Build FAILED.
+
+C:\tests\SafeCardGame\src\Shared\Shared.fs(51,21): error FS0035: This construct is deprecated: Consider using a separate record type instead [C:\tests\SafeCardGame\src\Shared\Shared.fsproj]
+C:\tests\SafeCardGame\src\Shared\Shared.fs(52,20): error FS0035: This construct is deprecated: Consider using a separate record type instead [C:\tests\SafeCardGame\src\Shared\Shared.fsproj]
+C:\tests\SafeCardGame\src\Shared\Shared.fs(53,22): error FS0035: This construct is deprecated: Consider using a separate record type instead [C:\tests\SafeCardGame\src\Shared\Shared.fsproj]
+    0 Warning(s)
+    3 Error(s)
+</code></pre></div></div>
+
+<p>It appears that newer versions of F# no longer allow anonymous types in discriminated unions so I had to break out those types like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">Card</span> <span class="p">=</span>
+   <span class="nc">CharacterCard</span> <span class="k">of</span> <span class="nc">CharacterCard</span>
+   <span class="p">|</span> <span class="nc">EffectCard</span> <span class="k">of</span> <span class="nc">EffectCard</span>
+   <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="k">of</span> <span class="nc">ResourceCard</span>
+<span class="k">and</span> <span class="nc">CharacterCard</span>
+    <span class="p">=</span> <span class="p">{</span> <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span><span class="p">;</span> <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span><span class="p">;</span> <span class="nc">Creature</span><span class="p">:</span> <span class="nc">Creature</span><span class="p">;</span> <span class="nc">ResourceCost</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">;</span> <span class="nc">PrimaryResource</span><span class="p">:</span> <span class="nc">Resource</span><span class="p">;</span> <span class="nc">EnterSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ExitSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">}</span>
+<span class="k">and</span> <span class="nc">EffectCard</span>
+    <span class="p">=</span> <span class="p">{</span> <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span><span class="p">;</span> <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span><span class="p">;</span> <span class="nc">ResourceCost</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">;</span> <span class="nc">PrimaryResource</span><span class="p">:</span> <span class="nc">Resource</span><span class="p">;</span> <span class="nc">EnterSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ExitSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">and</span> <span class="nc">ResourceCard</span>
+    <span class="p">=</span> <span class="p">{</span> <span class="nc">CardId</span><span class="p">:</span> <span class="nc">CardId</span><span class="p">;</span> <span class="nc">Name</span><span class="p">:</span> <span class="kt">string</span><span class="p">;</span> <span class="nc">ResourceCost</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">;</span> <span class="nc">PrimaryResource</span><span class="p">:</span> <span class="nc">Resource</span><span class="p">;</span> <span class="nc">EnterSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ExitSpecialEffects</span><span class="p">:</span> <span class="nc">GameStateSpecialEffect</span><span class="p">;</span> <span class="nc">ResourceAvailableOnFirstTurn</span><span class="p">:</span> <span class="kt">bool</span><span class="p">;</span> <span class="nc">ResourcesAdded</span><span class="p">:</span> <span class="nc">ResourcePool</span><span class="p">}</span></code></pre></figure>
+
+<p>Now running <code class="language-plaintext highlighter-rouge">dotnet fake build --target run</code> builds.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-2-domain-model">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

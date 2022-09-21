@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      KafkaUI - General Idea &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/kafkaui/2021/10/17/GeneralProjectIdea/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">KafkaUI - General Idea</h1>
+  <span class="post-date">17 Oct 2021</span>
+  <p><em>I have been writing this blog post over several days and will probably break it into multiple logical parts when finished.</em></p>
+
+<h2 id="overview">Overview</h2>
+<p>I recently attended the Kafka Summit Americas and have been experimenting with Kafka. One thing I have found lacking with Kafka vs other Pub-Sub systems is a management UI. I have previously used RabbitMQ and Azure Service Bus and both of those had quite useful tooling. Unfortunately, Kakfa largely utilizes helpful but not user friendly command line interfaces or commercial products. There appear to be a few user friendly clients like <a href="https://github.com/obsidiandynamics/kafdrop">KaDrop</a> and <a href="https://www.conduktor.io/">Conduktor</a> but these are still quite limited vs what you get built into something like Rabbit.</p>
+
+<p>My thought was that it might be a useful try to build a new basic admin interface for Kafka, not one that would actually compete with the existing solution but rather one which fit what I needed and provide a good way to get more comfortable with Kafka. Overall, I don’t think this is all that viable <em>but</em> it did create a great environment to come up with some really informative if hacky solutions to short comings in the dotnet <code class="language-plaintext highlighter-rouge">AdminClient</code> in <code class="language-plaintext highlighter-rouge">Confluent.Kafka</code>.</p>
+
+<h2 id="the-existing-tooling-for-dotnet---confluentkafka">The Existing tooling for dotnet - <code class="language-plaintext highlighter-rouge">Confluent.Kafka</code></h2>
+
+<p>The core client for interfacing with Kafka in the dotnet ecosystem is the <code class="language-plaintext highlighter-rouge">Confluent.Kafka</code> library, this appears to be quite limited vs the Java client library. Some limitations appear to be:</p>
+
+<ol>
+  <li>Legacy style APIs which don’t all support async/await</li>
+  <li>No streaming support</li>
+  <li>Very limited administrative capabilities</li>
+</ol>
+
+<p>These appear to be known limitation related to the underlying <a href="https://github.com/edenhill/librdkafka">librdkafka</a>. Generally, the client allows more general use cases of consuming and producing events but more advanced functionality.</p>
+
+<p>Reading online, it appears that the guidance is not to try to manage the cluster directly using librdkafka client implementations but rather utilize the <a href="https://docs.confluent.io/platform/current/kafka-rest/index.html">Confluent REST APIs</a> which does look great but unfortunately is a Confluent (i.e. commercial) product and not a real part of Kafka itself, for now it seems like <em>good</em> solutions require Java or to utilize Confluent Licensed tools.</p>
+
+<p>Out of general interest I wanted to see if I could come up with hacky solutions to try to perform similar functionality to Conduktor using only <code class="language-plaintext highlighter-rouge">Confluent.Kafka</code> and interfacing with <code class="language-plaintext highlighter-rouge">Zookeeper</code>.</p>
+
+<h3 id="initial-set-up">Initial Set Up</h3>
+
+<p>First I set up a general scaffold of the UI and hooked up some ideal DTOs and set up a basic UI in MaterialUI.</p>
+
+<p>The general project structure is set up like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client
+    |--&gt; Pages -&gt; 
+    |           |--&gt; CommonLayoutItems - Shared Layout Components
+                |
+                |--&gt; Layout - General layout definition &amp; view
+    |           |
+    |           |--&gt; Brokers
+    |           |
+    |           |--&gt; Topics
+    |           |
+    |           |--&gt; Consumers
+    |
+    |--&gt; Models - Global event models
+    |
+    |--&gt; Index - Routing for requests into the various pages
+    |
+    |--&gt; App - Boilerplate set up for client App
+Server
+    |--&gt; Kafka Interface - Helper and functions built around the Kafka clients, 
+                           used in the Api Implementations
+    |
+    |--&gt; ApiImplementations - Implementations of the API Contracts against kafka
+Shared
+    |--&gt; Dtos - Data models for information exchange between the client and server
+    |
+    |--&gt; Contracts - Api Definitions
+    |
+    |--&gt; Shared - Shared logic and helper functions
+
+</code></pre></div></div>
+
+<p>The pages will all share two general templates, there are informative pages and action pages.</p>
+
+<p>Informative pages are divided into sections like:</p>
+
+<p><img src="\assets\img\post-media\2021-10-17-GeneralProjectIdea\general-page-layout.png" alt="Informative Page Example" /></p>
+
+<p>Action pages are displayed as modals:</p>
+
+<p><img src="\assets\img\post-media\2021-10-17-GeneralProjectIdea\modal-page-layout.png" alt="Informative Page Example" /></p>
+
+<h3 id="getting-the-topic-offsets--event-counts">Getting the Topic Offsets &amp; Event Counts</h3>
+
+<p>Even looking through the <a href="https://docs.confluent.io/2.0.0/kafka-rest/docs/api.html#consumers">Rest Proxy Api Specs</a> I am not seeing this info available in the rest api.</p>
+
+<p>Basically, for each topic I believe I want to compare the 
+<code class="language-plaintext highlighter-rouge">kafka-run-class kafka.tools.GetOffsetShell --broker-list=localhost:29092 --topic=testtopic --time -1</code> results to the <code class="language-plaintext highlighter-rouge">kafka-run-class kafka.tools.GetOffsetShell --broker-list=localhost:29092 --topic=testtopic --time -2</code> for topics.</p>
+
+<p><img src="\assets\img\post-media\2021-10-17-GeneralProjectIdea\get-offset-shell-example.png" alt="Get Offset Example" /></p>
+
+<p>For consumer groups I believe we want to simulate <code class="language-plaintext highlighter-rouge">kafka-consumer-groups --bootstrap-server=localhost:29092 --group=testgroup --describe</code>.</p>
+
+<p><img src="\assets\img\post-media\2021-10-17-GeneralProjectIdea\kafka-consumer-groups-example.png" alt="Consumer Groups Example" /></p>
+
+<h4 id="replicating-the-topic-information">Replicating the Topic Information</h4>
+
+<p>I think I can replicate the <code class="language-plaintext highlighter-rouge">GetOffsetShell</code> results by creating a starting at the beginning of time and then comparing the high and low watermark offsets. I am not entirely certain how accurate this would be and what would be the effect of compacted topics on these results. I feel like the best way to figure out is to test it.</p>
+
+<p>Basically, I believe that if I use</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        let topicPartitions =
+            topicMetadata.Partitions
+            |&gt; Seq.map (fun x -&gt; new TopicPartition(topicMetadata.Topic, new Partition(x.PartitionId)))
+
+        topicPartitions |&gt; consumer.Assign
+
+        let res =
+            consumer.Consume(System.TimeSpan.FromMilliseconds(10.0))
+
+        let offsets =
+            topicPartitions
+            |&gt; Seq.map consumer.GetWatermarkOffsets
+            |&gt; Seq.toList
+```  [Github link](https://github.com/jamesclancy/KafkaUI/blob/2b43f8f3562ac8dd65a785a5a8156b91daa33bcf/src/Server/KafkaInterface/ClientBuilder.fs#L252)
+
+to pull watermarks and then sum them like:
+
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    this.TopicPartitionOffsets
+    |&gt; Seq.filter (fun x -&gt; x.High.IsSpecial = false)
+    |&gt; Seq.map (fun x -&gt; x.High.Value - x.Low.Value)
+    |&gt; Seq.sum ``` [Github link](https://github.com/jamesclancy/KafkaUI/blob/2b43f8f3562ac8dd65a785a5a8156b91daa33bcf/src/Server/KafkaInterface/ClientBuilder.fs#L34)
+</code></pre></div></div>
+
+<p>I should be get the total events still in the topic.</p>
+
+<h4 id="replicating-the-consumer-group-information">Replicating the Consumer Group Information</h4>
+
+<h2 id="links">Links</h2>
+
+<ul>
+  <li><a href="https://github.com/jamesclancy/KafkaUI">Visit the Repository</a></li>
+</ul>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Wilkens Avenue - Step 4 - Add Okta Support for Login &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/wilkensavenue/2021/08/15/WilkensAvenueStep4AddOktaLoginSupport/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Wilkens Avenue - Step 4 - Add Okta Support for Login</h1>
+  <span class="post-date">15 Aug 2021</span>
+  <p>I previously used Github OAuth to authenticate the SafeCardGame, I wanted to try using Okta.</p>
+
+<h2 id="goals-of-this-step">Goals of this Step</h2>
+<ul>
+  <li>Create Okta account</li>
+  <li>Create way to read secret keys/environmental variables with Okta api keys</li>
+  <li>Add Okta configuration and a route which requires login.</li>
+</ul>
+
+<h2 id="results">Results</h2>
+
+<p>This appeared to be very straightforward, unfortunately I was unable to find a way to cleanly pull the configuration from the service configuration in the Saturn provided <code class="language-plaintext highlighter-rouge">use_open_id_auth_with_config</code>. All examples I could find were pulling from static methods and not from the service configuration. While this may be the <em>functional way</em>, I did want to be able to utilize the Microsoft supplied <code class="language-plaintext highlighter-rouge">AddUserSecrets</code> and <code class="language-plaintext highlighter-rouge">AddEnvironmentVariables</code> which register values in the <code class="language-plaintext highlighter-rouge">IConfiguration</code> in the service configuration.</p>
+
+<p>Therefor, I had to implement my own <code class="language-plaintext highlighter-rouge">use_open_id_auth_with_config_from_service_collection</code>. To do this I essentially copy and pasted the original <a href="https://github.com/SaturnFramework/Saturn/blob/9593e90e1397309c4653abe703478893b60daa5e/src/Saturn.Extensions.Authorization/OAuth.fs#L189"><code class="language-plaintext highlighter-rouge">use_open_id_auth_with_config</code></a> and modified it to accept a function with maps from a IServiceCollection to the required confuration like so:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nn">Saturn</span><span class="p">.</span><span class="nn">Application</span><span class="p">.</span><span class="nc">ApplicationBuilder</span> <span class="k">with</span>
+    <span class="p">[&lt;</span><span class="nc">CustomOperation</span><span class="p">(</span><span class="s2">"use_open_id_auth_with_config_from_service_collection"</span><span class="o">)&gt;]</span>
+    <span class="k">member</span> <span class="o">__.</span><span class="nc">UseOpenIdAuthWithConfigFromServiceCollection</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="nc">ApplicationState</span><span class="p">,</span> <span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nc">IServiceCollection</span> <span class="p">-&gt;</span> <span class="nc">Action</span><span class="p">&lt;</span><span class="nn">OpenIdConnect</span><span class="p">.</span><span class="nc">OpenIdConnectOptions</span><span class="o">&gt;))</span> <span class="p">=</span>
+        <span class="k">let</span> <span class="n">middleware</span> <span class="p">(</span><span class="n">app</span> <span class="p">:</span> <span class="nc">IApplicationBuilder</span><span class="p">)</span> <span class="p">=</span>
+            <span class="n">app</span><span class="p">.</span><span class="nc">UseAuthentication</span><span class="bp">()</span>
+
+        <span class="k">let</span> <span class="n">service</span> <span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nc">IServiceCollection</span><span class="p">)</span> <span class="p">=</span>
+            <span class="k">let</span> <span class="n">authBuilder</span> <span class="p">=</span> <span class="n">s</span><span class="p">.</span><span class="nc">AddAuthentication</span><span class="p">(</span><span class="k">fun</span> <span class="n">authConfig</span> <span class="p">-&gt;</span>
+                <span class="n">authConfig</span><span class="p">.</span><span class="nc">DefaultScheme</span> <span class="p">&lt;-</span> <span class="nn">CookieAuthenticationDefaults</span><span class="p">.</span><span class="nc">AuthenticationScheme</span>
+                <span class="n">authConfig</span><span class="p">.</span><span class="nc">DefaultChallengeScheme</span> <span class="p">&lt;-</span> <span class="nn">OpenIdConnectDefaults</span><span class="p">.</span><span class="nc">AuthenticationScheme</span>
+                <span class="n">authConfig</span><span class="p">.</span><span class="nc">DefaultSignInScheme</span> <span class="p">&lt;-</span> <span class="nn">CookieAuthenticationDefaults</span><span class="p">.</span><span class="nc">AuthenticationScheme</span><span class="p">)</span>
+            <span class="k">if</span> <span class="k">not</span> <span class="n">state</span><span class="p">.</span><span class="nc">CookiesAlreadyAdded</span> <span class="k">then</span> <span class="n">authBuilder</span><span class="p">.</span><span class="nc">AddCookie</span><span class="bp">()</span> <span class="p">|&gt;</span> <span class="n">ignore</span>
+            <span class="n">authBuilder</span><span class="p">.</span><span class="nc">AddOpenIdConnect</span><span class="p">(</span><span class="nn">OpenIdConnectDefaults</span><span class="p">.</span><span class="nc">AuthenticationScheme</span><span class="p">,</span> <span class="p">(</span><span class="n">config</span> <span class="n">s</span><span class="o">))</span> <span class="p">|&gt;</span> <span class="n">ignore</span>
+            <span class="n">s</span>
+
+        <span class="p">{</span> <span class="n">state</span> <span class="k">with</span>
+            <span class="nc">ServicesConfig</span> <span class="p">=</span> <span class="n">service</span><span class="p">::</span><span class="n">state</span><span class="p">.</span><span class="nc">ServicesConfig</span>
+            <span class="nc">AppConfigs</span> <span class="p">=</span> <span class="n">middleware</span><span class="p">::</span><span class="n">state</span><span class="p">.</span><span class="nc">AppConfigs</span>
+            <span class="nc">CookiesAlreadyAdded</span> <span class="p">=</span> <span class="bp">true</span> <span class="p">}</span></code></pre></figure>
+
+<p><a href="https://github.com/jamesclancy/WilkensAvenue/tree/step-4">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

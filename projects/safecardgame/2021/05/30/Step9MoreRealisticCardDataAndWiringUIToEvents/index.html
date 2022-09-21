@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 9 - Adding more realistic cards data and wiring up the UI to send some events &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/30/Step9MoreRealisticCardDataAndWiringUIToEvents/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 9 - Adding more realistic cards data and wiring up the UI to send some events</h1>
+  <span class="post-date">30 May 2021</span>
+  <h2 id="adding-more-realistic-cards-data-and-wiring-up-the-ui-to-send-some-events">Adding more realistic cards data and wiring up the UI to send some events</h2>
+
+<p>In order to create better test data I am going to be creating a temporary SampleCardDatabase in the Client. This SampleCardDatabase will also require several generic list methods I am putting in a CollectionManipulation module also in the client.</p>
+
+<p>I am going to create a creatureCardDb which creates a list of sample creature cards and a resourceCardDb which contains a list of sample resource cards. I am ignoring the effect cards for now.</p>
+
+<p>Both of these “Db”s are generated by piping lists of tuples through a constructor function and taking all the valid “Ok” results.</p>
+
+<p>I implemented them like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">creatureCreatureConstructor</span> <span class="n">creatureId</span> <span class="n">name</span> <span class="n">description</span> <span class="n">primaryResource</span> <span class="n">resourceCost</span> <span class="n">health</span> <span class="n">weaknesses</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardId</span> <span class="p">=</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="n">creatureId</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">CardId</span>
+    <span class="k">let</span> <span class="n">cardImageUrl</span> <span class="p">=</span> <span class="nn">ImageUrlString</span><span class="p">.</span><span class="n">build</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"/images/full/%s.png"</span> <span class="n">creatureId</span><span class="p">)</span>
+
+    <span class="k">match</span>  <span class="n">cardId</span><span class="p">,</span> <span class="n">cardImageUrl</span> <span class="k">with</span>
+    <span class="p">|</span>  <span class="nc">Ok</span> <span class="n">cid</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">imgUrl</span> <span class="p">-&gt;</span>
+        <span class="nc">Ok</span> <span class="p">{</span>
+                <span class="nc">CardId</span> <span class="p">=</span> <span class="n">cid</span>
+                <span class="nc">ResourceCost</span> <span class="p">=</span>  <span class="n">resourceCost</span>
+                <span class="nc">Name</span> <span class="p">=</span> <span class="n">name</span>
+                <span class="nc">EnterSpecialEffects</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">ExitSpecialEffects</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">PrimaryResource</span> <span class="p">=</span> <span class="n">primaryResource</span>
+                <span class="nc">Creature</span> <span class="p">=</span>
+                      <span class="p">{</span>
+                        <span class="nc">Health</span><span class="p">=</span> <span class="n">health</span>
+                        <span class="nc">Weaknesses</span><span class="p">=</span>  <span class="n">weaknesses</span>
+                        <span class="nc">Attack</span> <span class="p">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">empty</span>
+                      <span class="p">}</span>
+                <span class="nc">ImageUrl</span> <span class="p">=</span> <span class="n">imgUrl</span>
+                <span class="nc">Description</span> <span class="p">=</span><span class="n">description</span>
+            <span class="p">}</span>
+    <span class="p">|</span> <span class="o">_,</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="nc">Error</span> <span class="s2">"No"</span>
+
+<span class="k">let</span> <span class="n">resourceCardConstructor</span> <span class="n">resourceCardId</span> <span class="n">resource</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardId</span> <span class="p">=</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="n">resourceCardId</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">CardId</span>
+    <span class="k">let</span> <span class="n">cardImageUrl</span> <span class="p">=</span> <span class="nn">ImageUrlString</span><span class="p">.</span><span class="n">build</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"/images/resource/%s.png"</span> <span class="p">(</span><span class="n">resource</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span>
+
+    <span class="k">match</span>  <span class="n">cardId</span><span class="p">,</span> <span class="n">cardImageUrl</span> <span class="k">with</span>
+    <span class="p">|</span>  <span class="nc">Ok</span> <span class="n">cid</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">imgUrl</span> <span class="p">-&gt;</span>
+        <span class="nc">Ok</span> <span class="p">{</span>
+                <span class="nc">CardId</span> <span class="p">=</span> <span class="n">cid</span>
+                <span class="nc">ResourceCost</span> <span class="p">=</span>  <span class="nn">Seq</span><span class="p">.</span><span class="n">empty</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span>
+                <span class="nc">Name</span> <span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+                <span class="nc">EnterSpecialEffects</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">ExitSpecialEffects</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">PrimaryResource</span> <span class="p">=</span> <span class="n">resource</span>
+                <span class="nc">ResourceAvailableOnFirstTurn</span> <span class="p">=</span> <span class="bp">true</span>
+                <span class="nc">ResourcesAdded</span> <span class="p">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span>
+                <span class="nc">ImageUrl</span> <span class="p">=</span> <span class="n">imgUrl</span>
+                <span class="nc">Description</span> <span class="p">=</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Add 1 %s to your available resource pool."</span> <span class="p">(</span><span class="n">getSymbolForResource</span> <span class="n">resource</span><span class="o">))</span>
+            <span class="p">}</span>
+    <span class="p">|</span> <span class="o">_,</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="nc">Error</span> <span class="s2">"No"</span>
+
+<span class="k">let</span> <span class="n">resourceCardDb</span> <span class="p">=</span>
+    <span class="p">[</span>
+      <span class="s2">"GrassEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span> <span class="nc">Grass</span><span class="p">;</span>
+      <span class="s2">"FireEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Fire</span><span class="p">;</span>
+      <span class="s2">"WaterEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span> <span class="nc">Water</span><span class="p">;</span>
+      <span class="s2">"LightningEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Lightning</span><span class="p">;</span>
+      <span class="s2">"PsychicEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Psychic</span><span class="p">;</span>
+      <span class="s2">"FightingEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Fighting</span><span class="p">;</span>
+      <span class="s2">"ColorlessEnergy"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Colorless</span>
+    <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">resourceCardConstructor</span>  <span class="n">x</span> <span class="n">y</span><span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="n">selectAllOkayResults</span>
+
+<span class="k">let</span> <span class="n">creatureCardDb</span> <span class="p">=</span>
+    <span class="p">[</span>
+      <span class="p">(</span><span class="s2">"001"</span><span class="p">,</span> <span class="s2">"BulbMon"</span><span class="p">,</span> <span class="s2">"It has a bulb on it bro"</span><span class="p">,</span><span class="nn">Resource</span><span class="p">.</span><span class="nc">Grass</span><span class="p">,</span> <span class="p">[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Grass</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">ofList</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="p">[</span><span class="nn">Resource</span><span class="p">.</span><span class="nc">Fire</span><span class="p">]</span> <span class="p">)</span>
+      <span class="p">(</span><span class="s2">"050"</span><span class="p">,</span> <span class="s2">"DigMon"</span><span class="p">,</span> <span class="s2">"Mole Monster"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Fighting</span><span class="o">,[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Fighting</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">ofList</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Lightning</span> <span class="p">]</span> <span class="p">)</span>
+      <span class="p">(</span><span class="s2">"086"</span><span class="p">,</span> <span class="s2">"SeelMon"</span><span class="p">,</span> <span class="s2">"See Lion Monster"</span><span class="p">,</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Water</span><span class="p">,</span> <span class="p">[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Water</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span> <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">ofList</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="p">[</span> <span class="nn">Resource</span><span class="p">.</span><span class="nc">Lightning</span> <span class="p">]</span> <span class="p">)</span>
+    <span class="p">]</span>
+   <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">q3</span><span class="p">,</span> <span class="n">q4</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">creatureCreatureConstructor</span>  <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="n">q</span> <span class="n">q2</span> <span class="n">q3</span> <span class="n">q4</span><span class="p">)</span>
+   <span class="p">|&gt;</span> <span class="n">selectAllOkayResults</span></code></pre></figure>
+
+<p>with selectAllOkayResults defined in the CollectionManipulation as</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">predicateForOkayResults</span> <span class="n">z</span> <span class="p">=</span>
+                        <span class="k">match</span> <span class="n">z</span> <span class="k">with</span>
+                        <span class="p">|</span> <span class="nc">Ok</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="bp">true</span>
+                        <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="bp">false</span>
+
+<span class="k">let</span> <span class="n">selectorForOkayResults</span> <span class="n">z</span> <span class="p">=</span>
+                        <span class="k">match</span> <span class="n">z</span> <span class="k">with</span>
+                        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">x</span> <span class="p">-&gt;</span>  <span class="p">[</span> <span class="n">x</span> <span class="p">]</span>
+                        <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">selectAllOkayResults</span> <span class="p">(</span><span class="n">z</span> <span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Result</span><span class="p">&lt;</span><span class="k">'</span><span class="n">a</span><span class="p">,</span><span class="k">'</span><span class="n">b</span><span class="o">&gt;&gt;)</span> <span class="p">=</span>
+    <span class="n">z</span>
+    <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="n">predicateForOkayResults</span>
+    <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">selectorForOkayResults</span>
+    <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold</span> <span class="o">(@)</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">shuffleG</span> <span class="n">xs</span> <span class="p">=</span> <span class="n">xs</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">sortBy</span> <span class="p">(</span><span class="k">fun</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="nn">System</span><span class="p">.</span><span class="nn">Guid</span><span class="p">.</span><span class="nc">NewGuid</span><span class="bp">()</span><span class="p">)</span></code></pre></figure>
+
+<p>I now need to utilize these functions when setting up teh game. I want to add a mixture of resource cards and creature cards. For now I can alternate decks between creature and resource cards.</p>
+
+<p>First I renamed <code class="language-plaintext highlighter-rouge">testCardGenerator</code> to <code class="language-plaintext highlighter-rouge">testCeatureCardGenerator</code> and change the function to pull information  from the sample database:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">testCreatureCardGenerator</span> <span class="n">cardInstanceIdStr</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardInstanceId</span> <span class="p">=</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="n">cardInstanceIdStr</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">CardInstanceId</span>
+
+    <span class="k">match</span> <span class="n">cardInstanceId</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">id</span> <span class="p">-&gt;</span>
+        <span class="k">let</span> <span class="n">card</span> <span class="p">=</span> <span class="nn">SampleCardDatabase</span><span class="p">.</span><span class="n">creatureCardDb</span> <span class="p">|&gt;</span> <span class="nn">CollectionManipulation</span><span class="p">.</span><span class="n">shuffleG</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">head</span>
+        <span class="nc">Ok</span>  <span class="p">{</span>
+                <span class="nc">CardInstanceId</span>  <span class="p">=</span>  <span class="n">id</span>
+                <span class="nc">Card</span> <span class="p">=</span>  <span class="n">card</span> <span class="p">|&gt;</span> <span class="nc">CharacterCard</span>
+            <span class="p">}</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+        <span class="n">sprintf</span> <span class="s2">"Unable to create card instance for %s"</span> <span class="n">cardInstanceIdStr</span>
+        <span class="p">|&gt;</span> <span class="nc">Error</span></code></pre></figure>
+
+<p>I can then create a similar function <code class="language-plaintext highlighter-rouge">testResourceCardGenerator</code>:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">testResourceCardGenerator</span> <span class="n">cardInstanceIdStr</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardInstanceId</span> <span class="p">=</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="n">cardInstanceIdStr</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">CardInstanceId</span>
+
+    <span class="k">match</span> <span class="n">cardInstanceId</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">id</span> <span class="p">-&gt;</span>
+        <span class="k">let</span> <span class="n">card</span> <span class="p">=</span> <span class="nn">SampleCardDatabase</span><span class="p">.</span><span class="n">resourceCardDb</span> <span class="p">|&gt;</span> <span class="nn">CollectionManipulation</span><span class="p">.</span><span class="n">shuffleG</span> <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">head</span>
+        <span class="nc">Ok</span>  <span class="p">{</span>
+                <span class="nc">CardInstanceId</span>  <span class="p">=</span>  <span class="n">id</span>
+                <span class="nc">Card</span> <span class="p">=</span>  <span class="n">card</span> <span class="p">|&gt;</span> <span class="nc">ResourceCard</span>
+            <span class="p">}</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+        <span class="n">sprintf</span> <span class="s2">"Unable to create card instance for %s"</span> <span class="n">cardInstanceIdStr</span>
+        <span class="p">|&gt;</span> <span class="nc">Error</span></code></pre></figure>
+
+<p>I can then combine these two functions into <code class="language-plaintext highlighter-rouge">testDeckSeqGenerator</code>:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">testDeckSeqGenerator</span> <span class="p">(</span><span class="n">numberOfCards</span> <span class="p">:</span><span class="kt">int</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">seq</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">..</span> <span class="p">(</span><span class="n">numberOfCards</span> <span class="p">-</span> <span class="mi">1</span><span class="o">)}</span>
+    <span class="p">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="p">=</span> <span class="mi">1</span> <span class="k">then</span>
+                        <span class="n">testCreatureCardGenerator</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"cardInstance-%i"</span> <span class="n">x</span><span class="p">)</span>
+                    <span class="k">else</span>
+                        <span class="n">testResourceCardGenerator</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"cardInstance-%i"</span> <span class="n">x</span><span class="p">)</span>
+                    <span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">ofSeq</span>
+    <span class="p">|&gt;</span> <span class="nn">CollectionManipulation</span><span class="p">.</span><span class="n">selectAllOkayResults</span></code></pre></figure>
+
+<p>I can then rewrite the init to reference the new Dbs like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">init</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">player1</span> <span class="p">=</span> <span class="n">createPlayer</span> <span class="s2">"Player1"</span> <span class="s2">"Player1"</span> <span class="mi">10</span> <span class="s2">"https://picsum.photos/id/1000/2500/1667?blur=5"</span>
+    <span class="k">let</span> <span class="n">player2</span> <span class="p">=</span> <span class="n">createPlayer</span> <span class="s2">"Player2"</span> <span class="s2">"Player2"</span> <span class="mi">10</span> <span class="s2">"https://picsum.photos/id/10/2500/1667?blur=5"</span>
+    <span class="k">let</span> <span class="n">gameId</span> <span class="p">=</span>  <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="s2">"GameIDHere"</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">GameId</span>
+
+    <span class="k">match</span> <span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">,</span> <span class="n">gameId</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">p1</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">p2</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">g</span> <span class="p">-&gt;</span>
+        <span class="k">let</span> <span class="n">playerBoard1</span> <span class="p">=</span> <span class="n">playerBoard</span> <span class="n">p1</span>
+        <span class="k">let</span> <span class="n">playerBoard2</span> <span class="p">=</span> <span class="n">playerBoard</span> <span class="n">p2</span>
+        <span class="k">match</span> <span class="n">playerBoard1</span><span class="p">,</span> <span class="n">playerBoard2</span> <span class="k">with</span>
+        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">pb1</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">pb2</span> <span class="p">-&gt;</span>
+          <span class="k">let</span> <span class="n">model</span> <span class="p">:</span> <span class="nc">GameState</span> <span class="p">=</span>
+            <span class="p">{</span>
+                <span class="nc">GameId</span> <span class="p">=</span> <span class="n">g</span>
+                <span class="nc">Players</span> <span class="p">=</span>  <span class="nn">Map</span><span class="p">.</span><span class="n">empty</span>
+                <span class="nc">Boards</span> <span class="p">=</span>   <span class="nn">Map</span><span class="p">.</span><span class="n">empty</span>
+                <span class="nc">NotificationMessages</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">CurrentStep</span> <span class="p">=</span>  <span class="nc">NotCurrentlyPlaying</span>
+                <span class="nc">TurnNumber</span> <span class="p">=</span> <span class="mi">0</span>
+                <span class="nc">PlayerOne</span> <span class="p">=</span> <span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span>
+                <span class="nc">PlayerTwo</span> <span class="p">=</span> <span class="n">p2</span><span class="p">.</span><span class="nc">PlayerId</span>
+            <span class="p">}</span>
+
+          <span class="k">let</span> <span class="n">startGameEvent</span> <span class="p">=</span>
+            <span class="p">{</span>
+                <span class="nc">GameId</span> <span class="p">=</span> <span class="n">g</span>
+                <span class="nc">Players</span> <span class="p">=</span>  <span class="p">[</span>
+                            <span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="n">p1</span><span class="p">;</span>
+                            <span class="n">p2</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="n">p2</span>
+                           <span class="p">]</span> <span class="p">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">ofList</span>
+                <span class="nc">PlayerOne</span> <span class="p">=</span> <span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span>
+                <span class="nc">PlayerTwo</span> <span class="p">=</span> <span class="n">p2</span><span class="p">.</span><span class="nc">PlayerId</span>
+                <span class="nc">Decks</span> <span class="p">=</span> <span class="p">[</span>   <span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="p">{</span> <span class="nc">TopCardsExposed</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nc">Cards</span> <span class="p">=</span> <span class="n">testDeckSeqGenerator</span> <span class="mi">60</span> <span class="o">});</span>
+                            <span class="p">(</span><span class="n">p2</span><span class="p">.</span><span class="nc">PlayerId</span><span class="p">,</span> <span class="p">{</span> <span class="nc">TopCardsExposed</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nc">Cards</span> <span class="p">=</span> <span class="n">testDeckSeqGenerator</span> <span class="mi">60</span> <span class="o">})]</span>
+                         <span class="p">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">ofSeq</span>
+            <span class="p">}</span> <span class="p">|&gt;</span> <span class="nc">StartGame</span>
+          <span class="k">let</span> <span class="n">cmd</span> <span class="p">=</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">ofMsg</span> <span class="n">startGameEvent</span>
+          <span class="nc">Ok</span> <span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+        <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="s2">"Failed to create player boards"</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="s2">"Failed to create players"</span> <span class="p">|&gt;</span> <span class="nc">Error</span></code></pre></figure>
+
+<p>I am able to see that the application does in fact now compile and renders the correct more realistic hands.</p>
+
+<p>I am now able to try to wire up some functionality.</p>
+
+<p>The first action I will try to implement is the “discard card” functionality on the discard button.</p>
+
+<p>To do this I will need to wire up the OnClick functionality on the button.</p>
+
+<p>I will wire it up by having this OnClick be a lambda sending a discard Msg like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderCardInstanceForHand</span>  <span class="p">(</span><span class="n">dispatch</span> <span class="p">:</span> <span class="nc">Msg</span> <span class="p">-&gt;</span> <span class="kt">unit</span><span class="p">)</span>  <span class="n">gameId</span> <span class="n">playerId</span> <span class="p">(</span><span class="n">card</span><span class="p">:</span> <span class="nc">CardInstance</span><span class="p">)</span> <span class="p">=</span>
+    <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"column is-4"</span> <span class="p">]</span>
+          <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card"</span> <span class="p">]</span>
+             <span class="p">[</span>   <span class="k">yield</span><span class="o">!</span> <span class="p">(</span><span class="n">renderCardForHand</span> <span class="n">card</span><span class="p">.</span><span class="nc">Card</span><span class="p">)</span>
+                 <span class="k">yield</span>   <span class="n">footer</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-footer"</span> <span class="p">]</span>
+                      <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span>
+                            <span class="nc">Class</span> <span class="s2">"card-footer-item"</span> <span class="p">]</span>
+                          <span class="p">[</span> <span class="n">str</span> <span class="s2">"Play"</span> <span class="p">]</span>
+                        <span class="n">a</span> <span class="p">[</span> <span class="nc">Href</span> <span class="s2">"#"</span>
+                            <span class="nc">OnClick</span> <span class="p">(</span><span class="k">fun</span> <span class="o">_-&gt;</span>
+                                            <span class="o">({</span>
+                                                <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameId</span>
+                                                <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">playerId</span>
+                                                <span class="nc">CardInstanceId</span> <span class="p">=</span> <span class="n">card</span><span class="p">.</span><span class="nc">CardInstanceId</span>
+                                            <span class="p">}</span> <span class="p">:</span> <span class="nc">DiscardCardEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">DiscardCard</span> <span class="p">|&gt;</span>  <span class="n">dispatch</span><span class="p">)</span>
+                            <span class="nc">Class</span> <span class="s2">"card-footer-item"</span> <span class="p">]</span>
+                          <span class="p">[</span> <span class="n">str</span> <span class="s2">"Discard"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>To modify the renderCardInstance like this I had to alter the function to render the card frame and card footer as opposed to the renderCardForHand.</p>
+
+<p>I did this by changing the renderCardForHand like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderCharacterCard</span> <span class="p">(</span><span class="n">card</span><span class="p">:</span> <span class="nc">CharacterCard</span><span class="p">)</span> <span class="p">=</span>
+     <span class="p">[</span>
+             <span class="n">header</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-title"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+                          <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-icon"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">card</span><span class="p">.</span><span class="nc">ResourceCost</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+             <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-image"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">figure</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"image is-4by3"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">img</span> <span class="p">[</span> <span class="nc">Src</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">ImageUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span>
+                                    <span class="nc">Alt</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span>
+                                    <span class="nc">Class</span> <span class="s2">"is-fullwidth"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+             <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-content"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"content"</span> <span class="p">]</span>
+                            <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"is-italic"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                              <span class="n">displayCardSpecialEffectDetailIfPresent</span> <span class="s2">"On Enter Playing Field"</span> <span class="n">card</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span>
+                              <span class="n">displayCardSpecialEffectDetailIfPresent</span> <span class="s2">"On Exit Playing Field"</span> <span class="n">card</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span>
+                              <span class="n">h5</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"IsTitle is5"</span> <span class="p">]</span>
+                                <span class="p">[</span> <span class="n">str</span> <span class="s2">"Attacks"</span> <span class="p">]</span>
+                              <span class="n">table</span> <span class="p">[</span> <span class="p">]</span>
+                                <span class="p">[</span>
+                                  <span class="k">yield</span><span class="o">!</span> <span class="n">seq</span> <span class="p">{</span>
+                                    <span class="k">for</span> <span class="n">a</span> <span class="k">in</span> <span class="n">card</span><span class="p">.</span><span class="nn">Creature</span><span class="p">.</span><span class="nc">Attack</span> <span class="k">do</span>
+                                      <span class="p">(</span><span class="n">renderAttackRow</span> <span class="n">a</span><span class="p">)</span>
+                                  <span class="p">}</span>
+                                <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+                                <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">renderCardForHand</span> <span class="p">(</span><span class="n">card</span><span class="p">:</span> <span class="nc">Card</span><span class="p">)</span> <span class="p">:</span> <span class="nc">ReactElement</span> <span class="kt">list</span><span class="p">=</span>
+    <span class="k">match</span> <span class="n">card</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">CharacterCard</span> <span class="n">c</span> <span class="p">-&gt;</span> <span class="n">renderCharacterCard</span> <span class="n">c</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+         <span class="p">[</span>
+            <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"IDK"</span> <span class="p">]</span>
+         <span class="p">]</span></code></pre></figure>
+
+<p>I am not able to click the discard button but it doesn’t function as expected! It is discarding all the cards other than the desired card!</p>
+
+<p>I now have to fix the behavior of the <code class="language-plaintext highlighter-rouge">discardCardFromBoard</code> function. I have found that the bug lies in the filter on the Hand being ` (List.filter (fun x -&gt; x.CardInstanceId = cardInstanceId) playerBoard.Hand.Cards)<code class="language-plaintext highlighter-rouge"> and not </code> (List.filter (fun x -&gt; x.CardInstanceId &lt;&gt; cardInstanceId) playerBoard.Hand.Cards)<code class="language-plaintext highlighter-rouge">. Scanning through the code I will also have to update the similar funcationality in </code>addCreatureToGameState<code class="language-plaintext highlighter-rouge"> and </code>playCardFromBoard`. (the fact that I had to update this logic is a real sign I need to refactor but I am ignoring this for now).</p>
+
+<p>I reload the webpage and discard appears to be correctly functioning.</p>
+
+<p>Now I can similarly implement the play card functionality by altering the</p>
+
+<p>Refreshing the browser, nothing happens when I click play.</p>
+
+<p>The first thing I did was add a notification area to the page to see if there was an error message like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">notificationArea</span> <span class="p">(</span><span class="n">messages</span> <span class="p">:</span><span class="nc">Option</span><span class="p">&lt;</span><span class="nc">Notification</span> <span class="kt">list</span><span class="o">&gt;)</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">messages</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="n">s</span> <span class="p">-&gt;</span>
+        <span class="n">div</span> <span class="bp">[]</span>
+            <span class="p">[</span>
+               <span class="k">yield</span><span class="o">!</span>  <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">div</span> <span class="p">[</span><span class="nc">Class</span> <span class="s2">"notification is-danger"</span><span class="p">]</span> <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span> <span class="o">])</span> <span class="n">s</span>
+            <span class="p">]</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+        <span class="n">div</span> <span class="bp">[]</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">mainLayout</span>  <span class="n">model</span> <span class="n">dispatch</span> <span class="p">=</span>
+  <span class="k">match</span> <span class="n">extractNeededModelsFromState</span> <span class="n">model</span> <span class="k">with</span>
+  <span class="p">|</span> <span class="nc">Ok</span> <span class="n">op</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">opb</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">cp</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">cpb</span> <span class="p">-&gt;</span>
+      <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container is-fluid"</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">topNavigation</span>
+          <span class="n">br</span> <span class="p">[</span> <span class="p">]</span>
+          <span class="n">br</span> <span class="p">[</span> <span class="p">]</span>
+          <span class="n">enemyStats</span> <span class="n">op</span> <span class="n">opb</span>
+          <span class="n">enemyCreatures</span> <span class="n">op</span> <span class="n">opb</span>
+          <span class="n">playerControlCenter</span> <span class="n">cp</span> <span class="n">cpb</span> <span class="n">model</span>
+          <span class="n">notificationArea</span> <span class="n">model</span><span class="p">.</span><span class="nc">NotificationMessages</span>
+          <span class="n">playerCreatures</span> <span class="n">cp</span> <span class="n">cpb</span>
+          <span class="n">playerHand</span> <span class="n">model</span><span class="p">.</span><span class="nc">GameId</span> <span class="n">cp</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="n">cpb</span><span class="p">.</span><span class="nc">Hand</span> <span class="n">dispatch</span>
+          <span class="n">footerBand</span>
+        <span class="p">]</span>
+  <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"Error in GameState encountered."</span> <span class="p">]</span></code></pre></figure>
+
+<p>After poking around for a while I realized this was never wired up at all. In the update function, I updated the</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">    <span class="p">|</span> <span class="nc">PlayCard</span> <span class="n">ev</span> <span class="p">-&gt;</span>
+        <span class="n">model</span><span class="p">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span></code></pre></figure>
+
+<p>to</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">    <span class="p">|</span> <span class="nc">PlayCard</span> <span class="n">ev</span> <span class="p">-&gt;</span>
+        <span class="n">modifyGameStateFromPlayCardEvent</span> <span class="n">ev</span> <span class="n">model</span><span class="p">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span></code></pre></figure>
+
+<p>Now it appears to be adding the creatures to the playfield. One thing that needs to be added to the UI is the total and available resources.</p>
+
+<p>To do this I modified the <code class="language-plaintext highlighter-rouge">playerStats</code> function on the PageLayoutElements to include the resources like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">playerStats</span>  <span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nc">Player</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span><span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+    <span class="p">[</span>             <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"💓 %i/10"</span> <span class="n">player</span><span class="p">.</span><span class="nc">RemainingLifePoints</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"🤚 %i"</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nn">Cards</span><span class="p">.</span><span class="nc">Length</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"🂠 %i"</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Deck</span><span class="p">.</span><span class="nn">Cards</span><span class="p">.</span><span class="nc">Length</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+                  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"🗑️ %i"</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">DiscardPile</span><span class="p">.</span><span class="nn">Cards</span><span class="p">.</span><span class="nc">Length</span><span class="o">)]</span> <span class="p">]</span>
+                  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Total Res: %s"</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">TotalResourcePool</span><span class="o">))]</span> <span class="p">]</span>
+                  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Avail Res: %s"</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span><span class="o">))]</span> <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>I can now see the resources and see that the total resources are modifying but not available so I will need to update the <code class="language-plaintext highlighter-rouge">playCardFromBoard</code> function on index like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">playCardFromBoard</span> <span class="p">(</span><span class="n">cardInstanceId</span> <span class="p">:</span> <span class="nc">CardInstanceId</span><span class="p">)</span> <span class="p">(</span><span class="n">playerId</span> <span class="p">:</span> <span class="nc">PlayerId</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span> <span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardToDiscard</span> <span class="p">:</span> <span class="nc">CardInstance</span> <span class="kt">list</span> <span class="p">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">CardInstanceId</span> <span class="p">=</span> <span class="n">cardInstanceId</span><span class="p">)</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nc">Cards</span>
+
+    <span class="k">match</span> <span class="n">cardToDiscard</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="bp">[]</span> <span class="p">-&gt;</span>
+        <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Unable to locate card in hand with card instance id %s"</span> <span class="p">(</span><span class="n">cardInstanceId</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+    <span class="p">|</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">-&gt;</span>
+            <span class="k">match</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span> <span class="k">with</span>
+            <span class="p">|</span> <span class="nc">CharacterCard</span> <span class="n">cc</span> <span class="p">-&gt;</span>
+
+              <span class="nn">System</span><span class="p">.</span><span class="nn">Guid</span><span class="p">.</span><span class="nc">NewGuid</span><span class="bp">()</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+              <span class="p">|&gt;</span> <span class="n">buildInPlayCreatureId</span>
+              <span class="p">|&gt;</span> <span class="p">(</span><span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">createInPlayCreatureFromCardInstance</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span><span class="o">))</span>
+              <span class="p">|&gt;</span> <span class="p">(</span><span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">addCreatureToGameState</span> <span class="n">cardInstanceId</span> <span class="n">x</span> <span class="n">playerId</span> <span class="n">gs</span> <span class="n">playerBoard</span><span class="o">))</span>
+              <span class="p">|&gt;</span> <span class="p">(</span><span class="nn">Result</span><span class="p">.</span><span class="n">bind</span>  <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">cc</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span><span class="o">))</span>
+
+            <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="n">rc</span> <span class="p">-&gt;</span>
+              <span class="k">let</span> <span class="n">newPb</span> <span class="p">=</span> <span class="p">{</span>
+                  <span class="n">playerBoard</span>
+                    <span class="k">with</span> <span class="nc">Hand</span> <span class="p">=</span>
+                          <span class="p">{</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Hand</span> <span class="k">with</span>
+
+                                <span class="nc">Cards</span> <span class="p">=</span> <span class="p">(</span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">CardInstanceId</span> <span class="p">&lt;&gt;</span> <span class="n">cardInstanceId</span><span class="p">)</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nc">Cards</span><span class="p">)</span>
+                          <span class="o">};</span>
+                         <span class="nc">TotalResourcePool</span> <span class="p">=</span> <span class="n">addResourcesToPool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">TotalResourcePool</span> <span class="p">(</span><span class="nn">Map</span><span class="p">.</span><span class="n">toList</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourcesAdded</span><span class="p">)</span>
+                         <span class="nc">AvailableResourcePool</span> <span class="p">=</span>
+                            <span class="k">if</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourceAvailableOnFirstTurn</span> <span class="k">then</span>
+                                <span class="n">addResourcesToPool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span> <span class="p">(</span><span class="nn">Map</span><span class="p">.</span><span class="n">toList</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourcesAdded</span><span class="p">)</span>
+                            <span class="k">else</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span>
+                         <span class="nc">DiscardPile</span> <span class="o">={</span><span class="n">playerBoard</span><span class="p">.</span><span class="nc">DiscardPile</span> <span class="k">with</span> <span class="nc">Cards</span> <span class="p">=</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">DiscardPile</span><span class="p">.</span><span class="nc">Cards</span> <span class="o">@</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">}</span>
+                <span class="p">}</span>
+              <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span> <span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="n">newPb</span><span class="o">))</span> <span class="p">}</span> <span class="p">|&gt;</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">rc</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span><span class="p">)</span>
+            <span class="p">|</span> <span class="nc">EffectCard</span> <span class="n">ec</span> <span class="p">-&gt;</span>
+              <span class="k">let</span> <span class="n">newPb</span> <span class="p">=</span>  <span class="p">{</span>
+                  <span class="n">playerBoard</span>
+                    <span class="k">with</span> <span class="nc">Hand</span> <span class="p">=</span>
+                          <span class="p">{</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Hand</span> <span class="k">with</span>
+
+                                <span class="nc">Cards</span> <span class="p">=</span> <span class="p">(</span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">CardInstanceId</span> <span class="p">&lt;&gt;</span> <span class="n">cardInstanceId</span><span class="p">)</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nc">Cards</span><span class="p">)</span>
+                          <span class="o">};</span>
+                         <span class="nc">DiscardPile</span> <span class="p">=</span> <span class="p">{</span><span class="n">playerBoard</span><span class="p">.</span><span class="nc">DiscardPile</span> <span class="k">with</span> <span class="nc">Cards</span> <span class="p">=</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">DiscardPile</span><span class="p">.</span><span class="nc">Cards</span> <span class="o">@</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">}</span>
+                <span class="p">}</span>
+              <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span> <span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="n">newPb</span><span class="p">)</span> <span class="p">)</span> <span class="p">}</span> <span class="p">|&gt;</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">ec</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">ec</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span><span class="p">)</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+        <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"ERROR: located multiple cards in hand with card instance id %s. This shouldn't happen"</span> <span class="p">(</span><span class="n">cardInstanceId</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span> <span class="p">|&gt;</span> <span class="nc">Error</span></code></pre></figure>
+
+<p>With both the total and available populating the layout completely breaks so I put these two values on top of each other. This looks bad but is functional for the moment:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="o">...</span>
+                  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"navbar-item"</span> <span class="p">]</span>
+                    <span class="p">[</span> <span class="n">a</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"button is-primary"</span>
+                          <span class="nc">Href</span> <span class="s2">"#"</span> <span class="p">]</span>
+                        <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Tot %s"</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">TotalResourcePool</span><span class="o">))</span>
+                          <span class="n">br</span> <span class="bp">[]</span>
+                          <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Ava %s"</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span><span class="o">))]</span> <span class="p">]</span> <span class="p">]</span>
+<span class="o">...</span></code></pre></figure>
+
+<p>I now notice that I am able to play cards for which I don’t have the resources, as well as my available resources, are not being decremented.</p>
+
+<p>To implement this I had to create a number of functions and rewrite the play logic to take this into account like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">getNeededResourcesForCard</span> <span class="n">card</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">card</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">CharacterCard</span> <span class="n">cc</span> <span class="p">-&gt;</span> <span class="n">cc</span><span class="p">.</span><span class="nc">ResourceCost</span>
+    <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="n">rc</span> <span class="p">-&gt;</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourceCost</span>
+    <span class="p">|</span> <span class="nc">EffectCard</span> <span class="n">ec</span> <span class="p">-&gt;</span> <span class="n">ec</span><span class="p">.</span><span class="nc">ResourceCost</span>
+
+<span class="k">let</span> <span class="n">tryRemoveResourceFromPlayerBoard</span> <span class="p">(</span><span class="n">playerBoard</span><span class="p">:</span><span class="nc">PlayerBoard</span><span class="p">)</span> <span class="n">x</span> <span class="n">y</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">AvailableResourcePool</span><span class="p">.</span><span class="nc">TryGetValue</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="bp">true</span><span class="p">,</span> <span class="n">z</span> <span class="k">when</span> <span class="n">z</span> <span class="o">&gt;=</span> <span class="n">y</span> <span class="p">-&gt;</span> <span class="nc">Ok</span> <span class="p">{</span><span class="n">playerBoard</span> <span class="k">with</span> <span class="nc">AvailableResourcePool</span> <span class="p">=</span> <span class="p">(</span><span class="n">addResourcesToPool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span>  <span class="p">[</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span>  <span class="n">y</span><span class="p">)</span> <span class="o">])</span>  <span class="p">}</span>
+    <span class="p">|</span> <span class="o">_,</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="n">sprintf</span> <span class="s2">"Not enough %s"</span> <span class="p">(</span><span class="n">getSymbolForResource</span> <span class="n">x</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">decrementResourcesFromPlayerBoard</span> <span class="n">playerBoard</span> <span class="n">resourcePool</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">resourcePool</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="bp">[]</span> <span class="p">-&gt;</span> <span class="nc">Ok</span> <span class="n">playerBoard</span>
+    <span class="p">|</span> <span class="p">[</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">]</span> <span class="p">-&gt;</span> <span class="n">tryRemoveResourceFromPlayerBoard</span> <span class="n">playerBoard</span> <span class="n">x</span> <span class="n">y</span>
+    <span class="p">|</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">::</span> <span class="n">xs</span> <span class="p">-&gt;</span>
+        <span class="k">match</span> <span class="n">tryRemoveResourceFromPlayerBoard</span> <span class="n">playerBoard</span> <span class="n">x</span> <span class="n">y</span> <span class="k">with</span>
+        <span class="p">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="p">-&gt;</span> <span class="n">e</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+        <span class="p">|</span> <span class="nc">Ok</span> <span class="n">pb</span> <span class="p">-&gt;</span> <span class="n">decrementResourcesFromPlayerBoard</span> <span class="n">pb</span> <span class="n">xs</span>
+
+
+<span class="k">let</span> <span class="n">decrementRequiredResourcesFromModel</span> <span class="n">cardToDiscard</span> <span class="p">(</span><span class="n">playerId</span> <span class="p">:</span> <span class="nc">PlayerId</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span> <span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+     <span class="n">getNeededResourcesForCard</span> <span class="n">cardToDiscard</span>
+     <span class="p">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">toList</span>
+     <span class="p">|&gt;</span> <span class="n">decrementResourcesFromPlayerBoard</span> <span class="n">playerBoard</span>
+     <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="k">fun</span> <span class="n">updatedPlayerBoard</span> <span class="p">-&gt;</span> <span class="nc">Ok</span> <span class="p">{</span><span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span><span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="n">updatedPlayerBoard</span><span class="p">)</span> <span class="o">})</span>
+
+
+<span class="k">let</span> <span class="n">playCardFromBoardImp</span> <span class="n">cardInstanceId</span> <span class="n">playerId</span> <span class="n">playerBoard</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nc">CardInstance</span><span class="p">)</span> <span class="n">cardToDiscard</span> <span class="n">gs</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span> <span class="k">with</span>
+               <span class="p">|</span> <span class="nc">CharacterCard</span> <span class="n">cc</span> <span class="p">-&gt;</span>
+
+                 <span class="nn">System</span><span class="p">.</span><span class="nn">Guid</span><span class="p">.</span><span class="nc">NewGuid</span><span class="bp">()</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span>
+                 <span class="p">|&gt;</span> <span class="n">buildInPlayCreatureId</span>
+                 <span class="p">|&gt;</span> <span class="p">(</span><span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">createInPlayCreatureFromCardInstance</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span><span class="o">))</span>
+                 <span class="p">|&gt;</span> <span class="p">(</span><span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">addCreatureToGameState</span> <span class="n">cardInstanceId</span> <span class="n">x</span> <span class="n">playerId</span> <span class="n">gs</span> <span class="n">playerBoard</span><span class="o">))</span>
+                 <span class="p">|&gt;</span> <span class="p">(</span><span class="nn">Result</span><span class="p">.</span><span class="n">bind</span>  <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">cc</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span><span class="o">))</span>
+
+               <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="n">rc</span> <span class="p">-&gt;</span>
+                 <span class="k">let</span> <span class="n">newAvailResourcePool</span> <span class="p">=</span>
+                               <span class="k">if</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourceAvailableOnFirstTurn</span> <span class="k">then</span>
+                                   <span class="n">addResourcesToPool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span> <span class="p">(</span><span class="nn">Map</span><span class="p">.</span><span class="n">toList</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourcesAdded</span><span class="p">)</span>
+                               <span class="k">else</span>
+                                   <span class="n">playerBoard</span><span class="p">.</span><span class="nc">AvailableResourcePool</span>
+                 <span class="k">let</span> <span class="n">newPb</span> <span class="p">=</span> <span class="p">{</span>
+                     <span class="n">playerBoard</span>
+                       <span class="k">with</span> <span class="nc">Hand</span> <span class="p">=</span>
+                             <span class="p">{</span>
+                               <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Hand</span> <span class="k">with</span>
+                                   <span class="nc">Cards</span> <span class="p">=</span> <span class="p">(</span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">CardInstanceId</span> <span class="p">&lt;&gt;</span> <span class="n">cardInstanceId</span><span class="p">)</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nc">Cards</span><span class="p">)</span>
+                             <span class="p">}</span>
+                            <span class="nc">TotalResourcePool</span> <span class="p">=</span> <span class="n">addResourcesToPool</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">TotalResourcePool</span> <span class="p">(</span><span class="nn">Map</span><span class="p">.</span><span class="n">toList</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ResourcesAdded</span><span class="p">)</span>
+                            <span class="nc">AvailableResourcePool</span> <span class="p">=</span> <span class="n">newAvailResourcePool</span>
+                            <span class="nc">DiscardPile</span> <span class="o">={</span><span class="n">playerBoard</span><span class="p">.</span><span class="nc">DiscardPile</span> <span class="k">with</span> <span class="nc">Cards</span> <span class="p">=</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">DiscardPile</span><span class="p">.</span><span class="nc">Cards</span> <span class="o">@</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">}</span>
+                   <span class="p">}</span>
+                 <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span> <span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="n">newPb</span><span class="o">))</span> <span class="p">}</span> <span class="p">|&gt;</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">rc</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">rc</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span><span class="p">)</span>
+               <span class="p">|</span> <span class="nc">EffectCard</span> <span class="n">ec</span> <span class="p">-&gt;</span>
+                 <span class="k">let</span> <span class="n">newPb</span> <span class="p">=</span>  <span class="p">{</span>
+                     <span class="n">playerBoard</span>
+                       <span class="k">with</span> <span class="nc">Hand</span> <span class="p">=</span>
+                             <span class="p">{</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nc">Hand</span> <span class="k">with</span>
+
+                                   <span class="nc">Cards</span> <span class="p">=</span> <span class="p">(</span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">CardInstanceId</span> <span class="p">&lt;&gt;</span> <span class="n">cardInstanceId</span><span class="p">)</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nc">Cards</span><span class="p">)</span>
+                             <span class="o">};</span>
+                            <span class="nc">DiscardPile</span> <span class="p">=</span> <span class="p">{</span><span class="n">playerBoard</span><span class="p">.</span><span class="nc">DiscardPile</span> <span class="k">with</span> <span class="nc">Cards</span> <span class="p">=</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">DiscardPile</span><span class="p">.</span><span class="nc">Cards</span> <span class="o">@</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">}</span>
+                   <span class="p">}</span>
+                 <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span> <span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="n">newPb</span><span class="p">)</span> <span class="p">)</span> <span class="p">}</span> <span class="p">|&gt;</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">ec</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">applyEffectIfDefinied</span> <span class="n">ec</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span><span class="p">)</span>
+
+
+<span class="k">let</span> <span class="n">playCardFromBoard</span> <span class="p">(</span><span class="n">cardInstanceId</span> <span class="p">:</span> <span class="nc">CardInstanceId</span><span class="p">)</span> <span class="p">(</span><span class="n">playerId</span> <span class="p">:</span> <span class="nc">PlayerId</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span> <span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardToDiscard</span> <span class="p">:</span> <span class="nc">CardInstance</span> <span class="kt">list</span> <span class="p">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">CardInstanceId</span> <span class="p">=</span> <span class="n">cardInstanceId</span><span class="p">)</span> <span class="n">playerBoard</span><span class="p">.</span><span class="nn">Hand</span><span class="p">.</span><span class="nc">Cards</span>
+
+    <span class="k">match</span> <span class="n">cardToDiscard</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="bp">[]</span> <span class="p">-&gt;</span>
+        <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"Unable to locate card in hand with card instance id %s"</span> <span class="p">(</span><span class="n">cardInstanceId</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+    <span class="p">|</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">-&gt;</span>
+        <span class="n">decrementRequiredResourcesFromModel</span> <span class="n">x</span><span class="p">.</span><span class="nc">Card</span> <span class="n">playerId</span> <span class="n">gs</span> <span class="n">playerBoard</span>
+        <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">bind</span> <span class="p">(</span><span class="n">playCardFromBoardImp</span> <span class="n">cardInstanceId</span> <span class="n">playerId</span> <span class="n">playerBoard</span> <span class="n">x</span> <span class="n">cardToDiscard</span><span class="p">)</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+        <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"ERROR: located multiple cards in hand with card instance id %s. This shouldn't happen"</span> <span class="p">(</span><span class="n">cardInstanceId</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">))</span> <span class="p">|&gt;</span> <span class="nc">Error</span></code></pre></figure>
+
+<p>From a testing standpoint, the lack of rendering the resource cards has become quite difficult to deal with so I have added a simple rendering for the resource cards:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderResourceCard</span> <span class="p">(</span><span class="n">card</span><span class="p">:</span> <span class="nc">ResourceCard</span><span class="p">)</span> <span class="p">=</span>
+    <span class="p">[</span>
+            <span class="n">header</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header"</span> <span class="p">]</span>
+                       <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-title"</span> <span class="p">]</span>
+                           <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+                         <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-header-icon"</span> <span class="p">]</span>
+                           <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">card</span><span class="p">.</span><span class="nc">ResourceCost</span><span class="p">)</span> <span class="p">]</span> <span class="p">]</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-image"</span> <span class="p">]</span>
+                       <span class="p">[</span> <span class="n">figure</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"image is-4by3"</span> <span class="p">]</span>
+                           <span class="p">[</span> <span class="n">img</span> <span class="p">[</span> <span class="nc">Src</span> <span class="p">(</span><span class="n">card</span><span class="p">.</span><span class="nn">ImageUrl</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="p">)</span>
+                                   <span class="nc">Alt</span> <span class="n">card</span><span class="p">.</span><span class="nc">Name</span>
+                                   <span class="nc">Class</span> <span class="s2">"is-fullwidth"</span> <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+            <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"card-content"</span> <span class="p">]</span>
+                       <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"content"</span> <span class="p">]</span>
+                           <span class="p">[</span> <span class="n">p</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"is-italic"</span> <span class="p">]</span>
+                               <span class="p">[</span> <span class="n">str</span> <span class="n">card</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                             <span class="n">displayCardSpecialEffectDetailIfPresent</span> <span class="s2">"On Enter Playing Field"</span> <span class="n">card</span><span class="p">.</span><span class="nc">EnterSpecialEffects</span>
+                             <span class="n">displayCardSpecialEffectDetailIfPresent</span> <span class="s2">"On Exit Playing Field"</span> <span class="n">card</span><span class="p">.</span><span class="nc">ExitSpecialEffects</span>
+                           <span class="p">]</span> <span class="p">]</span> <span class="p">]</span>
+
+
+<span class="k">let</span> <span class="n">renderCardForHand</span> <span class="p">(</span><span class="n">card</span><span class="p">:</span> <span class="nc">Card</span><span class="p">)</span> <span class="p">:</span> <span class="nc">ReactElement</span> <span class="kt">list</span><span class="p">=</span>
+    <span class="k">match</span> <span class="n">card</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">CharacterCard</span> <span class="n">c</span> <span class="p">-&gt;</span> <span class="n">renderCharacterCard</span> <span class="n">c</span>
+    <span class="p">|</span> <span class="nc">ResourceCard</span> <span class="n">rc</span> <span class="p">-&gt;</span> <span class="n">renderResourceCard</span> <span class="n">rc</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+         <span class="p">[</span>
+            <span class="n">strong</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="s2">"IDK"</span> <span class="p">]</span>
+         <span class="p">]</span></code></pre></figure>
+
+<p>One thing I have realized is that I need to add functionality to remove old notifications. To do this I will need to add an id to the <code class="language-plaintext highlighter-rouge">Notification</code>s, define a Msg <code class="language-plaintext highlighter-rouge">DeleteNotification</code> which removes the notification with a specified id. Then I will add a delete button the to UI which sends a <code class="language-plaintext highlighter-rouge">DeleteNotification</code> message.</p>
+
+<p>The UI update will be:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">notificationArea</span> <span class="p">(</span><span class="n">messages</span> <span class="p">:</span><span class="nc">Option</span><span class="p">&lt;</span><span class="nc">Notification</span> <span class="kt">list</span><span class="o">&gt;)</span> <span class="n">dispatch</span><span class="p">=</span>
+    <span class="k">match</span> <span class="n">messages</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="n">s</span> <span class="p">-&gt;</span>
+        <span class="n">div</span> <span class="bp">[]</span>
+            <span class="p">[</span>
+               <span class="k">yield</span><span class="o">!</span>  <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">div</span> <span class="p">[</span><span class="nc">Class</span> <span class="s2">"notification is-danger"</span><span class="p">]</span> <span class="p">[</span>
+                                                    <span class="n">button</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"delete"</span>
+                                                             <span class="nc">OnClick</span> <span class="p">(</span><span class="k">fun</span> <span class="n">y</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">Id</span> <span class="p">|&gt;</span> <span class="nc">DeleteNotification</span> <span class="p">|&gt;</span> <span class="n">dispatch</span><span class="p">)</span>
+                                                            <span class="p">]</span> <span class="bp">[]</span>
+                                                    <span class="n">str</span> <span class="n">x</span><span class="p">.</span><span class="nc">Content</span> <span class="o">])</span> <span class="n">s</span>
+            <span class="p">]</span>
+    <span class="p">|</span> <span class="p">_</span> <span class="p">-&gt;</span>
+        <span class="n">div</span> <span class="bp">[]</span> <span class="bp">[]</span></code></pre></figure>
+
+<p>The domain update to the notification will be:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">    <span class="o">...</span>
+    <span class="k">and</span> <span class="nc">Notification</span> <span class="p">=</span>
+        <span class="p">{</span>
+            <span class="nc">Id</span><span class="p">:</span> <span class="nc">Guid</span>
+            <span class="nc">Content</span><span class="p">:</span> <span class="kt">string</span>
+        <span class="p">}</span>
+    <span class="o">...</span>
+
+    <span class="k">let</span> <span class="n">createNotification</span> <span class="n">message</span> <span class="o">={</span><span class="nc">Id</span> <span class="p">=</span> <span class="nn">Guid</span><span class="p">.</span><span class="nc">NewGuid</span><span class="bp">()</span><span class="p">;</span> <span class="nc">Content</span> <span class="p">=</span> <span class="n">message</span><span class="p">}</span></code></pre></figure>
+
+<p>The Msg type I also updated to remove the outdated GameStarted type:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">type</span> <span class="nc">Msg</span> <span class="p">=</span>
+    <span class="p">|</span> <span class="nc">StartGame</span> <span class="k">of</span> <span class="nc">StartGameEvent</span>
+    <span class="p">|</span> <span class="nc">DrawCard</span> <span class="k">of</span> <span class="nc">DrawCardEvent</span>
+    <span class="p">|</span> <span class="nc">DiscardCard</span> <span class="k">of</span> <span class="nc">DiscardCardEvent</span>
+    <span class="p">|</span> <span class="nc">PlayCard</span> <span class="k">of</span> <span class="nc">PlayCardEvent</span>
+    <span class="p">|</span> <span class="nc">EndPlayStep</span> <span class="k">of</span> <span class="nc">EndPlayStepEvent</span>
+    <span class="p">|</span> <span class="nc">PerformAttack</span> <span class="k">of</span> <span class="nc">PerformAttackEvent</span>
+    <span class="p">|</span> <span class="nc">SkipAttack</span> <span class="k">of</span> <span class="nc">SkipAttackEvent</span>
+    <span class="p">|</span> <span class="nc">EndTurn</span> <span class="k">of</span> <span class="nc">EndTurnEvent</span>
+    <span class="p">|</span> <span class="nc">DeleteNotification</span> <span class="k">of</span> <span class="nc">Guid</span>
+    <span class="p">|</span> <span class="nc">GameWon</span> <span class="k">of</span> <span class="nc">GameWonEvent</span></code></pre></figure>
+
+<p>I can then update <code class="language-plaintext highlighter-rouge">update</code> to include the new event</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">    <span class="p">|</span> <span class="nc">DeleteNotification</span> <span class="n">dn</span> <span class="p">-&gt;</span>
+        <span class="n">removeNotification</span> <span class="n">model</span> <span class="n">dn</span><span class="p">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span></code></pre></figure>
+
+<p>and define <code class="language-plaintext highlighter-rouge">removeNotification</code> as</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">filterNotificationList</span> <span class="n">notificationId</span> <span class="n">l</span> <span class="p">=</span>
+    <span class="n">l</span> <span class="p">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="k">fun</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">.</span><span class="nc">Id</span> <span class="p">&lt;&gt;</span> <span class="n">notificationId</span><span class="p">)</span>
+    <span class="p">|&gt;</span> <span class="k">function</span>
+        <span class="p">|</span> <span class="bp">[]</span> <span class="p">-&gt;</span> <span class="nc">None</span>
+        <span class="p">|</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="nc">Some</span> <span class="n">x</span>
+
+<span class="k">let</span> <span class="n">removeNotification</span> <span class="n">gs</span> <span class="n">notificationId</span> <span class="p">=</span>
+   <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">NotificationMessages</span> <span class="p">=</span> <span class="k">match</span> <span class="n">gs</span><span class="p">.</span><span class="nc">NotificationMessages</span> <span class="k">with</span>
+                                    <span class="p">|</span> <span class="nc">Some</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="n">filterNotificationList</span> <span class="n">notificationId</span> <span class="n">x</span>
+                                    <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span> <span class="nc">None</span>
+   <span class="p">}</span></code></pre></figure>
+
+<p>This all appears to build so I am leave this as the final change in the branch <code class="language-plaintext highlighter-rouge">step-9-better-sample-data-and-wiring-up-ui</code>.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-9-better-sample-data-and-wiring-up-ui">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

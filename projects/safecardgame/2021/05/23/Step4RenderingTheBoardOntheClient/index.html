@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 4 - Game Board Layout &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/05/23/Step4RenderingTheBoardOntheClient/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 4 - Game Board Layout</h1>
+  <span class="post-date">23 May 2021</span>
+  <h3 id="bringing-the-board-layout-into-the-client">Bringing the board layout into the client</h3>
+<hr />
+
+<p>I feel like the next logical step is to bring the layout I just developed to the client.</p>
+
+<p>First I updated the index.html file in the src/client to reference the bulmaswatch layout “darkly” like the template.</p>
+
+<p>I then googled around and found an online tool to convert html to the format used by elmish to define html. This is usable and somewhat close to the Fulma format we would like to eventually support. ([HTML to Elmish Site] (https://mangelmaxime.github.io/html-to-elmish/))</p>
+
+<p>Whatever we convert is going to be plugged into the &lt;div id="elmish-app"&gt;&lt;/div&gt; in the index.html so I needed to extract the content of the body of the layout from the body. I saved it separately: (<a href="documentation/html/InitialSketchOfBoardv2_toConvert.html">template to convert</a>)</p>
+
+<p>This failed with no error message on the site so I am assuming it doesn’t like the html somewhere.</p>
+
+<p>In order to move forward, I began breaking down the html page into pieces and converting the page part by part (which is something that would eventually have to be done anyway).</p>
+
+<p>This will require future refinement but I initially broke out the page into parts for the</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    topNavigation
+    enemyStats
+    enemyCreatures
+    playerControlCenter
+    playerCreatures
+    playerHand
+    footerBand
+</code></pre></div></div>
+<p>With a general arrangement of</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="container is-fluid"&gt;
+    topNavigation
+    &lt;br /&gt;&lt;br /&gt;
+    enemyStats
+    enemyCreatures
+    &lt;section class="section"&gt;
+        &lt;div class="container py-r"&gt;
+            playerControlCenter
+            playerCreatures
+        &lt;/div&gt;
+    &lt;/section&gt;
+    playerHand
+    footerBand
+&lt;/div&gt;
+</code></pre></div></div>
+
+<p>Going in order I dropped each of these parts into the converter. When I reached <code class="language-plaintext highlighter-rouge">playerControlCenter</code> the converter stopped working. After playing around with the html for a while (no error message was returned) I was able to discover that the converter did not like the <code class="language-plaintext highlighter-rouge">disabled</code> on the buttons.</p>
+
+<p>i.e. the blocks like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button class="button is-primary" disabled&gt;
+    &lt;span&gt;Draw&lt;/span&gt;
+&lt;/button&gt;
+</code></pre></div></div>
+<p>needed to be changed to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button class="button is-primary" disabled="true"&gt;
+    &lt;span&gt;Draw&lt;/span&gt;
+&lt;/button&gt;
+</code></pre></div></div>
+
+<p>I don’t think this is needed from an html standpoint? It is probably just a feature of the converter.</p>
+
+<p>I was eventually able to convert all the html subsections defining each as a variable (will eventually be converted to a function).</p>
+
+<p>i.e. like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">footerBand</span> <span class="p">=</span>
+  <span class="n">footer</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"footer"</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container"</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"level"</span> <span class="p">]</span>
+        <span class="o">...</span></code></pre></figure>
+
+<p>I then manually created the mainLayout as</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">mainLayout</span> <span class="p">=</span>
+  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container is-fluid"</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">topNavigation</span>
+      <span class="n">br</span> <span class="p">[</span> <span class="p">]</span>
+      <span class="n">br</span> <span class="p">[</span> <span class="p">]</span>
+      <span class="n">enemyStats</span>
+      <span class="n">enemyCreatures</span>
+      <span class="n">section</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"section"</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container py-r"</span> <span class="p">]</span>
+            <span class="n">playerControlCenter</span>
+            <span class="n">playerCreatures</span> <span class="p">]</span> <span class="p">]</span>
+      <span class="n">playerHand</span>
+      <span class="n">footerBand</span></code></pre></figure>
+
+<p>The results of this process ae located in (<a href="documentation/html/ElmishElements.fs">the documentation &gt; html &gt; ElmishElements.fs</a>)</p>
+
+<p>I then added a <code class="language-plaintext highlighter-rouge">PageLayoutElements.fs</code> to the src/client and added the file into the <code class="language-plaintext highlighter-rouge">Client.fsproj</code> to be included and compiled coming before the <code class="language-plaintext highlighter-rouge">Index.fs</code>.</p>
+
+<p>I copied and pasted the contents from the ElmishElements into this file.</p>
+
+<p>This broke the build as the file needed a module to be defined and the references imported so I added</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">module</span> <span class="nc">PageLayoutParts</span>
+
+<span class="k">open</span> <span class="nc">Elmish</span>
+<span class="k">open</span> <span class="nn">Fable</span><span class="p">.</span><span class="nc">React</span>
+<span class="k">open</span> <span class="nn">Fable</span><span class="p">.</span><span class="nn">React</span><span class="p">.</span><span class="nc">Props</span>
+<span class="k">open</span> <span class="nc">Fulma</span></code></pre></figure>
+
+<p>to the top of the file.</p>
+
+<p>This still did not build. There was an issue with a <code class="language-plaintext highlighter-rouge">broken-css</code> being added by the converter for the background-image element. As well as an issue with the way <code class="language-plaintext highlighter-rouge">strong</code> elements were converted.</p>
+
+<p>The indentation was</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">                                <span class="p">[</span> <span class="n">strong</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"On Enter Playing Field"</span> <span class="p">]</span>
+                                      <span class="n">str</span> <span class="s2">": Effect description."</span> <span class="p">]</span></code></pre></figure>
+
+<p>I needed to change it to</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp">                                <span class="p">[</span> <span class="n">strong</span> <span class="p">[</span> <span class="p">]</span>
+                                    <span class="p">[</span> <span class="n">str</span> <span class="s2">"On Enter Playing Field"</span> <span class="p">]</span>
+                                  <span class="n">str</span> <span class="s2">": Effect description."</span> <span class="p">]</span></code></pre></figure>
+
+<p>i.e. the function definition is strong str not strong and two lists like many other elements.</p>
+
+<p>Finally, I found that the <code class="language-plaintext highlighter-rouge">mainLayout</code> thing I wrote was invalid. I had to change it to:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">mainLayout</span> <span class="p">=</span>
+  <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container is-fluid"</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">topNavigation</span>
+      <span class="n">br</span> <span class="p">[</span> <span class="p">]</span>
+      <span class="n">br</span> <span class="p">[</span> <span class="p">]</span>
+      <span class="n">enemyStats</span>
+      <span class="n">enemyCreatures</span>
+      <span class="n">section</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"section"</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">div</span> <span class="p">[</span> <span class="nc">Class</span> <span class="s2">"container py-r"</span> <span class="p">]</span>
+            <span class="p">[</span>
+            <span class="n">playerControlCenter</span>
+            <span class="n">playerCreatures</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+      <span class="n">playerHand</span>
+      <span class="n">footerBand</span>
+    <span class="p">]</span></code></pre></figure>
+
+<p>It compiled and I was then able to upload the view function in Index.fs to reference the mainLayout function.</p>
+
+<p>i.e.</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">view</span> <span class="p">(</span><span class="n">model</span> <span class="p">:</span> <span class="nc">Model</span><span class="p">)</span> <span class="p">(</span><span class="n">dispatch</span> <span class="p">:</span> <span class="nc">Msg</span> <span class="p">-&gt;</span> <span class="kt">unit</span><span class="p">)</span> <span class="p">=</span>
+    <span class="nn">PageLayoutParts</span><span class="p">.</span><span class="n">mainLayout</span></code></pre></figure>
+
+<p>After viewing the page a few elements had to be rearranged and some changes had to be made. For example, changing the html unicode codes to just the unicode characters.</p>
+
+<p>For the next step, we will try to make the output actually pull information from the GameState model and break down these general page parts into smaller and more usable parts.</p>
+
+<p>This is the final commit in the <code class="language-plaintext highlighter-rouge">step-4-implement-layout-in-client</code> branch.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-4-implement-layout-in-client">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>

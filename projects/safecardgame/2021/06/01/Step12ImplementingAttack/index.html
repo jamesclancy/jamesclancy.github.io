@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SafeCardGame - Step 12 - Implementing Attack &middot; James Clancy
+    
+  </title>
+
+  
+  <link rel="canonical" href="/projects/safecardgame/2021/06/01/Step12ImplementingAttack/">
+  
+
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6FZ90LRCT8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6FZ90LRCT8');
+    </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Largely a mess of content. The idea is to generate content then refine sometime in the future.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+    
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/bookreviews/">
+          BookReviews
+          (<span class="text-muted small font-weight-light">
+              77
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/general/">
+          General
+          (<span class="text-muted small font-weight-light">
+              2
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/projects/">
+          Projects
+          (<span class="text-muted small font-weight-light">
+              38
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/kafkaui/" style="padding-left:60px;">KafkaUI (<span class="text-muted small font-weight-light">
+                1
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/safecardgame/" style="padding-left:60px;">SafeCardGame (<span class="text-muted small font-weight-light">
+                17
+                
+              </span>)</a>
+
+          
+        
+          
+          
+          <a class="sidebar-nav-item" 
+              href="/categories/wilkensavenue/" style="padding-left:60px;">WilkensAvenue (<span class="text-muted small font-weight-light">
+                20
+                
+              </span>)</a>
+
+          
+        
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+    
+
+    
+
+    
+    
+
+        
+
+        
+        <a class="sidebar-nav-item" href="/categories/recipes/">
+          Recipes
+          (<span class="text-muted small font-weight-light">
+              16
+              
+          </span>)
+        </a>
+
+        <!-- content count -->
+
+
+    
+
+
+    
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  </nav>
+
+
+<div class="sidebar-item">
+  <p>
+<a href="/about">About</a> | 
+<a href="https://github.com/jamesclancy" aria-label="github" target="_blank" rel="noopener"> 
+  <i class="fab fa-github-alt"></i> Github </a> | 
+<a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> RSS </a>
+    </p>
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">James Clancy</a>
+            <small>This needs to be reorganized in the future.</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">SafeCardGame - Step 12 - Implementing Attack</h1>
+  <span class="post-date">01 Jun 2021</span>
+  <h2 id="implementing-attack">Implementing Attack</h2>
+
+<p>The next step will be to implement the attack functionality.</p>
+
+<p>To do this I implemented several new functions:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">getPlayBoardToTargetAttack</span> <span class="p">(</span><span class="n">playerId</span> <span class="p">:</span> <span class="nc">PlayerId</span><span class="p">)</span> <span class="n">gs</span> <span class="p">=</span>
+    <span class="n">playerId</span>
+    <span class="p">|&gt;</span> <span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">TryGetValue</span>
+    <span class="p">|&gt;</span> <span class="k">function</span>
+        <span class="p">|</span> <span class="bp">true</span><span class="p">,</span> <span class="n">pb</span> <span class="p">-&gt;</span> <span class="n">pb</span> <span class="p">|&gt;</span> <span class="nc">Ok</span>
+        <span class="p">|</span> <span class="o">_,</span> <span class="p">_</span> <span class="p">-&gt;</span> <span class="s2">"Unable to locate target for attack"</span> <span class="p">|&gt;</span> <span class="nc">Error</span>
+
+<span class="k">let</span> <span class="n">activeCreatureKilledFromPlayerBoard</span> <span class="n">playBoard</span> <span class="p">:</span><span class="nc">PlayerBoard</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">playBoard</span><span class="p">.</span><span class="nc">Bench</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">None</span> <span class="p">|</span> <span class="nc">Some</span> <span class="bp">[]</span> <span class="p">-&gt;</span> <span class="p">{</span> <span class="n">playBoard</span> <span class="k">with</span> <span class="nc">ActiveCreature</span> <span class="p">=</span> <span class="nc">None</span><span class="p">}</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="p">-&gt;</span>  <span class="p">{</span> <span class="n">playBoard</span> <span class="k">with</span> <span class="nc">ActiveCreature</span> <span class="p">=</span> <span class="nc">Some</span> <span class="n">x</span><span class="p">;</span> <span class="nc">Bench</span> <span class="p">=</span> <span class="nc">None</span><span class="p">}</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="p">(</span><span class="n">x</span> <span class="p">::</span> <span class="n">xs</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">{</span> <span class="n">playBoard</span> <span class="k">with</span> <span class="nc">ActiveCreature</span> <span class="p">=</span> <span class="nc">Some</span> <span class="n">x</span><span class="p">;</span> <span class="nc">Bench</span> <span class="p">=</span> <span class="nc">Some</span> <span class="n">xs</span><span class="p">}</span>
+
+<span class="k">let</span> <span class="n">applyBasicAttackToPlayBoard</span> <span class="p">(</span><span class="n">attack</span> <span class="p">:</span> <span class="nc">Attack</span><span class="p">)</span> <span class="p">(</span><span class="n">playBoard</span><span class="p">)</span> <span class="n">gs</span> <span class="p">=</span>
+        <span class="k">match</span> <span class="n">playBoard</span><span class="p">.</span><span class="nc">ActiveCreature</span> <span class="k">with</span>
+        <span class="p">|</span> <span class="nc">Some</span> <span class="n">cre</span> <span class="k">when</span> <span class="p">(</span><span class="n">cre</span><span class="p">.</span><span class="nc">CurrentDamage</span> <span class="o">+</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">)</span> <span class="p">&lt;</span> <span class="n">cre</span><span class="p">.</span><span class="nc">TotalHealth</span> <span class="p">-&gt;</span>
+              <span class="o">({</span>
+                <span class="n">playBoard</span> <span class="k">with</span> <span class="nc">ActiveCreature</span> <span class="p">=</span>
+                                    <span class="nc">Some</span> <span class="p">{</span> <span class="n">cre</span> <span class="k">with</span> <span class="nc">CurrentDamage</span> <span class="p">=</span> <span class="n">cre</span><span class="p">.</span><span class="nc">CurrentDamage</span>  <span class="o">+</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span> <span class="p">}</span>
+              <span class="o">},</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sprintf</span> <span class="s2">"%i damage dealt to %s"</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span> <span class="n">cre</span><span class="p">.</span><span class="nc">Name</span><span class="p">)</span>
+        <span class="p">|</span> <span class="nc">Some</span> <span class="n">cre</span> <span class="p">-&gt;</span>
+            <span class="o">((</span><span class="n">activeCreatureKilledFromPlayerBoard</span> <span class="n">playBoard</span><span class="o">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sprintf</span> <span class="s2">"%i damage dealt to %s. It died."</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span> <span class="n">cre</span><span class="p">.</span><span class="nc">Name</span><span class="p">)</span>
+        <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span>
+            <span class="p">(</span><span class="n">playBoard</span><span class="p">,</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">,</span> <span class="n">sprintf</span> <span class="s2">"%i damage dealt to player"</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">)</span>
+
+
+<span class="k">let</span> <span class="n">applyPlayerDamageToPlayer</span> <span class="p">(</span><span class="n">playerId</span> <span class="p">:</span> <span class="nc">PlayerId</span><span class="p">)</span> <span class="n">damage</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">player</span> <span class="p">=</span> <span class="n">gs</span><span class="p">.</span><span class="nn">Players</span><span class="p">.</span><span class="nc">TryGetValue</span> <span class="n">playerId</span>
+    <span class="k">match</span> <span class="n">player</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="bp">true</span><span class="p">,</span> <span class="n">p</span> <span class="p">-&gt;</span> <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Players</span> <span class="p">=</span> <span class="n">gs</span><span class="p">.</span><span class="nn">Players</span><span class="p">.</span><span class="nc">Add</span><span class="p">(</span><span class="n">playerId</span><span class="p">,</span> <span class="p">{</span><span class="n">p</span> <span class="k">with</span> <span class="nc">RemainingLifePoints</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="nc">RemainingLifePoints</span> <span class="p">-</span> <span class="n">damage</span><span class="o">})}</span>
+    <span class="p">|</span> <span class="o">_,_</span> <span class="p">-&gt;</span> <span class="n">gs</span>
+
+
+<span class="k">let</span> <span class="n">playAttackFromBoard</span> <span class="p">(</span><span class="n">attack</span> <span class="p">:</span> <span class="nc">Attack</span><span class="p">)</span> <span class="p">(</span><span class="n">playerId</span> <span class="p">:</span> <span class="nc">PlayerId</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">(</span><span class="n">playerBoard</span> <span class="p">:</span> <span class="nc">PlayerBoard</span><span class="p">)</span> <span class="p">=</span>
+
+    <span class="k">let</span> <span class="n">target</span> <span class="p">=</span> <span class="n">getTheOtherPlayer</span> <span class="n">gs</span> <span class="n">playerId</span>
+    <span class="k">let</span> <span class="n">otherBoard</span> <span class="p">=</span> <span class="n">getPlayBoardToTargetAttack</span> <span class="n">target</span> <span class="n">gs</span>
+
+    <span class="k">match</span> <span class="n">otherBoard</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Ok</span> <span class="n">playBoard</span> <span class="p">-&gt;</span>
+
+        <span class="k">let</span> <span class="p">(</span><span class="n">newPb</span><span class="p">,</span> <span class="n">playerDamage</span><span class="p">,</span> <span class="n">messages</span><span class="p">)</span> <span class="p">=</span>  <span class="p">(</span><span class="n">applyBasicAttackToPlayBoard</span> <span class="n">attack</span> <span class="n">playBoard</span> <span class="n">gs</span><span class="p">)</span>
+
+        <span class="p">{</span> <span class="n">gs</span> <span class="k">with</span> <span class="nc">Boards</span> <span class="p">=</span> <span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="nn">Boards</span><span class="p">.</span><span class="nc">Add</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">newPb</span><span class="p">)</span>  <span class="p">)</span> <span class="p">}</span>
+        <span class="p">|&gt;</span> <span class="n">applyPlayerDamageToPlayer</span> <span class="n">target</span> <span class="n">playerDamage</span>
+        <span class="p">|&gt;</span> <span class="n">appendMessagesToGameState</span> <span class="n">messages</span> <span class="p">|&gt;</span><span class="nc">Ok</span>
+    <span class="p">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="p">-&gt;</span>
+        <span class="nc">Error</span> <span class="n">e</span>
+
+
+
+<span class="k">let</span> <span class="n">modifyGameStateFromPerformAttackEvent</span> <span class="p">(</span><span class="n">ev</span><span class="p">:</span> <span class="nc">PerformAttackEvent</span><span class="p">)</span> <span class="p">(</span><span class="n">gs</span><span class="p">:</span> <span class="nc">GameState</span><span class="p">)</span> <span class="p">=</span>
+        <span class="n">getExistingPlayerBoardFromGameState</span> <span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="n">gs</span>
+        <span class="o">&gt;&gt;=</span> <span class="p">(</span><span class="n">playAttackFromBoard</span> <span class="n">ev</span><span class="p">.</span><span class="nc">Attack</span> <span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="n">gs</span><span class="p">)</span>
+        <span class="o">&gt;&gt;=</span> <span class="n">migrateGameStateToNewStep</span> <span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="nc">PlayerId</span> <span class="p">|&gt;</span> <span class="nc">Reconcile</span> <span class="p">)</span>
+        <span class="p">|&gt;</span> <span class="n">applyErrorResultToGamesState</span> <span class="n">gs</span></code></pre></figure>
+
+<p>I then reference this <code class="language-plaintext highlighter-rouge">modifyGameStateFromPerformAttackEvent</code> in the update function.</p>
+
+<p>This builds. I will now have to make sure my sample data has attacks and that the UI is wired up to trigger these events.</p>
+
+<p>To wire up the UI I am able to modify the <code class="language-plaintext highlighter-rouge">renderAttackRow</code> to also include a button to exec an attack if it is available like:</p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">renderDamageInformationForAttack</span> <span class="p">(</span><span class="n">attack</span><span class="p">:</span> <span class="nc">Attack</span><span class="p">)</span> <span class="p">=</span>
+    <span class="k">match</span> <span class="n">attack</span><span class="p">.</span><span class="nc">SpecialEffect</span> <span class="k">with</span>
+    <span class="p">|</span> <span class="nc">Some</span> <span class="n">se</span> <span class="p">-&gt;</span>
+        <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span>
+                    <span class="n">p</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"%i"</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">)</span> <span class="p">]</span>
+                    <span class="n">p</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="n">se</span><span class="p">.</span><span class="nc">Description</span> <span class="p">]</span>
+                <span class="p">]</span>
+    <span class="p">|</span> <span class="nc">None</span> <span class="p">-&gt;</span>
+        <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span>
+                    <span class="n">p</span> <span class="bp">[]</span> <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"%i"</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Damage</span><span class="p">)</span> <span class="p">]</span>
+                <span class="p">]</span>
+
+
+<span class="k">let</span> <span class="n">renderAttackRowWithoutActions</span> <span class="p">(</span><span class="n">attack</span><span class="p">:</span> <span class="nc">Attack</span><span class="p">)</span> <span class="p">=</span>
+        <span class="n">tr</span> <span class="p">[</span> <span class="p">]</span>
+            <span class="p">[</span> <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Cost</span><span class="p">)</span> <span class="p">]</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+              <span class="n">renderDamageInformationForAttack</span> <span class="n">attack</span> <span class="p">]</span>
+
+<span class="k">let</span> <span class="n">renderAttackRow</span> <span class="n">displayAttackButton</span> <span class="n">canAttack</span> <span class="n">availableResources</span> <span class="n">gameId</span> <span class="n">playerId</span> <span class="n">inPlayCreatureId</span> <span class="p">(</span><span class="n">attack</span><span class="p">:</span> <span class="nc">Attack</span><span class="p">)</span> <span class="n">dispatch</span> <span class="p">=</span> <span class="c1">// Lol this needs to be refactored</span>
+    <span class="k">let</span> <span class="n">execAttack</span> <span class="p">=</span>  <span class="p">(</span><span class="k">fun</span> <span class="p">_</span> <span class="p">-&gt;</span>
+                                                    <span class="o">({</span>
+                                                        <span class="nc">GameId</span> <span class="p">=</span> <span class="n">gameId</span>
+                                                        <span class="nc">PlayerId</span> <span class="p">=</span> <span class="n">playerId</span>
+                                                        <span class="nc">InPlayCreatureId</span> <span class="p">=</span> <span class="n">inPlayCreatureId</span>
+                                                        <span class="nc">Attack</span> <span class="p">=</span> <span class="n">attack</span>
+                                                    <span class="p">}</span> <span class="p">:</span>  <span class="nc">PerformAttackEvent</span><span class="p">)</span> <span class="p">|&gt;</span> <span class="nc">PerformAttack</span> <span class="p">|&gt;</span>  <span class="n">dispatch</span><span class="p">)</span>
+
+    <span class="k">let</span> <span class="n">displayAttackButton</span> <span class="p">=</span> <span class="n">displayAttackButton</span> <span class="p">&amp;&amp;</span> <span class="n">canAttack</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="n">hasEnoughResources</span> <span class="n">availableResources</span> <span class="p">(</span><span class="nn">Map</span><span class="p">.</span><span class="n">toList</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Cost</span><span class="o">))</span>
+
+    <span class="n">tr</span> <span class="p">[</span> <span class="p">]</span>
+            <span class="p">[</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="p">(</span><span class="n">textDescriptionForResourcePool</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Cost</span><span class="p">)</span> <span class="p">]</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span> <span class="n">str</span> <span class="n">attack</span><span class="p">.</span><span class="nc">Name</span> <span class="p">]</span>
+              <span class="n">renderDamageInformationForAttack</span> <span class="n">attack</span>
+              <span class="n">td</span> <span class="p">[</span> <span class="p">]</span>
+                <span class="p">[</span>
+                    <span class="k">if</span> <span class="n">displayAttackButton</span> <span class="k">then</span>
+                        <span class="n">button</span> <span class="p">[</span>
+                            <span class="nc">Class</span> <span class="s2">"is-danger"</span>
+                            <span class="nc">OnClick</span> <span class="n">execAttack</span>
+                        <span class="p">]</span>
+                            <span class="p">[</span>
+                                <span class="n">str</span> <span class="s2">"Exec"</span>
+                            <span class="p">]</span>
+                    <span class="k">else</span>
+                        <span class="n">str</span> <span class="s2">""</span>
+                <span class="p">]</span> <span class="p">]</span></code></pre></figure>
+
+<p>To populate the test database I am adding a “tackle” attack to all generated creatures in the <code class="language-plaintext highlighter-rouge">SampleCardDatabase</code></p>
+
+<figure class="highlight"><pre><code class="language-fsharp" data-lang="fsharp"><span class="k">let</span> <span class="n">creatureCreatureConstructor</span> <span class="n">creatureId</span> <span class="n">name</span> <span class="n">description</span> <span class="n">primaryResource</span> <span class="n">resourceCost</span> <span class="n">health</span> <span class="n">weaknesses</span> <span class="p">=</span>
+    <span class="k">let</span> <span class="n">cardId</span> <span class="p">=</span> <span class="nn">NonEmptyString</span><span class="p">.</span><span class="n">build</span> <span class="n">creatureId</span> <span class="p">|&gt;</span> <span class="nn">Result</span><span class="p">.</span><span class="n">map</span> <span class="nc">CardId</span>
+    <span class="k">let</span> <span class="n">cardImageUrl</span> <span class="p">=</span> <span class="nn">ImageUrlString</span><span class="p">.</span><span class="n">build</span> <span class="p">(</span><span class="n">sprintf</span> <span class="s2">"/images/full/%s.png"</span> <span class="n">creatureId</span><span class="p">)</span>
+
+    <span class="k">match</span>  <span class="n">cardId</span><span class="p">,</span> <span class="n">cardImageUrl</span> <span class="k">with</span>
+    <span class="p">|</span>  <span class="nc">Ok</span> <span class="n">cid</span><span class="p">,</span> <span class="nc">Ok</span> <span class="n">imgUrl</span> <span class="p">-&gt;</span>
+        <span class="nc">Ok</span> <span class="p">{</span>
+                <span class="nc">CardId</span> <span class="p">=</span> <span class="n">cid</span>
+                <span class="nc">ResourceCost</span> <span class="p">=</span>  <span class="n">resourceCost</span>
+                <span class="nc">Name</span> <span class="p">=</span> <span class="n">name</span>
+                <span class="nc">EnterSpecialEffects</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">ExitSpecialEffects</span> <span class="p">=</span> <span class="nc">None</span>
+                <span class="nc">PrimaryResource</span> <span class="p">=</span> <span class="n">primaryResource</span>
+                <span class="nc">Creature</span> <span class="p">=</span>
+                      <span class="p">{</span>
+                        <span class="nc">Health</span><span class="p">=</span> <span class="n">health</span>
+                        <span class="nc">Weaknesses</span><span class="p">=</span>  <span class="n">weaknesses</span>
+                        <span class="nc">Attack</span> <span class="p">=</span> <span class="p">[</span>
+                                    <span class="p">{</span>
+                                        <span class="nc">Damage</span> <span class="p">=</span> <span class="mi">5</span>
+                                        <span class="nc">Name</span> <span class="p">=</span> <span class="s2">"Tackle"</span>
+                                        <span class="nc">Cost</span> <span class="p">=</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">empty</span> <span class="p">|&gt;</span> <span class="nc">ResourcePool</span>
+                                        <span class="nc">SpecialEffect</span> <span class="p">=</span> <span class="nc">None</span>
+                                    <span class="p">}</span>
+                                 <span class="p">]</span>
+                      <span class="p">}</span>
+                <span class="nc">ImageUrl</span> <span class="p">=</span> <span class="n">imgUrl</span>
+                <span class="nc">Description</span> <span class="p">=</span><span class="n">description</span>
+            <span class="p">}</span>
+    <span class="p">|</span> <span class="o">_,_</span> <span class="p">-&gt;</span> <span class="nc">Error</span> <span class="s2">"No"</span></code></pre></figure>
+
+<p>I am now able to test the game. I can deal damage to creatures and players. It works in terms of basic functionality.</p>
+
+<p>I am leaving this as the last commit in the branch <code class="language-plaintext highlighter-rouge">step-12-implement-attack</code>.</p>
+
+<p><a href="https://github.com/jamesclancy/SafeCardGame/tree/step-12-implement-attack">Git branch for this step</a></p>
+
+</div>
+
+
+<div class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/16/Redshirts/">
+            Redshirts by John-Scalzi
+            <small>16 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/09/02/ThomasJeffersonTripoliPirates/">
+            Thomas Jefferson and the Tripoli Pirates by Brian Kilmeade
+            <small>02 Sep 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/bookreviews/2022/08/24/DestinyDisrupted/">
+            Destiny Disrupted - A History of the World Through Islamic Eyes by Tamim Ansary
+            <small>24 Aug 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>
